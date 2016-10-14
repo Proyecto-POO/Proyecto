@@ -277,8 +277,7 @@
 
   </div>
 </div>
-
-    <footer>
+    <footer style="position: relative;">
             <div class="container">
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4">
@@ -290,10 +289,10 @@
             <b><em>GAMERS.ES</em></b> &copy; 2016 - Todos Los Derechos Reservados
     </footer>
 
-		 <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.min.js"></script>
-   <script src="http://localhost:35729/livereload.js"></script>
-   <script src="js/acciones.js"></script>
+	<script src="js/jquery.min.js"></script>
+   	<script src="js/bootstrap.min.js"></script>
+   	<script src="http://localhost:35729/livereload.js"></script>
+   	<script src="js/acciones.js"></script>
          <!-- <script type="text/javascript">
           $(".carousel").carousel({
             interval: 1000,
