@@ -114,13 +114,13 @@
 
 	            </form>
 	            <ul class="nav navbar-nav navbar-right">
-	              <li><a href="registro.html">Registrarse</a></li>
+	              <li><a href="registro.php">Registrarse</a></li>
 	              <li class="dropdown">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar Sesión <span class="caret"></span></a>
 	                <ul class="dropdown-menu">
-	                  <li><a href="login.html">Cliente</a></li>
+	                  <li><a href="login.php">Cliente</a></li>
 	                  <li role="separator" class="divider"></li>
-	                  <li><a href="login.html">Administrador</a></li>
+	                  <li><a href="login.php">Administrador</a></li>
 	                </ul>
 	              </li>
 	            </ul>

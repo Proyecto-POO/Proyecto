@@ -116,13 +116,13 @@
 
             </form>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="registro.html">Registrarse</a></li>
+              <li><a href="registro.php">Registrarse</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar Sesión <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="login.html">Cliente</a></li>
+                  <li><a href="login.php">Cliente</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="login.html">Administrador</a></li>
+                  <li><a href="login.php">Administrador</a></li>
                 </ul>
               </li>
             </ul>
@@ -277,7 +277,8 @@
 
   </div>
 </div>
-    <footer style="position: relative;">
+
+    <footer>
             <div class="container">
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4">
@@ -289,10 +290,9 @@
             <b><em>GAMERS.ES</em></b> &copy; 2016 - Todos Los Derechos Reservados
     </footer>
 
-	<script src="js/jquery.min.js"></script>
-   	<script src="js/bootstrap.min.js"></script>
-   	<script src="http://localhost:35729/livereload.js"></script>
-   	<script src="js/acciones.js"></script>
+		 <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   
          <!-- <script type="text/javascript">
           $(".carousel").carousel({
             interval: 1000,

@@ -9,6 +9,7 @@ html {
 body {
   background: linear-gradient(circle, black, white);
   font-family: "Titillium Web", sans-serif;
+  color: #fff;
   background-image: url(http://localhost/Proyectos/ProyectoWeb/img/fondo.png);
   background-position: center;
   background-attachment: fixed;
@@ -36,43 +37,6 @@ a:hover {
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
-.tab-group {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px 0;
-}
-.tab-group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.tab-group li a {
-  display: block;
-  text-decoration: none;
-  padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
-  float: left;
-  width: 50%;
-  text-align: center;
-  cursor: pointer;
-  -webkit-transition: 0.5s ease;
-  transition: 0.5s ease;
-}
-.tab-group li a:hover {
-  background: #b43131;
-  color: white;
-}
-.tab-group .active a {
-  background: #c83636;
-  color: white;
-}
-
-.tab-content > div:last-child {
-  display: none;
-}
-
 h1 {
   text-align: center;
   color: white;
@@ -85,16 +49,13 @@ h1 span {
 }
 
 label {
-  position: absolute;
   -webkit-transform: translateY(6px);
           transform: translateY(6px);
-  left: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #fff;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
-  -webkit-backface-visibility: hidden;
   pointer-events: none;
-  font-size: 22px;
+  font-size: 14px;
 }
 label .req {
   margin: 2px;
@@ -115,47 +76,20 @@ label.highlight {
   color: white;
 }
 
-input, textarea {
-  font-size: 22px;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 5px 10px;
-  background: none;
-  background-image: none;
-  border: 1px solid #a0b3b0;
-  color: white;
-  border-radius: 0;
+.date{
+  font-size: 14px;
+  width: 50%;
+  padding: 5px 5px;
+  border: 1px solid;
+  color: grey;
+  border-radius: 4px;
   -webkit-transition: border-color 0.25s ease, box-shadow 0.25s ease;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
+
 input:focus, textarea:focus {
   outline: 0;
-  border-color: #c83636;
-}
-
-textarea {
-  border: 2px solid #a0b3b0;
-  resize: vertical;
-}
-
-.field-wrap {
-  position: relative;
-  margin-bottom: 40px;
-}
-
-.top-row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.top-row > div {
-  float: left;
-  width: 48%;
-  margin-right: 4%;
-}
-.top-row > div:last-child {
-  margin: 0;
+  border-color: #00baff;
 }
 
 .button {
@@ -187,15 +121,12 @@ textarea {
   text-align: right;
 }
 
-footer {
-  background-color: #222222;
-  color: lightgrey;
-  position: absolute;
+footer
+{
+  background: rgba(50,0,0,0.6);
+  color: #555;
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 20px;
   text-align: center;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding-top: 10px;
-  font-family: "Titillium Web", sans-serif;
 }
