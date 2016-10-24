@@ -9,6 +9,17 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 
     <link rel="stylesheet" href="css/login-reg.css">
+    <style type="text/css">
+       .color-letras{
+          color: #ffffff;
+         font-size: 15px;
+       }
+ 
+       .error-form{
+         background-color: #e26161; 
+         display: none;
+       }
+     </style>
 
   </head>
 
@@ -72,37 +83,41 @@
       <h1>Crear GAMERS<span>.ES</span> ID</h1>
 
                     Nombre de usuario
-                    <input type="text" name="" id="" style="width:50%" class="form-control" >
+                    <input type="text" name="txt-nombre-usuario" id="txt-nombre-usuario" style="width:50%" class="form-control" >
+                    <div id="mensaje1" class="well error-form"> Error, campo vacio, ingrese su nombre.</div>
                     <hr>
                     Contraseña
-                    <input type="password" name="" id="" style="width:50%"  class="form-control" >
+                    <input type="password" name="txt-contraseña" id="txt-contraseña" style="width:50%"  class="form-control" >
+                    <div id="mensaje2" class="well error-form"> Error, campo vacio, ingrese su contraseña.</div>
                     <hr>
                     Verificar contraseña
-                    <input type="password" name="" id="" style="width:50%" class="form-control" >
+                    <input type="password" name="txt-contraseña-verificar" id="txt-contraseña-verificar" style="width:50%" class="form-control" >
+                    <div id="mensaje3" class="well error-form"> Error, campo vacio o sus contraseñas no coinciden.</div>
                     <hr>
                     Fecha de Nacimiento<br>
-                    <input type="date" name="dte-fecha-nacimiento" step="3" min="01-01-1900" max="31-31-2099"
+                    <input type="date" name="dte-fecha-nacimiento" step="1" min="01-01-1900" max="31-31-2099"
                           value="<?php echo date('Y-m-d');?>"
                           class="date"
                     >
                     <hr>
                     Correo electronico
-                    <input type="password" name="" id="" style="width:50%"  class="form-control" >
+                    <input type="text" name="txt-correo" id="txt-correo" style="width:50%"  class="form-control" >
+                    <div id="mensaje4" class="well error-form"> Error, campo vacio, ingrese un correo electrónico.</div>
                     <hr>
                     Verificar correo electronico
-                    <input type="password" name="" id="" style="width:50%"  class="form-control" >
+                    <input type="text" name="txt-correo-verificar" id="txt-correo-verificar" style="width:50%"  class="form-control" >
+                    <div id="mensaje5" class="well error-form"> Error, campo vacio o sus correos no coinciden.</div>
                     <hr>
                     Terminos de suscriptor
                     <textarea class="form-control"></textarea>
                     <hr>
                     <input  type="checkbox" >&nbsp;He leido y acepto los terminos de suscriptor.
                     <hr>
-                    <button class="btn btn-primary" style="width:100%"> Crear cuenta</button>
-
+                    <button id="btn-crear-cuenta" name="btn-crear-cuenta" class="btn btn-primary" style="width:100%"> Crear cuenta</button>
     </div>
 <!-- Fin del Formulario para registrar nuevo usuario-->
 <!--Inicio de las e-->
-     <footer>
+     <footer style="position: relative;">
                   <div class="container">
                     <div class="row">
                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
@@ -118,8 +133,77 @@
     <script src='js/bootstrap.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.2.3/underscore.string.min.js'></script>
 
-
-
+    <script type="text/javascript">
+       $(document).ready(function(){
+           $("#btn-crear-cuenta").click(function(){
+           var nombreUsuario = $("#txt-nombre-usuario").val();
+           var contraseña = $("#txt-contraseña").val();
+           var contraseñaVerificar = $("#txt-contraseña-verificar").val();
+           var correo = $("#txt-correo").val();
+           var correoVerificar = $("#txt-correo-verificar").val();
+           //faltan las variables de los select y el checkbox (que no aparece).
+ 
+           if(nombreUsuario==""
+             ||contraseña==""
+             ||contraseñaVerificar==""
+             ||contraseñaVerificar!=contraseña
+             ||correo==""
+             || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)
+             ||correoVerificar==""
+             ||correo!=correoVerificar
+             || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correoVerificar)){
+ 
+             if(nombreUsuario==""){
+                $("#mensaje1").fadeIn();
+                
+             }else{
+                $("#mensaje1").fadeOut();
+             }
+ 
+             if(contraseña==""){
+                $("#mensaje2").fadeIn();
+                
+             }else{
+                $("#mensaje2").fadeOut();
+             }
+ 
+             if(contraseñaVerificar==""||contraseñaVerificar!=contraseña){
+                $("#mensaje3").fadeIn();
+                
+             }else{
+                $("#mensaje3").fadeOut();
+             }
+ 
+             if(correo==""||!/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)){
+                $("#mensaje4").fadeIn();
+                
+             }else{
+                $("#mensaje4").fadeOut();
+             }
+ 
+             if(correoVerificar==""||correoVerificar!=correo||!/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correoVerificar)){
+                $("#mensaje5").fadeIn();
+             }else{
+               $("#mensaje5").fadeOut();
+             }
+ 
+           } else{
+             alert("informacion enviada con exito.");
+             $("#mensaje1").fadeOut();
+             $("#mensaje2").fadeOut();
+             $("#mensaje3").fadeOut();
+             $("#mensaje4").fadeOut();
+             $("#mensaje5").fadeOut();
+ 
+             $("#txt-nombre-usuario").val("");
+             $("#txt-contraseña").val("");
+             $("#txt-contraseña-verificar").val("");
+            $("#txt-correo").val("");
+             $("#txt-correo-verificar").val("");
+           } 
+         });
+       }); 
+     </script>
 
   </body>
 </html>
