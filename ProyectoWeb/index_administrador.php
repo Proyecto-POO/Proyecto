@@ -29,15 +29,6 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="index_administrador.php" class="hvr-underline-from-center">Inicio</a></li>
-              <li><a href="#">Productos</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acerca de <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Conocenos</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Contacto</a></li>
-                </ul>
-              </li>
             </ul>
             <form class="navbar-form navbar-left">
               <div class="form-group input-group">
@@ -75,7 +66,7 @@
         </div>
         <div class="col-lg-4">
             <div class="cont">
-            <label>Gestion de Productor</label><br><br>
+            <label>Gestion de Producto</label><br><br>
               <a href="agregar_producto.php"><button class="btn btn-success btn-lg">Agregar</button></a><br><br>
               <button class="btn btn-primary btn-lg">Modificar</button><br><br>
               <button class="btn btn-danger btn-lg">Eliminar</button><br><br>
