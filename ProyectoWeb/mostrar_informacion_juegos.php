@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Agregar Juego</title>
+	<title>Detalles del Juego</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
