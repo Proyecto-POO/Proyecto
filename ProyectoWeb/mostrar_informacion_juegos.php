@@ -1,11 +1,14 @@
 <?php
 	include_once("class/class_conexion.php");
+	include_once("class/class_usuario.php");
 	$conexion = new Conexion();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Detalles del Juego</title>
+	<link rel="stylesheet" type="text/css" href="css/campo_comentarios.css">
+	<link rel="stylesheet" type="text/css" href="css/comentarios.css">
 	<link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
@@ -107,8 +110,33 @@
 					<h2 style="text-align: center;">Comprar</h2>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<button class="btn btn-warning form-control" >$ <?php echo $fila_juego['precio'];?></button>
+					</div><br>
+					<h1 class="text-center">Comentarios</h1>
+					<div class="comments-container" style="">
+						<ul id="comments-list" class="comments-list"></ul>
 					</div>
+					<div class="container-fluid">
+						<h3 class="text-center">Deja tu comentario</h3>
+		    				<div class="row">
+		    					<div class="col-md-6">
+		    						<div class="widget-area no-padding blank">
+										<div class="status-upload" style="width: 650px;">
+											<form>
+												<textarea id="txt-comentario" placeholder="Ingresa tu comentario aqui." ></textarea>
+												<ul>
+													<li><button class="btn btn-primary" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span></strong></button></li>
+													<li id="li-usuarios">
+														<?php Usuario::generar_select_usuarios($conexion); ?>
+													</li>
+												</ul>
 
+												<button onclick="GuardarComentario(<?php echo $_GET["codigoJuego"]; ?>)" type="button" class="btn btn-success btn-lg">Enviar Comentario</button>
+											</form>
+										</div><!-- Status Upload  -->
+									</div><!-- Widget Area -->
+								</div>
+		        			</div>
+					</div><br>
 			</div>
 		</div>
 	</div>
@@ -131,6 +159,11 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/funciones.js"></script>
+   <script src="js/controlador.js"></script>
+   <script type="text/javascript">
+   	$(document).ready(function(){
+   		CargarComentarios(<?php echo $_GET["codigoJuego"]?>);
+   	});
+   </script>
 </body>
 </html>
