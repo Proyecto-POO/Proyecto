@@ -1,3 +1,8 @@
+<?php
+    include_once("class/class_conexion.php");
+    include_once("class/class_juegos.php");  
+    $conexion = new Conexion();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,63 +39,14 @@
         </div><!-- /.container-fluid -->
       </nav>
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 cont">
-				<table class="table">
-					<tr>
-						<td colspan="2"> 
-							<h4 class="text-center">Nuevo Juego</h4>
-						</td>
-					</tr>
-					<tr>
-						<th>Titulo</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Portada</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Descripcion</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Categoria</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Lanzamiento</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Requisito</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Precio</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<th>Tamano</th>
-						<td><input type="text" name="" class="form-control"></td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<button class="btn btn-primary btn-md form-control">Guardar</button>
-
-						</td>						
-					</tr>
-
-				</table>
-				
-			</div>
-		</div>
+		 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+              <?php
+                    //impresion de las tarjetas de los juegos para eliminarlos 
+                    Juegos::obtenerTarjetasEliminar($conexion); 
+              ?>                 
+    </div>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+    <br><br><br><br><br><br><br>
 	<footer>
             <div class="container">
               <div class="row">
@@ -105,6 +61,5 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/funciones.js"></script>
 </body>
 </html>

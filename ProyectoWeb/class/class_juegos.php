@@ -148,6 +148,41 @@
 	            
 		}
 
+		public static function obtenerTarjetasEliminar($conexion){
+			$tarjetasEliminar = $conexion->ejecutarInstruccion('
+						SELECT 
+								codigo_juego, 
+								codigo_desarrollador,
+								codigo_esrb, nombre_juego, 
+								descripcion, 
+								fecha_publicacion, 
+								url, portada, 
+								calificacion, 
+								precio FROM tbl_juegos 
+				');
+
+			while ($fila_tarjetas_eliminar = $conexion->obtenerFila($tarjetasEliminar)) {
+				?>
+				<div class="rowglyphicon-thumbs-up">
+		            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 row-divisor-bottom card-container ">
+		                <div class="well hovereffect card-profile ">
+		                    <img id='img-<?php echo $fila_tarjetas_eliminar["nombre_juego"]; ?>' class='img img-responsive' src='<?php echo $fila_tarjetas_eliminar["portada"]; ?>' alt='Portada'>
+		                        <div class="overlay">
+		                            <h2><b><?php echo $fila_tarjetas_eliminar["nombre_juego"]; ?></b></h2>
+		                             <br>
+		                              <button type="button" class="btn btn-danger"  title="Eliminar <?php echo $fila_tarjetas_eliminar['nombre_juego']; ?>" style="position: center;">
+	                                        <span class="glyphicon glyphicon-trash" style="font-size: 200%" aria-hidden="true"></span>
+	                                 </button>
+		                        </div>
+		                </div>
+		              </div>
+		         </div>
+
+	            <?php
+	        }
+	        $conexion->liberarResultado($tarjetasEliminar);
+		}
+
 		public static function obtenerMasValorados($conexion){
 			$masValorados = $conexion->ejecutarInstruccion('
 					SELECT 

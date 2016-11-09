@@ -1,3 +1,8 @@
+<?php
+    include_once("class/class_conexion.php");
+    include_once("class/class_categorias.php");  
+    $conexion = new Conexion();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,19 +61,101 @@
         <div class="col-lg-4">
             <div class="cont">
             <label>Gestion de Producto</label><br><br>
-              <a href="agregar_producto.php"><button class="btn btn-success btn-lg">Agregar</button></a><br><br>
+              <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal-nuevo-juego">Agregar</button><br><br>
               <button class="btn btn-primary btn-lg">Modificar</button><br><br>
-              <button class="btn btn-danger btn-lg">Eliminar</button><br><br>
+              <a href="eliminar_producto.php"><button class="btn btn-danger btn-lg">Eliminar</button></a><br><br>
 
             </div>
         </div>
       </div>
     </div>
+
+    <!--Ventana Modal de registro de nuevo juego-->
+<div class="modal fade" id="modal-nuevo-juego" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Registro de Juego</h4>
+      </div>
+      <div class="modal-body">
+          <!--Formulario de registro-->
+          <table class="table">
+          <tr>
+            <th>Titulo</th>
+            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control" ></td>
+          </tr>
+          <tr>
+            <th>Portada</th>
+            <td colspan="3"><input type="text" name="txt-portada" id="txt-portada" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Descripcion</th>
+            <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion" class="form-control"></textarea></td>
+          </tr>
+          <tr>
+            <th>Categorias</th>
+            <td colspan="3"><?php Categorias::checkBoxCategoria($conexion); ?></td>
+          </tr>
+          <tr>
+            <th>Fecha de lanzamiento</th>
+            <td colspan="3"><input type="text" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control"></td>
+          </tr>
+           <tr>
+            <th>Precio</th>
+            <td colspan="3"><input type="text" name="txt-precio" id="txt-precio" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Tamaño</th>
+            <td colspan="3"><input type="text" name="txt-tamano" id="txt-tamano" class="form-control"></td>
+          </tr>
+           <tr>
+             <th class="text-center" colspan="3">Especificaciones</th>
+          </tr>
+           <tr>
+              <th></th>
+              <th class="text-center">Minimos</th> 
+              <th class="text-center">Recomendados</th>
+          </tr>
+          <tr>
+            <th>CPU</th>
+            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>RAM</th>
+            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Sistema Operativo</th>
+            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Tarjeta Grafica</th>
+            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado" class="form-control"></td>
+          </tr>
+        </table>
+
+          <!--Fin Formulario de registro de  nuevo juego-->
+      </div>
+       <!--formulario de los botones de la ventana modal-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" id="btn-guardar-usuario"  class="btn btn-primary">Guardar</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+      <br>
       <br>
       <br>
       <br>
     <footer>
-            <div class="container">
+            <div class="container ">
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4">
                   <img src="img/pago-icono.png" alt="" class="img img-responsive">
@@ -81,16 +168,7 @@
 
 		 <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/funciones.js"></script>
 
-   </script>
-
-        <script type="text/javascript">
-          $(".carousel").carousel({
-            interval: 3000,
-            pause: "hover"
-          });
-        </script>
 
 </body>
 </html>
