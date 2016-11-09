@@ -4,27 +4,6 @@
 		private $usuario;
 		private $descripcionComentario;
 		private $fechaComentario;
-
-		public static function insertar_comentarios($conexion, $codigo_app,$comentario, $usuario, $fecha){
-			$sql = sprintf("INSERT INTO tbl_comentarios
-				(codigo_comentario, comentario, 
-				fecha_publicacion, calificacion, 
-				codigo_usuario, codigo_aplicacion) 
-				VALUES (NULL,'%s','%s',NULL,'%s','%s')",
-				stripslashes($comentario),
-				stripcslashes($fecha),
-				stripcslashes($usuario),
-				stripcslashes($codigo_app)
-				);
-			$resultado = $conexion->ejecutarInstruccion($sql);
-			/*if($resultado){
-				echo "<b>Registro almacenado con exito</b>";
-			}else{
-				echo "Error al guardar el registro";
-				exit;
-			}*/
-			$conexion->liberarResultado($resultado);
-		}
 		
 		public static function guardar_comentarios($conexion, $codigo_juego,$codigo_usuario,$comentario){
 			$fecha = $fecha = date("Y") . "-" . date("m") . "-" . date("d");
