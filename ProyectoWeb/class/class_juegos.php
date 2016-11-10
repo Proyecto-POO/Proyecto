@@ -239,5 +239,21 @@
 			<?php			
 			$conexion->liberarResultado($masValorados);
 		}
+
+		public static function generarESRB($conexion){
+			$resultado = $conexion->ejecutarInstruccion(
+				'SELECT codigo_esrb, 
+						tipo_esrb,
+						icono 
+				FROM tbl_esrb');
+
+			echo "<select name='slc-esrb' id='slc-esrb' class='form-control' style='height: 30px;'>";
+			while ($fila = $conexion->obtenerFila($resultado)) {
+				echo "<option value='".$fila["codigo_esrb"]."'>
+				".$fila["tipo_esrb"]."</option>";
+			}
+			echo "</select>";
+			$conexion->liberarResultado($resultado);
+		}
 	}
 ?>

@@ -1,6 +1,8 @@
 <?php
     include_once("class/class_conexion.php");
     include_once("class/class_categorias.php");  
+    include_once("class/class_desarrolladores.php");
+    include_once("class/class_juegos.php");
     $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -109,6 +111,18 @@
             <th>Tamaño</th>
             <td colspan="3"><input type="text" name="txt-tamano" id="txt-tamano" class="form-control"></td>
           </tr>
+          <tr>
+            <th>Url del producto</th>
+            <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Desarrollador</th>
+            <td colspan="3"><?php Desarrolladores::generarDesarrolladores($conexion);?></td>
+          </tr>
+          <tr>
+            <th>Clasificacion ESRB</th>
+            <td colspan="3"><?php Juegos::generarESRB($conexion);?></td>
+          </tr>
            <tr>
              <th class="text-center" colspan="3">Especificaciones</th>
           </tr>
@@ -166,8 +180,9 @@
             <b><em>GAMERS.ES</em></b> &copy; 2016 - Todos Los Derechos Reservados
     </footer>
 
-		 <script src="js/jquery.min.js"></script>
+	 <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script src="js/controlador.js"></script>
 
 
 </body>
