@@ -43,7 +43,7 @@
       </nav>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 col-lg-offset-3 cont">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont">
 				<?php
 					$codigoJuego = $_GET['codigoJuego'];
 					$juego = $conexion->ejecutarInstruccion('
@@ -70,15 +70,21 @@
 					$fila_juego = $conexion->obtenerFila($juego);				
 				?>
 					<br><br>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 cont">
-						<img src="<?php echo $fila_juego['portada']; ?>" class='img img-responsive'>						
-					</div>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cont">
 							<h2 style="text-align: center;"><?php echo $fila_juego['nombre_juego'] ?></h2>
 					</div>
-					<br><br><br><br><hr>
-					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 col-lg-offset-1 col-md-offset-1 cont">
+						<img src="<?php echo $fila_juego['portada']; ?>" class='img img-responsive'>						
+					</div>
+					<h2 style="text-align: center;">Descripcion</h2>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-1 col-md-offset-1" style="height: 300px;overflow-y: scroll;">
+						<?php echo $fila_juego['descripcion']; ?>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<button class="btn btn-warning form-control" >USD. <?php echo $fila_juego['precio'];?></button>
+					</div>
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<label>Desarrollador :  </label>
 						<?php echo $fila_juego['nombre_desarrollador']; ?>
 					</div>
@@ -86,7 +92,7 @@
 						<label>ESRB : </label>
 						<?php echo $fila_juego['tipo_esrb']; ?>
 					</div>
-					<br><br><hr>
+					
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<label>Calificacion : </label>
 						<?php
@@ -101,26 +107,66 @@
 						<label> Fecha de Lanzamiento : </label>
 						<?php echo $fila_juego['fecha_publicacion']; ?>
 					</div>
-					<br><br><hr>
-					<h2 style="text-align: center;">Descripcion</h2>
-					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2" style="height: 300px;overflow-y: scroll;">
-						<?php echo $fila_juego['descripcion']; ?>
+
+					<br><br><br><br><hr>
+					<!-- capturas -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cont">
+							<h2 style="text-align: center;">Capturas</h2>
 					</div>
-					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><hr>
-					<h2 style="text-align: center;">Comprar</h2>
+
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+						<img src="img/capturas/captura_ds_1.jpg" alt="captura" class="img img-responsive">
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+						<img src="img/capturas/captura_ds_2.jpg" alt="captura" class="img img-responsive">
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+						<img src="img/capturas/captura_ds_3.jpg" alt="captura" class="img img-responsive">
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+						<img src="img/capturas/captura_ds_4.jpg" alt="captura" class="img img-responsive">
+					</div>
+					<!-- fin capturas -->
+
+					<!-- video -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cont">
+							<h2 style="text-align: center;">Trailer - Gameplay</h2>
+							<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
+								<iframe width="700" height="360" src="https://www.youtube.com/embed/lRiiWLaub_o" frameborder="0" allowfullscreen></iframe>
+							</div>
+					</div>
+					<!-- fin video -->
+					<!-- requisitos -->
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cont">
+							<h2 style="text-align: center;">Requisitos de sistema</h2>
+					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<button class="btn btn-warning form-control" >$ <?php echo $fila_juego['precio'];?></button>
-					</div><br>
-					<h1 class="text-center">Comentarios</h1>
-					<div class="comments-container" style="">
-						<ul id="comments-list" class="comments-list"></ul>
+						<!-- aqui van los requisitos de sistema del juego -->
 					</div>
+					<!-- fin requisitos -->
+					<br>
+					
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cont">
+							<h1 class="text-center">Comentarios</h1>
+					</div>
+
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  cont">
+							<div class="comments-container" style="">
+								<ul id="comments-list" class="comments-list"></ul>
+							</div>
+					</div>
+
 					<div class="container-fluid">
-						<h3 class="text-center">Deja tu comentario</h3>
+					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-3 cont">
+							<h3 class="text-center">Deja tu comentario</h3>
+					</div>
 		    				<div class="row">
-		    					<div class="col-md-6">
+		    					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
 		    						<div class="widget-area no-padding blank">
-										<div class="status-upload" style="width: 650px;">
+										<div class="status-upload" style="width: 720px;">
 											<form>
 												<textarea id="txt-comentario" placeholder="Ingresa tu comentario aqui." ></textarea>
 												<ul>
