@@ -5,6 +5,14 @@
 		private $descripcionComentario;
 		private $fechaComentario;
 		
+		public static function eliminarComentario($conexion, $codigoComentario){
+			$sql = sprintf("DELETE FROM tbl_comentarios
+				WHERE codigo_comentario = '%s'",
+				stripcslashes($codigoComentario));
+			$conexion->ejecutarInstruccion($sql);
+			echo "esta es la instruccion sql: " + $sql;
+		}
+
 		public static function guardar_comentarios($conexion, $codigo_juego,$codigo_usuario,$comentario){
 			$fecha = $fecha = date("Y") . "-" . date("m") . "-" . date("d");
 			/*echo $fecha;
@@ -50,7 +58,7 @@
 								<h6 class="comment-name by-author"><a href="#"><?php echo $fila["nombre"]; ?></a></h6>
 								<span>hace x minutos</span><br>
 								<button data-toggle="tooltip" data-placement="top" title="Modificar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-								<button data-toggle="tooltip" data-placement="top" title="Eliminar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<button onclick="eliminarComentario(<?php echo $fila["codigo_comentario"]; ?>, <?php echo $fila["codigo_aplicacion"]; ?>)" data-toggle="tooltip" data-placement="top" title="Eliminar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 								<button data-toggle="tooltip" data-placement="top" title="Te gusta este comentario" class="btn btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
 							</div>
 							<div class="comment-content" style="width: 70%;">

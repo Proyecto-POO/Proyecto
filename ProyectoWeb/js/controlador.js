@@ -32,3 +32,18 @@ GuardarComentario=function(codigoJuego){
 		}
 	});
 }
+
+eliminarComentario = function(codigoComentario,codigoJuego){
+	var info = "codigoComentario=" + codigoComentario;
+		$.ajax({
+			data: info,
+			url:"ajax/acciones.php?accion=3",
+			method: "POST",
+			success:function(resultado){
+				CargarComentarios(codigoJuego);
+				alert("Comentario eliminado con exito.");
+			},
+			error:function(){
+		}
+	});
+}

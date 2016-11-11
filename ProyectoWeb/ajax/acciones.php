@@ -14,6 +14,13 @@ switch ($_GET["accion"]) {
 		$conexion = new Conexion();
 		Comentario::guardar_comentarios($conexion,$_POST["codigo_juego"],$_POST["slc-usuarios"],$_POST["txt-comentario"]);
 	break;
+
+	case '3':
+		include_once("../class/class_conexion.php");
+		include_once("../class/class_comentarios.php");
+		$conexion = new Conexion();
+		Comentario::eliminarComentario($conexion,$_POST["codigoComentario"]);
+	break;
 	default:
 		# code...
 		break;
