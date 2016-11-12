@@ -1,6 +1,7 @@
 <?php
     include_once("class/class_conexion.php");
     include_once("class/class_juegos.php");  
+    include_once("class/class_usuario.php");
     $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -38,19 +39,32 @@
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-	<div class="container">
-		 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
-              <?php
-                    //impresion de las tarjetas de los juegos para eliminarlos 
-                    Juegos::obtenerTarjetasEliminar($conexion); 
-              ?>                 
+	<div class="container-fluid">
+       <div class="row">
+              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12   "> 
+                 <?php
+                      Usuario::mostrarUsuarios($conexion);
+                    ?> 
+             
+              </div>
+              <div class="row-divisor-bottom col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="row">
+                            <?php
+                                  //impresion de las tarjetas de los juegos para eliminarlos 
+                                  Juegos::obtenerTarjetasEliminar($conexion); 
+                            ?>                 
+                  </div>
+              </div>
+          
+        </div>
     </div>
-	</div>
+  </div>
     <br><br><br><br><br><br><br>
 	<footer>
             <div class="container">
               <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
                   <img src="img/pago-icono.png" alt="" class="img img-responsive">
                 </div>
               </div>
@@ -61,5 +75,6 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
+   <script src="js/eliminar.js"></script>
 </body>
 </html>

@@ -158,14 +158,15 @@
 			while ($fila_tarjetas_eliminar = $conexion->obtenerFila($tarjetasEliminar)) {
 				?>
 				<div class="rowglyphicon-thumbs-up">
-		            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 row-divisor-bottom card-container ">
+		            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 row-divisor-bottom card-container ">
 		                <div class="well hovereffect card-profile ">
 		                    <img id='img-<?php echo $fila_tarjetas_eliminar["nombre_juego"]; ?>' class='img img-responsive' src='<?php echo $fila_tarjetas_eliminar["portada"]; ?>' alt='Portada'>
 		                        <div class="overlay">
 		                            <h2><b><?php echo $fila_tarjetas_eliminar["nombre_juego"]; ?></b></h2>
 		                             <br>
 		                              <button type="button" class="btn btn-danger"  title="Eliminar <?php echo $fila_tarjetas_eliminar['nombre_juego']; ?>" style="position: center;">
-	                                        <span class="glyphicon glyphicon-trash" style="font-size: 200%" aria-hidden="true"></span>
+	                                        <span class="glyphicon glyphicon-trash" 
+	                                        onclick="eliminarJuego('<?php echo $fila_tarjetas_eliminar["codigo_juego"]; ?>')"style="font-size: 200%" aria-hidden="true"></span>
 	                                 </button>
 		                        </div>
 		                </div>
@@ -196,34 +197,38 @@
 			?>
 				<div class="col-lg-8 col-md-9 col-lg-offset-2 col-md-offset-2">
 		            <h5 class="titulo">Lo Mas Valorados</h5>
-		            <div id="div-masComprados" class="carousel slide" data-ride="carousel">
-		                <div class="carousel-inner" role="listbox">
+		            <div id="div-masComprados" class="carousel slide" data-ride="carousel">		              
+		               <div class="carousel-inner" role="listbox">
 			<?php
 			while ($fila_masValorados = $conexion->obtenerFila($masValorados)) {
 				if ($opcion==0) {
-			?>
+			?>			
+						 <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_masValorados["codigo_juego"]; ?>">
 						    <div class="item active">
 		                        <img class="img img-responsive" src="<?php echo $fila_masValorados["portada"]; ?>" alt="">
 		                        <div class="carousel-caption">
 		                          <h4><?php echo $fila_masValorados["nombre_juego"]; ?></h4>
 		                        </div>
 		                     </div>
+		                </a>
 				<?php
 					$opcion++;
 				}else{
 				?>
+						 <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_masValorados["codigo_juego"]; ?>">
 							<div class="item">
 		                        <img class="img img-responsive" src="<?php echo $fila_masValorados["portada"]; ?>" alt="">
 		                        <div class="carousel-caption">
 		                            <h4><?php echo $fila_masValorados["nombre_juego"]; ?></h4>
 		                        </div>
 		                     </div>
+		                </a>
 				<?php
 				}
 			}
 				?>		
 						</div>
-
+					</a>
 		                  <a class="left carousel-control" href="#div-masComprados" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left" aria-hiden="true"></span></a>
 
 		                  <a class="right carousel-control" href="#div-masComprados" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right" aria-hiden="true"></span></a>

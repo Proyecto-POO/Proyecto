@@ -55,7 +55,7 @@
         <div class="col-lg-4 col-lg-offset-2">
             <div class="cont">
             <label>Ver Listas</label><br><br>
-              <button class="btn btn-warning btn-lg">Ver Usuarios</button><br><br>
+              <a href="eliminar_producto.php"><button class="btn btn-warning btn-lg">Ver Usuarios y Juegos</button></a><br><br>
               <button class="btn btn-primary btn-lg">Ver Transacciones</button><br><br>
 
             </div>
@@ -65,7 +65,6 @@
             <label>Gestion de Producto</label><br><br>
               <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal-nuevo-juego">Agregar</button><br><br>
               <button class="btn btn-primary btn-lg">Modificar</button><br><br>
-              <a href="eliminar_producto.php"><button class="btn btn-danger btn-lg">Eliminar</button></a><br><br>
 
             </div>
         </div>
@@ -82,7 +81,7 @@
       </div>
       <div class="modal-body">
           <!--Formulario de registro-->
-          <table class="table">
+          <table class="table table-striped">
           <tr>
             <th>Titulo</th>
             <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control" ></td>
@@ -162,20 +161,17 @@
        <!--formulario de los botones de la ventana modal-->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="button" id="btn-guardar-usuario"  class="btn btn-primary">Guardar</button>
+        <button type="button" id="btn-guardar-juego"  class="btn btn-primary">Guardar</button>
         
       </div>
     </div>
   </div>
 </div>
-      <br>
-      <br>
-      <br>
-      <br>
+      <br><br><br><br><br><br><br>
     <footer>
             <div class="container ">
               <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
                   <img src="img/pago-icono.png" alt="" class="img img-responsive">
                 </div>
               </div>

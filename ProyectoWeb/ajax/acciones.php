@@ -1,35 +1,31 @@
 <?php 
+	include_once("../class/class_conexion.php");
+	include_once("../class/class_comentarios.php");
+	include_once("../class/class_juegos.php");
+	include_once("../class/class_especificaciones.php");
+	$conexion = new Conexion();
 	switch ($_GET["accion"]) {
-		case '1':
-			include_once("../class/class_conexion.php");
-			include_once("../class/class_comentarios.php");
-			$conexion = new Conexion();
+		case '1':// cargar los comentarios
+			
 			$codigoJuego = $_POST["codigo_juego"];
 			Comentario::generar_comentarios($conexion,$codigoJuego);
 			break;
 
-		case '2':
-			include_once("../class/class_conexion.php");
-			include_once("../class/class_comentarios.php");
-			$conexion = new Conexion();
+		case '2'://Guardar los comentarios
+		
 			$codigoJuego = $_POST["codigo_juego"];
 			$codigoUsuario = $_POST["slc-usuarios"];
 			$comentario = $_POST["txt-comentario"];
 			Comentario::guardar_comentarios($conexion, $codigoJuego, $codigoUsuario, $comentario);
 		break;
 
-		case '3':
-			include_once("../class/class_conexion.php");
-			include_once("../class/class_comentarios.php");
-			$conexion = new Conexion();
+		case '3'://Eliminar Comentario
+			
 			Comentario::eliminarComentario($conexion,$_POST["codigoComentario"]);
 			break;
 
-		case '4':
-		include_once("../class/class_conexion.php");
-		include_once("../class/class_juegos.php");
-		include_once("../class/class_especificaciones.php");
-		$conexion = new Conexion();
+		case '4':// guardado de un juego
+		sleep(3);
 		$nuevoJuego = new Juegos($_POST["slc-desarrolladores"],
 					$_POST["slc-esrb"],
 					$_POST["txt-titulo-juego"],

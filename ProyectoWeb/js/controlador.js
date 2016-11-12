@@ -1,4 +1,71 @@
 $(document).ready(function(){
+	$("#btn-crear-cuenta").click(function(){
+           var nombreUsuario = $("#txt-nombre-usuario").val();
+           var contraseña = $("#txt-contraseña").val();
+           var contraseñaVerificar = $("#txt-contraseña-verificar").val();
+           var correo = $("#txt-correo").val();
+           var correoVerificar = $("#txt-correo-verificar").val();
+           //faltan las variables de los select y el checkbox (que no aparece).
+ 
+           if(nombreUsuario==""
+             ||contraseña==""
+             ||contraseñaVerificar==""
+             ||contraseñaVerificar!=contraseña
+             ||correo==""
+             || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)
+             ||correoVerificar==""
+             ||correo!=correoVerificar
+             || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correoVerificar)){
+ 
+             if(nombreUsuario==""){
+                $("#mensaje1").fadeIn();
+                
+             }else{
+                $("#mensaje1").fadeOut();
+             }
+ 
+             if(contraseña==""){
+                $("#mensaje2").fadeIn();
+                
+             }else{
+                $("#mensaje2").fadeOut();
+             }
+ 
+             if(contraseñaVerificar==""||contraseñaVerificar!=contraseña){
+                $("#mensaje3").fadeIn();
+                
+             }else{
+                $("#mensaje3").fadeOut();
+             }
+ 
+             if(correo==""||!/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)){
+                $("#mensaje4").fadeIn();
+                
+             }else{
+                $("#mensaje4").fadeOut();
+             }
+ 
+             if(correoVerificar==""||correoVerificar!=correo||!/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correoVerificar)){
+                $("#mensaje5").fadeIn();
+             }else{
+               $("#mensaje5").fadeOut();
+             }
+ 
+           } else{
+             alert("informacion enviada con exito.");
+             $("#mensaje1").fadeOut();
+             $("#mensaje2").fadeOut();
+             $("#mensaje3").fadeOut();
+             $("#mensaje4").fadeOut();
+             $("#mensaje5").fadeOut();
+ 
+             $("#txt-nombre-usuario").val("");
+             $("#txt-contraseña").val("");
+             $("#txt-contraseña-verificar").val("");
+            $("#txt-correo").val("");
+             $("#txt-correo-verificar").val("");
+           } 
+         });
 	
 
 });
@@ -49,7 +116,8 @@ eliminarComentario = function(codigoComentario,codigoJuego){
 
 }
 
-$("#btn-guardar-usuario").click(function(){
+$("#btn-guardar-juego").click(function(){
+	$("#btn-guardar-juego").button("Guardando");
 	var categoriasSeleccionadas="";
 		
 		$("input[name='chkcategorias[]']:checked").each(function(){
@@ -84,6 +152,7 @@ $("#btn-guardar-usuario").click(function(){
 			data: parametros,
 			success:function(resultado){
 				alert(resultado);
+				$("#btn-guardar-juego").button("reset");
 			},
 			error:function(){
 

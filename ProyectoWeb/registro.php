@@ -120,7 +120,7 @@
      <footer style="position: relative;">
                   <div class="container">
                     <div class="row">
-                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
                         <img src="img/pago-icono.png" alt="" class="img img-responsive">
                       </div>
                     </div>
@@ -131,79 +131,8 @@
 
     <script src='js/jquery.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.2.3/underscore.string.min.js'></script>
-
-    <script type="text/javascript">
-       $(document).ready(function(){
-           $("#btn-crear-cuenta").click(function(){
-           var nombreUsuario = $("#txt-nombre-usuario").val();
-           var contraseña = $("#txt-contraseña").val();
-           var contraseñaVerificar = $("#txt-contraseña-verificar").val();
-           var correo = $("#txt-correo").val();
-           var correoVerificar = $("#txt-correo-verificar").val();
-           //faltan las variables de los select y el checkbox (que no aparece).
- 
-           if(nombreUsuario==""
-             ||contraseña==""
-             ||contraseñaVerificar==""
-             ||contraseñaVerificar!=contraseña
-             ||correo==""
-             || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)
-             ||correoVerificar==""
-             ||correo!=correoVerificar
-             || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correoVerificar)){
- 
-             if(nombreUsuario==""){
-                $("#mensaje1").fadeIn();
-                
-             }else{
-                $("#mensaje1").fadeOut();
-             }
- 
-             if(contraseña==""){
-                $("#mensaje2").fadeIn();
-                
-             }else{
-                $("#mensaje2").fadeOut();
-             }
- 
-             if(contraseñaVerificar==""||contraseñaVerificar!=contraseña){
-                $("#mensaje3").fadeIn();
-                
-             }else{
-                $("#mensaje3").fadeOut();
-             }
- 
-             if(correo==""||!/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)){
-                $("#mensaje4").fadeIn();
-                
-             }else{
-                $("#mensaje4").fadeOut();
-             }
- 
-             if(correoVerificar==""||correoVerificar!=correo||!/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correoVerificar)){
-                $("#mensaje5").fadeIn();
-             }else{
-               $("#mensaje5").fadeOut();
-             }
- 
-           } else{
-             alert("informacion enviada con exito.");
-             $("#mensaje1").fadeOut();
-             $("#mensaje2").fadeOut();
-             $("#mensaje3").fadeOut();
-             $("#mensaje4").fadeOut();
-             $("#mensaje5").fadeOut();
- 
-             $("#txt-nombre-usuario").val("");
-             $("#txt-contraseña").val("");
-             $("#txt-contraseña-verificar").val("");
-            $("#txt-correo").val("");
-             $("#txt-correo-verificar").val("");
-           } 
-         });
-       }); 
-     </script>
+    <script src='js/controlador.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.2.3/underscore.string.min.js'></script> 
 
   </body>
 </html>
