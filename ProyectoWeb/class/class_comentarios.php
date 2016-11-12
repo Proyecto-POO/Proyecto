@@ -4,49 +4,57 @@
 		private $usuario;
 		private $descripcionComentario;
 		private $fechaComentario;
-		
+
 		public static function eliminarComentario($conexion, $codigoComentario){
-			$sql = sprintf("DELETE FROM tbl_comentarios
-				WHERE codigo_comentario = '%s'",
-				stripcslashes($codigoComentario));
+			$sql = sprintf("
+							DELETE FROM tbl_comentarios
+							WHERE codigo_comentarios = '%s'
+						   ",
+
+			stripcslashes($codigoComentario));
+
 			$conexion->ejecutarInstruccion($sql);
 			echo "esta es la instruccion sql: " + $sql;
 		}
-
+		
 		public static function guardar_comentarios($conexion, $codigo_juego,$codigo_usuario,$comentario){
 			$fecha = $fecha = date("Y") . "-" . date("m") . "-" . date("d");
-			/*echo $fecha;
-			echo $codigo_usuario;
-			echo $codigo_juego;
-			echo $comentario;*/
-			$sql=sprintf("INSERT INTO tbl_comentarios
-				(codigo_comentario, comentario,
-				 fecha_publicacion, calificacion,
-				  codigo_usuario, codigo_aplicacion)
-				   VALUES (NULL,'%s','%s',NULL,'%s','%s')",
-			 stripcslashes($comentario),
-			 stripcslashes($fecha),
+			
+			$sql=sprintf("INSERT INTO tbl_comentarios 
+									( 
+									codigo_comentarios , 
+									codigo_usuario , 
+									codigo_juego , 
+									comentario , 
+									fecha_comentario 
+									) VALUES (NULL,'%s','%s','%s','%s')",
+				
 			 stripcslashes($codigo_usuario),
-			 stripcslashes($codigo_juego));
-			echo "intruccion a ejecutar: " . $sql;
+			 stripcslashes($codigo_juego),
+			 stripcslashes($comentario),
+			 stripcslashes($fecha)
+			 );
+			
 			$resultado=$conexion->ejecutarInstruccion($sql);
-			if ($resultado) {
-				echo "guardado con exito";
-			}else{
-				echo "fallo guardar";
-			}
-			$conexion->liberarResultado($resultado);
+			
+			$conexion->liberarResultado($sql);
 		}
 
 		public static function generar_comentarios($conexion, $codigo_juego){
-			$resultado = $conexion->ejecutarInstruccion('SELECT a.codigo_comentario, a.comentario,
-			 a.fecha_publicacion, a.calificacion,
-			  a.codigo_usuario, a.codigo_aplicacion,
-			  b.nombre,b.codigo_usuario
+			$resultado = $conexion->ejecutarInstruccion('
+				SELECT 
+						a.codigo_comentarios, 
+						a.codigo_usuario,
+						 a.codigo_juego,
+						 a.comentario,
+						 a.fecha_comentario,
+						  b.nombre,
+						  b.codigo_usuario
 				FROM tbl_comentarios a
 				INNER JOIN tbl_usuarios b 
 				ON (a.codigo_usuario=b.codigo_usuario)
-				WHERE a.codigo_aplicacion='.$codigo_juego.'');
+				WHERE a.codigo_juego='.$codigo_juego.'
+				');
 			
 			while ($fila = $conexion->obtenerFila($resultado)) {
 				?>
@@ -56,10 +64,11 @@
 						<div class="comment-box">
 							<div class="comment-head" style="width: 70%;">
 								<h6 class="comment-name by-author"><a href="#"><?php echo $fila["nombre"]; ?></a></h6>
-								<span>hace x minutos</span><br>
+								<span>hace x minutos</span>
 								<button data-toggle="tooltip" data-placement="top" title="Modificar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-								<button onclick="eliminarComentario(<?php echo $fila["codigo_comentario"]; ?>, <?php echo $fila["codigo_aplicacion"]; ?>)" data-toggle="tooltip" data-placement="top" title="Eliminar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<button onclick="eliminarComentario(<?php echo $fila["codigo_comentarios"]; ?>, <?php echo $fila["codigo_juego"]; ?>);" data-toggle="tooltip" data-placement="top" title="Eliminar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 								<button data-toggle="tooltip" data-placement="top" title="Te gusta este comentario" class="btn btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+								<span style="float: right;"><?php echo $fila['fecha_comentario'];?></span>
 							</div>
 							<div class="comment-content" style="width: 70%;">
 							<?php 
