@@ -23,6 +23,7 @@
 			$this->urlDesarrollador = $urlDesarrollador;
 		}
 
+		//genera el combobox formulario nuevo juego
 		public static function generarDesarrolladores($conexion){
 			$resultado = $conexion->ejecutarInstruccion(
 				'SELECT codigo_desarrollador, 

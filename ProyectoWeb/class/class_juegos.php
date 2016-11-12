@@ -3,7 +3,6 @@
 	class Juegos{
 
 		private $desarrollador;
-		private $especificaciones;
 		private $esrb;
 		private $nombreJuego;
 		private $descripcion;
@@ -12,9 +11,9 @@
 		private $portada;
 		private $calificacion;
 		private $precio;
+		private $categoria;
 
 		public function __construct($desarrollador,
-					$especificaciones,
 					$esrb,
 					$nombreJuego,
 					$descripcion,
@@ -22,9 +21,9 @@
 					$url_iso,
 					$portada,
 					$calificacion,
-					$precio){
+					$precio,
+					$categoria){
 			$this->desarrollador = $desarrollador;
-			$this->especificaciones = $especificaciones;
 			$this->esrb = $esrb;
 			$this->nombreJuego = $nombreJuego;
 			$this->descripcion = $descripcion;
@@ -33,18 +32,13 @@
 			$this->portada = $portada;
 			$this->calificacion = $calificacion;
 			$this->precio = $precio;
+			$this->categoria = $categoria;
 		}
 		public function getDesarrollador(){
 			return $this->desarrollador;
 		}
 		public function setDesarrollador($desarrollador){
 			$this->desarrollador = $desarrollador;
-		}
-		public function getEspecificaciones(){
-			return $this->especificaciones;
-		}
-		public function setEspecificaciones($especificaciones){
-			$this->especificaciones = $especificaciones;
 		}
 		public function getEsrb(){
 			return $this->esrb;
@@ -254,6 +248,50 @@
 			}
 			echo "</select>";
 			$conexion->liberarResultado($resultado);
+		}
+
+		public function guardarJuego($conexion){
+			$sql = sprintf("INSERT INTO tbl_juegos(
+					codigo_juego, codigo_desarrollador, 
+					codigo_esrb, nombre_juego, 
+					descripcion, fecha_publicacion, 
+					url, portada, calificacion, precio
+					) VALUES (NULL,'%s','%s','%s','%s','%s','%s','%s','%s','%s')",
+						stripslashes($this->desarrollador),
+						stripslashes($this->esrb),
+						stripslashes($this->nombreJuego),
+						stripslashes($this->descripcion),
+						stripslashes($this->fechaPublicacion),
+						stripslashes($this->url_iso),
+						stripslashes($this->portada),
+						stripslashes($this->calificacion),
+						stripslashes($this->precio)
+				);
+			echo "Instruccion a ejecutar: ".$sql;
+			$res = $conexion->ejecutarInstruccion($sql);
+			if($res){
+				echo "Registro almacenado con exito";
+			}else{
+				echo "Error al guardar el registro";
+				exit;
+			}
+			//Es necesario obtener el ultimo ID agregado:
+			$UltimoInsert = $conexion->ejecutarInstruccion("SELECT last_insert_id(codigo_juego) as id FROM tbl_juegos ORDER BY id DESC;");
+			$fila = $conexion->obtenerFila($UltimoInsert);
+
+			//Las categorias
+			if ($fila["id"]>0){
+				for ($i=0;$i<count($this->categoria);$i++){
+					$sql = sprintf(
+						"INSERT INTO tbl_juegos_x_tbl_categorias(codigo_juego, codigo_categoria) VALUES ('%s','%s')",
+						stripslashes($fila["id"]),	
+						stripslashes($this->categoria[$i])
+											
+					);
+					$conexion->ejecutarInstruccion($sql);
+				}
+			}
+
 		}
 	}
 ?>

@@ -101,7 +101,7 @@
           </tr>
           <tr>
             <th>Fecha de lanzamiento</th>
-            <td colspan="3"><input type="text" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control"></td>
+            <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control"></td>
           </tr>
            <tr>
             <th>Precio</th>
@@ -114,6 +114,10 @@
           <tr>
             <th>Url del producto</th>
             <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>calificacion</th>
+            <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion" class="form-control"></td>
           </tr>
           <tr>
             <th>Desarrollador</th>
