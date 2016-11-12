@@ -3,6 +3,8 @@
 	include_once("../class/class_comentarios.php");
 	include_once("../class/class_juegos.php");
 	include_once("../class/class_especificaciones.php");
+	include_once("../class/class_usuario.php");
+				
 	$conexion = new Conexion();
 	switch ($_GET["accion"]) {
 		case '1':// cargar los comentarios
@@ -59,6 +61,14 @@
 			);
 		$nuevaEspecificacionRecomendada->guardarEspecificaciones($conexion);
 		break;
+
+		case '5':
+				$usuario = $_POST['usuario'];
+				$contrasena = $_POST['contrasena'];
+
+				Usuario::inicioSesion($conexion, $usuario, $contrasena);
+				
+				break;						
 
 		default:
 			# code...

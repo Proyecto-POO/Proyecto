@@ -293,10 +293,104 @@
 						stripslashes($this->categoria[$i])
 											
 					);
-					$conexion->ejecutarInstruccion($sql);
+					echo "Instruccion a ejecutar: ".$sql;
+						$res = $conexion->ejecutarInstruccion($sql);
+						if($res){
+							echo "Registro almacenado con exito";
+						}else{
+							echo "Error al guardar el registro";
+							exit;
+						}
+								
 				}
 			}
 
 		}
+
+		public static function generarCapturas($conexion, $codigoJuego) {
+				$capturas = $conexion->ejecutarInstruccion('
+								SELECT 
+										url_captura
+								FROM tbl_capturas
+								WHERE codigo_juego = '.$codigoJuego.'								
+							');
+						while ($captura = $conexion->obtenerFila($capturas)) {
+					?>	
+							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
+								<img src="<?php echo $captura['url_captura']; ?>" alt="captura" class="img img-responsive">
+							</div>
+					<?php		
+						}
+		}
+
+		public static function generarTrailer($conexion, $codigoJuego) {
+				$trailers = $conexion->ejecutarInstruccion('
+								SELECT 
+										url_trailer
+								FROM tbl_trailer
+								WHERE codigo_juego = '.$codigoJuego.'								
+							');
+						while ($trailer = $conexion->obtenerFila($trailers)) {
+					?>	
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-responsive embed-responsive-16by9">
+										<iframe class="embed-responsive-item" src="<?php echo $trailer['url_trailer']; ?>" frameborder="0" allowfullscreen>
+										</iframe>
+							</div>	
+					<?php		
+						}
+		}
+
+		public static function generarRequisitosMinimos($conexion, $codigoJuego) {
+			$requisitos = $conexion->ejecutarInstruccion('
+								SELECT  
+										codigo_especificaciones, 
+										codigo_tipo_especificaciones, 
+										codigo_juego, 
+										sistema_operativo, 
+										ram, 
+										targeta_grafica, 
+										cpu 
+
+								FROM tbl_especificaciones
+
+								WHERE codigo_juego = '.$codigoJuego.' 
+
+								AND codigo_tipo_especificaciones = 1 						
+							');
+						$req = $conexion->obtenerFila($requisitos);
+						echo "Minimos<br><br>";
+						echo "SO: ".$req['sistema_operativo']."<br>";
+						echo "RAM: ".$req['ram']."<br>";
+						echo "TARJETA GRAFICA: ".$req['targeta_grafica']."<br>";
+						echo "CPU: ".$req['cpu']."<br>";
+
+		}
+
+		public static function generarRequisitosRecomendados($conexion, $codigoJuego) {
+			$requisitos = $conexion->ejecutarInstruccion('
+								SELECT  
+										codigo_especificaciones, 
+										codigo_tipo_especificaciones, 
+										codigo_juego, 
+										sistema_operativo, 
+										ram, 
+										targeta_grafica, 
+										cpu 
+
+								FROM tbl_especificaciones
+
+								WHERE codigo_juego = '.$codigoJuego.' 
+
+								AND codigo_tipo_especificaciones = 2 						
+							');
+						$req = $conexion->obtenerFila($requisitos);
+						echo "Recomendados<br><br>";
+						echo "SO: ".$req['sistema_operativo']."<br>";
+						echo "RAM: ".$req['ram']."<br>";
+						echo "TARJETA GRAFICA: ".$req['targeta_grafica']."<br>";
+						echo "CPU: ".$req['cpu']."<br>";
+
+		}
+
 	}
 ?>

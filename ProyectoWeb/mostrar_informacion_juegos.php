@@ -1,6 +1,8 @@
 <?php
 	include_once("class/class_conexion.php");
 	include_once("class/class_usuario.php");
+	include_once("class/class_juegos.php");
+
 	$conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -120,19 +122,7 @@
 					</div>
 
 					<?php
-						$capturas = $conexion->ejecutarInstruccion('
-								SELECT 
-										url_captura
-								FROM tbl_capturas
-								WHERE codigo_juego = '.$codigoJuego.'								
-							');
-						while ($captura = $conexion->obtenerFila($capturas)) {
-					?>	
-							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
-								<img src="<?php echo $captura['url_captura']; ?>" alt="captura" class="img img-responsive">
-							</div>
-					<?php		
-						}
+						Juegos::generarCapturas($conexion, $codigoJuego);
 					?>
 
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -143,20 +133,7 @@
 							<h3 style="text-align: center;">Trailer - Gameplay</h3>
 					</div>
 					<?php
-						$trailers = $conexion->ejecutarInstruccion('
-								SELECT 
-										url_trailer
-								FROM tbl_trailer
-								WHERE codigo_juego = '.$codigoJuego.'								
-							');
-						while ($trailer = $conexion->obtenerFila($trailers)) {
-					?>	
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="<?php echo $trailer['url_trailer']; ?>" frameborder="0" allowfullscreen>
-										</iframe>
-							</div>	
-					<?php		
-						}
+						Juegos::generarTrailer($conexion, $codigoJuego);
 					?>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<hr>
@@ -167,28 +144,22 @@
 							<h3 style="text-align: center;">Requisitos de sistema</h3>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-						<?php
-						$requisitos = $conexion->ejecutarInstruccion('
-								SELECT  
-										codigo_especificaciones, 
-										codigo_tipo_especificaciones, 
-										codigo_juego, 
-										sistema_operativo, 
-										ram, 
-										targeta_grafica, 
-										cpu 
+					<div class="row">
+							
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+							<?php
+							Juegos::generarRequisitosMinimos($conexion, $codigoJuego);
+							?>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+							<?php
+							Juegos::generarRequisitosRecomendados($conexion, $codigoJuego);
+							?>
+						</div>
+						
 
-								FROM tbl_especificaciones 
-								WHERE codigo_juego = '.$codigoJuego.'							
-							');
-						$req = $conexion->obtenerFila($requisitos);
-						echo "SO: ".$req['sistema_operativo']."<br>";
-						echo "RAM: ".$req['ram']."<br>";
-						echo "TARJETA GRAFICA: ".$req['targeta_grafica']."<br>";
-						echo "CPU: ".$req['cpu']."<br>";
-
-						?>
-
+					</div>
+						
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<hr>

@@ -74,13 +74,13 @@
       <form role="form" action="/login" method="POST" name="login" accept-charset="UTF-8" enctype="application/x-www-form-urlencoded" autocomplete="off">
         <div class="field-wrap">
           <div class="form-group input-group"><span id="basic-addon1" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-            <input type="text" name="username" placeholder="Username" aria-describedby="basic-addon1" class="form-control" />
+            <input type="text" id="user" name="username" placeholder="Username" aria-describedby="basic-addon1" class="form-control" />
           </div>
         </div>
 
         <div class="field-wrap">
           <div class="form-group input-group"><span id="basic-addon2" class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-            <input type="password" name="password" placeholder="Password" aria-describedby="basic-addon2" autocomplete="off" class="form-control" />
+            <input type="password" id="pass" name="password" placeholder="Password" aria-describedby="basic-addon2" autocomplete="off" class="form-control" />
           </div>
         </div><br>
         <p class="forgot"><a href="/forgot">olvidaste tu contraseña?</a></p>
@@ -88,9 +88,11 @@
       </form>
     </div><!-- fin log in  -->
 
+    <div id="usuario-registrado" class="alert alert-info"></div>
+
     <script src='js/jquery.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.2.3/underscore.string.min.js'></script>
+    <script src='js/controlador.js'></script>
 
   </body>
 </html>

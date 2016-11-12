@@ -159,3 +159,27 @@ $("#btn-guardar-juego").click(function(){
 			}
 		});
 });
+
+
+function logIn(){
+	var datos = "usuario="+$("#user").val()+"&"+
+			    "contrasena="+$("#pass").val();
+
+			  // alert(datos);  	
+	$.ajax({
+			url:"ajax/acciones.php?accion=5",
+			method: "POST",
+			data: datos,
+			
+			success:function(resultado){
+				$("#usuario-registrado").html(resultado);
+				if (resultado==1) {
+				location.href = "index_administrador.php";
+			}
+
+			},
+			error:function(){
+
+			}
+		})
+} 

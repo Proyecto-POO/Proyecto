@@ -118,5 +118,29 @@
 			
 					<?php
 		}
+
+		public static function inicioSesion($conexion, $usuario, $contrasena){
+			$resultado = $conexion->ejecutarInstruccion(
+				"SELECT 
+						nombre_usuario, 
+						contrasena
+				FROM tbl_usuarios
+				WHERE nombre_usuario = '".$usuario."' AND contrasena='".$contrasena."'
+				"
+			);
+			$existe = 0;
+            while ($fila = $conexion->obtenerFila($resultado)) {
+            	if ($fila['nombre_usuario']==$usuario && $fila['contrasena']==$contrasena) {
+            		$existe = 1;
+            	}
+            }
+            if ($existe==1) {
+            	echo $existe;
+            }else{
+            	echo "<kbd>El usuario no esta registrado</kbd>";
+            }
+            
+		}
+
 	}
 ?>
