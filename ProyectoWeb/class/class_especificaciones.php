@@ -80,8 +80,8 @@
 				);
 
 			echo "<br>Instruccion a ejecutar: ".$sql;
-			$conexion->ejecutarInstruccion($sql);
-			
+			$resultado=$conexion->ejecutarInstruccion($sql);
+			$conexion->liberarResultado($resultado);
 		}
 
 

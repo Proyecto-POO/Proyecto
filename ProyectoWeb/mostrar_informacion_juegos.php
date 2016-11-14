@@ -48,8 +48,7 @@
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont">
 				<?php
 					$codigoJuego = $_GET['codigoJuego'];
-					$juego = $conexion->ejecutarInstruccion('
-							SELECT 
+					$sql = sprintf("SELECT 
 									a.codigo_juego, 
 									a.codigo_desarrollador, 
 									a.codigo_esrb, 
@@ -68,8 +67,8 @@
 									INNER JOIN tbl_esrb c
 									ON (a.codigo_esrb = c.codigo_esrb)
 									
-									WHERE codigo_juego = '.$codigoJuego.'
-						');
+									WHERE codigo_juego = '%s'",stripslashes($codigoJuego));
+					$juego = $conexion->ejecutarInstruccion($sql);
 					$fila_juego = $conexion->obtenerFila($juego);				
 				?>
 					<br><br>
@@ -84,7 +83,9 @@
 						<?php echo $fila_juego['descripcion']; ?>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<button class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
+					        <?php if ($_GET["nombreUsuario"]!="") {?>
+									<button  id="comprar" class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
+							<?php } ?> 						
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<hr>
@@ -187,14 +188,11 @@
 										<div class="status-upload" style="width: 100%;">
 											<form>
 												<textarea id="txt-comentario" placeholder="Ingresa tu comentario aqui." ></textarea>
-												<ul>
-													<li><button class="btn btn-primary" title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><strong><span class="glyphicon glyphicon-user" aria-hidden="true"></span></strong></button></li>
-													<li id="li-usuarios">
-													   <?php Usuario::generar_select_usuarios($conexion); ?>
-													</li>
-												</ul>
-
-												<button onclick="GuardarComentario(<?php echo $_GET['codigoJuego']; ?>);" type="button" class="btn btn-success btn-lg">Enviar Comentario</button>
+												
+												<?php if ($_GET["nombreUsuario"]!="") {?>
+													<button onclick="GuardarComentario(<?php echo $_GET['codigoJuego']; ?>,'<?php echo $_GET["nombreUsuario"]; ?>');" type="button" class="btn btn-success btn-lg">Enviar Comentario</button>
+												<?php } ?> 
+												
 											</form>
 										</div><!-- Status Upload  -->
 									</div><!-- Widget Area -->
@@ -205,8 +203,9 @@
 		</div>
 	</div>
 	
-	
+
 	<footer>
+
             <div class="container">
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
@@ -223,8 +222,13 @@
    <script src="js/controlador.js"></script>
    <script type="text/javascript">
    	$(document).ready(function(){
-   		CargarComentarios(<?php echo $_GET["codigoJuego"]?>);
+   		CargarComentarios(<?php echo $_GET["codigoJuego"]?>,'<?php echo $_GET["nombreUsuario"];?>');
    	});
    </script>
 </body>
 </html>
+<?php 
+$conexion->liberarResultado($juego);
+$conexion->cerrarConexion();
+
+?>

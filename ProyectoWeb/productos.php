@@ -59,9 +59,9 @@
 	              <li class="dropdown">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar Sesión <span class="caret"></span></a>
 	                <ul class="dropdown-menu">
-	                  <li><a href="login.php">Cliente</a></li>
+	                  <li><a href="login_usuario.php">Cliente</a></li>
 	                  <li role="separator" class="divider"></li>
-	                  <li><a href="login.php">Administrador</a></li>
+	                  <li><a href="login_administrador.php">Administrador</a></li>
 	                </ul>
 	              </li>
 	            </ul>

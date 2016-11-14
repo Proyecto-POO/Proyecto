@@ -1,25 +1,23 @@
 <?php
     include_once("class/class_conexion.php");
-    include_once("class/class_categorias.php");  
+    include_once("class/class_juegos.php");  
+    include_once("class/class_usuario.php");
+    include_once("class/class_categorias.php");
     include_once("class/class_desarrolladores.php");
-    include_once("class/class_juegos.php");
     $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	 <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GAMERS.ES</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
+	<title>Modificar Juego</title>
+	<link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
 
 </head>
 <body style="background-image: url('img/fondo.png'); ">
-
-      <nav class="navbar navbar-inverse">
+		
+	<nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -35,65 +33,52 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="index_administrador.php" class="hvr-underline-from-center">Inicio</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_GET["nombre"]; ?><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="login_administrador.php">Cerrar Sesion</a></li>
-                  <li role="separator" class="divider"></li>
-                </ul>
+              <li><a href="index_administrador.php" class="hvr-underline-from-center">
+              		<button class="btn btn-warning">Volver Atras</button>
+              	</a>
               </li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
-    
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-lg-offset-2">
-            <div class="cont">
-            <label>Ver Listas</label><br><br>
-              <a href="eliminar_producto.php"><button class="btn btn-warning btn-lg">Ver Usuarios y Juegos</button></a><br><br>
-              <button class="btn btn-primary btn-lg">Ver Transacciones</button><br><br>
-
-            </div>
+	<div class="container-fluid">
+       <div class="row">
+              <div class="row-divisor-bottom col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="div-lista-modificar-juegos">
+                    <div class="row">
+                            <?php
+                                  //impresion de las tarjetas de los juegos para modificar 
+                                  Juegos::obtenerTarjetasModificar($conexion); 
+                            ?>                 
+                  </div>
+              </div>
+          
         </div>
-        <div class="col-lg-4">
-            <div class="cont">
-            <label>Gestion de Producto</label><br><br>
-              <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal-nuevo-juego">Agregar</button><br><br>
-              <a href="modificar_juegos.php"><button class="btn btn-primary btn-lg" >Modificar</button></a><br><br>
-
-            </div>
-        </div>
-      </div>
     </div>
-  
+  </div>
 
-    <!--Ventana Modal de registro de nuevo juego-->
-<div class="modal fade" id="modal-nuevo-juego" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <!--Ventana Modal para editar juego-->
+<div class="modal fade" id="modal-actualizar-juego" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Registro de Juego</h4>
+        <h4 class="modal-title" id="myModalLabel">Modificar Juego</h4>
       </div>
       <div class="modal-body">
           <!--Formulario de registro-->
           <table class="table table-striped">
           <tr>
             <th>Titulo</th>
-            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control" ></td>
+            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego2" class="form-control" ></td>
           </tr>
           <tr>
             <th>Portada</th>
-            <td colspan="3"><input type="text" name="txt-portada" id="txt-portada" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-portada" id="txt-portada2" class="form-control"></td>
           </tr>
           <tr>
             <th>Descripcion</th>
-            <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion" class="form-control"></textarea></td>
+            <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion2" class="form-control"></textarea></td>
           </tr>
           <tr>
             <th>Categorias</th>
@@ -101,23 +86,23 @@
           </tr>
           <tr>
             <th>Fecha de lanzamiento</th>
-            <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control"></td>
+            <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento2"  class="form-control"></td>
           </tr>
            <tr>
             <th>Precio</th>
-            <td colspan="3"><input type="text" name="txt-precio" id="txt-precio" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-precio" id="txt-precio2" class="form-control"></td>
           </tr>
           <tr>
             <th>Tamaño</th>
-            <td colspan="3"><input type="text" name="txt-tamano" id="txt-tamano" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-tamano" id="txt-tamano2" class="form-control"></td>
           </tr>
           <tr>
             <th>Url del producto</th>
-            <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso2" class="form-control"></td>
           </tr>
           <tr>
             <th>calificacion</th>
-            <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion2" class="form-control"></td>
           </tr>
           <tr>
             <th>Desarrollador</th>
@@ -137,23 +122,23 @@
           </tr>
           <tr>
             <th>CPU</th>
-            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo2" class=" form-control"></td>
+            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado2" class="form-control"></td>
           </tr>
           <tr>
             <th>RAM</th>
-            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo2" class=" form-control"></td>
+            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado2" class="form-control"></td>
           </tr>
           <tr>
             <th>Sistema Operativo</th>
-            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo2" class=" form-control"></td>
+            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado2" class="form-control"></td>
           </tr>
           <tr>
             <th>Tarjeta Grafica</th>
-            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo2" class=" form-control"></td>
+            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado2" class="form-control"></td>
           </tr>
         </table>
 
@@ -168,9 +153,10 @@
     </div>
   </div>
 </div>
-      <br><br><br><br><br><br><br>
-    <footer>
-            <div class="container ">
+
+    <br><br><br><br><br><br><br>
+	<footer>
+            <div class="container">
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
                   <img src="img/pago-icono.png" alt="" class="img img-responsive">
@@ -181,10 +167,8 @@
             <b><em>GAMERS.ES</em></b> &copy; 2016 - Todos Los Derechos Reservados
     </footer>
 
-	 <script src="js/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/controlador.js"></script>
-
-
 </body>
 </html>

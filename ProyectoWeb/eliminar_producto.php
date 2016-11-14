@@ -41,14 +41,14 @@
       </nav>
 	<div class="container-fluid">
        <div class="row">
-              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12   "> 
+              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="div-lista-usuarios"> 
                  <?php
                       Usuario::mostrarUsuarios($conexion);
                     ?> 
              
               </div>
               <div class="row-divisor-bottom col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
-              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="div-lista-eliminar-juegos">
                     <div class="row">
                             <?php
                                   //impresion de las tarjetas de los juegos para eliminarlos 
@@ -75,6 +75,6 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/eliminar.js"></script>
+   <script src="js/controlador.js"></script>
 </body>
 </html>

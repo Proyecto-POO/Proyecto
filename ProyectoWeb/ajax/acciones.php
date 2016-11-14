@@ -4,21 +4,22 @@
 	include_once("../class/class_juegos.php");
 	include_once("../class/class_especificaciones.php");
 	include_once("../class/class_usuario.php");
+	include_once("../class/class_administradores.php");
 				
 	$conexion = new Conexion();
 	switch ($_GET["accion"]) {
 		case '1':// cargar los comentarios
 			
 			$codigoJuego = $_POST["codigo_juego"];
-			Comentario::generar_comentarios($conexion,$codigoJuego);
+			Comentario::generar_comentarios($conexion,$codigoJuego,$_POST["nombre_usuario"]);
 			break;
 
 		case '2'://Guardar los comentarios
 		
 			$codigoJuego = $_POST["codigo_juego"];
-			$codigoUsuario = $_POST["slc-usuarios"];
+			$nombreUsuario = $_POST["nombre_usuario"];
 			$comentario = $_POST["txt-comentario"];
-			Comentario::guardar_comentarios($conexion, $codigoJuego, $codigoUsuario, $comentario);
+			Comentario::guardar_comentarios($conexion, $codigoJuego, $nombreUsuario, $comentario);
 		break;
 
 		case '3'://Eliminar Comentario
@@ -62,15 +63,32 @@
 		$nuevaEspecificacionRecomendada->guardarEspecificaciones($conexion);
 		break;
 
-		case '5':
+		case '5'://comprobacion del login Usuario
 				$usuario = $_POST['usuario'];
 				$contrasena = $_POST['contrasena'];
 
 				Usuario::inicioSesion($conexion, $usuario, $contrasena);
 				
 				break;						
+		case '6'://Eliminacion de un usuario
+				$codigo_usuario=$_POST['codigoUsuario'];
+				Usuario::eliminarUsuario($conexion,$codigo_usuario);
+				Usuario::mostrarUsuarios($conexion);
+			break;
+		case '7'://Eliminacion de un juego
+			$codigo_juego=$_POST['codigoJuego'];
+			Juegos::eliminarJuegos($conexion,$codigo_juego);
+			Juegos::obtenerTarjetasEliminar($conexion);
+			break;
+		case '8'://comprobacion del login Admin
+			$usuario = $_POST['Admin'];
+			$contrasena = $_POST['contrasena'];
 
-		default:
+			Administradores::inicioSesionAdmin($conexion,$usuario, $contrasena);
+			
+			break;
+		
+		default:		
 			# code...
 			break;
 	}

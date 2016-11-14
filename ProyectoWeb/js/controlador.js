@@ -70,8 +70,8 @@ $(document).ready(function(){
 
 });
 
-CargarComentarios = function(codigoJuego){
-	var info = "codigo_juego=" + codigoJuego;
+CargarComentarios = function(codigoJuego,nombreUsuario){
+	var info = "codigo_juego=" + codigoJuego + "&nombre_usuario=" + nombreUsuario;
 		$.ajax({
 			data: info,
 			url:"ajax/acciones.php?accion=1",
@@ -84,30 +84,31 @@ CargarComentarios = function(codigoJuego){
 	});
 }
 
-GuardarComentario=function(codigoJuego){
+GuardarComentario=function(codigoJuego,nombreUsuario){
 	var info = "codigo_juego=" + codigoJuego +"&"+
-		"slc-usuarios=" + $("#slc-usuarios").val()+"&"+
+		"nombre_usuario=" + nombreUsuario + "&"+
 	 	"txt-comentario=" + $("#txt-comentario").val();
 		$.ajax({
 			data: info,
 			url:"ajax/acciones.php?accion=2",
 			method: "POST",
 			success:function(resultado){
-				CargarComentarios(codigoJuego);
+				CargarComentarios(codigoJuego,nombreUsuario);
+				$("#txt-comentario").val("");
 			},
 			error:function(){
 		}
 	});
 }
 
-eliminarComentario = function(codigoComentario,codigoJuego){
+eliminarComentario = function(codigoComentario,codigoJuego,nombreUsuario){
 	var info = "codigoComentario=" + codigoComentario;
 		$.ajax({
 			data: info,
 			url:"ajax/acciones.php?accion=3",
 			method: "POST",
 			success:function(resultado){
-				CargarComentarios(codigoJuego);
+				CargarComentarios(codigoJuego,nombreUsuario);
 				alert("Comentario eliminado con exito.");
 			},
 			error:function(){
@@ -161,7 +162,7 @@ $("#btn-guardar-juego").click(function(){
 });
 
 
-function logIn(){
+function logInUsuario(){
 	var datos = "usuario="+$("#user").val()+"&"+
 			    "contrasena="+$("#pass").val();
 
@@ -172,9 +173,11 @@ function logIn(){
 			data: datos,
 			
 			success:function(resultado){
-				$("#usuario-registrado").html(resultado);
+				
 				if (resultado==1) {
-				location.href = "index_administrador.php";
+					
+					location.href = "index_usuario.php?nombre="+$("#user").val()+"";
+					$("#comprar").fadeIn();
 			}
 
 			},
@@ -183,3 +186,73 @@ function logIn(){
 			}
 		})
 } 
+function logInAdmin(){
+	var datos = "Admin="+$("#user-admin").val()+"&"+
+			    "contrasena="+$("#pass-admin").val();
+
+			  // alert(datos);  	
+	$.ajax({
+			url:"ajax/acciones.php?accion=8",
+			method: "POST",
+			data: datos,
+			
+			success:function(resultado){
+				if (resultado==1) {
+					location.href = "index_administrador.php?nombre="+$("#user-admin").val()+"";
+					
+			}
+
+			},
+			error:function(){
+
+			}
+		})
+}
+function eliminarUsuario(codigoUsuario){
+	alert(codigoUsuario);
+	var eliminarUsuario = "codigoUsuario= " + codigoUsuario;
+	$.ajax({
+		url:"ajax/acciones.php?accion=6",
+		method:"POST",
+		data: eliminarUsuario,
+		success:function(resultado){
+				$("#div-lista-usuarios").html(resultado);
+			},
+			error:function(){
+		}
+	}) 
+}
+
+function eliminarJuego(codigoJuego){
+	alert(codigoJuego);
+	var eliminarJuego = "codigoJuego= " + codigoJuego;
+	$.ajax({
+		url:"ajax/acciones.php?accion=7",
+		method:"POST",
+		data: eliminarJuego,
+		success:function(resultado){
+				$("#div-lista-eliminar-juegos").html(resultado);
+			},
+			error:function(){
+		}
+	}) 
+}
+
+function editarJuego(codigoJuego){
+	alert(codigoJuego);
+	var info = "codigo_juego=" + codigoJuego;
+	alert("codigo juego: "+ info);
+	$.ajax({
+		url: "ajax/json.php?accion=8",
+		data: info,
+		method: "POST",
+		dataType: 'json',
+		success:function(resultado){
+			alert(resultado);
+			$("#txt-titulo-juego2").val(resultado.nombre_juego);
+		},
+		error: function(){
+			alert("hubo error");
+		}
+	});
+}

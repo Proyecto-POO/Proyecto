@@ -13,13 +13,23 @@
 
 			stripcslashes($codigoComentario));
 
-			$conexion->ejecutarInstruccion($sql);
+			$resultado=$conexion->ejecutarInstruccion($sql);
 			echo "esta es la instruccion sql: " + $sql;
+			$conexion->liberarResultado($resultado);
 		}
 		
-		public static function guardar_comentarios($conexion, $codigo_juego,$codigo_usuario,$comentario){
+		public static function guardar_comentarios($conexion, $codigo_juego,$nombre_usuario,$comentario){
 			$fecha = $fecha = date("Y") . "-" . date("m") . "-" . date("d");
 			
+			$sql2 = sprintf("SELECT codigo_usuario, nombre_usuario
+							 FROM tbl_usuarios
+							  WHERE nombre_usuario = '%s'",
+							  stripslashes($nombre_usuario));
+
+			$resultado2 = $conexion->ejecutarInstruccion($sql2);
+			$filaNombre = $conexion->obtenerFila($resultado2);
+
+
 			$sql=sprintf("INSERT INTO tbl_comentarios 
 									( 
 									codigo_comentarios , 
@@ -27,9 +37,10 @@
 									codigo_juego , 
 									comentario , 
 									fecha_comentario 
-									) VALUES (NULL,'%s','%s','%s','%s')",
+									) VALUES (NULL,'%s','%s','%s','%s')
+									",
 				
-			 stripcslashes($codigo_usuario),
+			 stripcslashes($filaNombre["codigo_usuario"]),
 			 stripcslashes($codigo_juego),
 			 stripcslashes($comentario),
 			 stripcslashes($fecha)
@@ -40,21 +51,21 @@
 			$conexion->liberarResultado($sql);
 		}
 
-		public static function generar_comentarios($conexion, $codigo_juego){
-			$resultado = $conexion->ejecutarInstruccion('
-				SELECT 
+		public static function generar_comentarios($conexion, $codigo_juego, $nombre_usuario){
+			$sql = sprintf("SELECT 
 						a.codigo_comentarios, 
 						a.codigo_usuario,
 						 a.codigo_juego,
 						 a.comentario,
 						 a.fecha_comentario,
 						  b.nombre,
-						  b.codigo_usuario
+						  b.codigo_usuario,
+						  b.nombre_usuario
 				FROM tbl_comentarios a
 				INNER JOIN tbl_usuarios b 
 				ON (a.codigo_usuario=b.codigo_usuario)
-				WHERE a.codigo_juego='.$codigo_juego.'
-				');
+				WHERE a.codigo_juego='%s'",stripslashes($codigo_juego));
+			$resultado = $conexion->ejecutarInstruccion($sql);
 			
 			while ($fila = $conexion->obtenerFila($resultado)) {
 				?>
@@ -63,11 +74,11 @@
 					<!-- Contenedor del Comentario -->
 						<div class="comment-box">
 							<div class="comment-head" style="width: 70%;">
-								<h6 class="comment-name by-author"><a href="#"><?php echo $fila["nombre"]; ?></a></h6>
-								<span>hace x minutos</span>
-								<button data-toggle="tooltip" data-placement="top" title="Modificar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
-								<button onclick="eliminarComentario(<?php echo $fila["codigo_comentarios"]; ?>, <?php echo $fila["codigo_juego"]; ?>);" data-toggle="tooltip" data-placement="top" title="Eliminar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-								<button data-toggle="tooltip" data-placement="top" title="Te gusta este comentario" class="btn btn-sm"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+								<h6 class="comment-name by-author"><a href="#"><?php echo $fila["nombre_usuario"]; ?></a></h6>
+								<span>hace 1000000 minutos</span>
+								<?php if ($fila["nombre_usuario"]==$nombre_usuario) {?>
+									<button onclick="eliminarComentario(<?php echo $fila["codigo_comentarios"]; ?>, <?php echo $fila["codigo_juego"]; ?>,'<?php echo $nombre_usuario; ?>');" data-toggle="tooltip" data-placement="top" title="Eliminar comentario" class="btn btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								<?php } ?> 
 								<span style="float: right;"><?php echo $fila['fecha_comentario'];?></span>
 							</div>
 							<div class="comment-content" style="width: 70%;">

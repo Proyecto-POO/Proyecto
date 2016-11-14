@@ -21,9 +21,9 @@
 		public static function checkBoxCategoria($conexion){
 				$categorias = $conexion->ejecutarInstruccion('
 							SELECT 
-								a.codigo_categoria, 
-								a.nombre_categoria
-							FROM tbl_categorias a
+								codigo_categoria, 
+								nombre_categoria
+							FROM tbl_categorias 
 						');
 
 						while ($fila_categoria = $conexion->obtenerFila($categorias)) {

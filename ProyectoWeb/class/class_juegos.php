@@ -101,7 +101,7 @@
 				" Precio: " . $this->precio;
 		}
 
-		public static function generacionTarjetas($conexion){
+		public static function generacionTarjetas($conexion,$nombreUsuario){
 			$tarjetas = $conexion->ejecutarInstruccion('
 						SELECT 
 								codigo_juego, 
@@ -111,12 +111,13 @@
 								fecha_publicacion, 
 								url, portada, 
 								calificacion, 
-								precio FROM tbl_juegos 
+								precio
+								FROM tbl_juegos 
 				');
 
 			while ($fila_tarjetas = $conexion->obtenerFila($tarjetas)) {
 				?>
-	             <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_tarjetas["codigo_juego"]; ?>"> <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 row-divisor-bottom">
+	             <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_tarjetas["codigo_juego"]; ?>&nombreUsuario=<?php echo $nombreUsuario; ?>"> <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 row-divisor-bottom">
 	                <div class="well hovereffect">
 	                    <img id='img-<?php echo $fila_tarjetas["nombre_juego"]; ?>' class='img img-responsive' src='<?php echo $fila_tarjetas["portada"]; ?>' alt='Portada'>
 	                        <div class="overlay">
@@ -158,7 +159,7 @@
 			while ($fila_tarjetas_eliminar = $conexion->obtenerFila($tarjetasEliminar)) {
 				?>
 				<div class="rowglyphicon-thumbs-up">
-		            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5 row-divisor-bottom card-container ">
+		            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 row-divisor-bottom card-container ">
 		                <div class="well hovereffect card-profile ">
 		                    <img id='img-<?php echo $fila_tarjetas_eliminar["nombre_juego"]; ?>' class='img img-responsive' src='<?php echo $fila_tarjetas_eliminar["portada"]; ?>' alt='Portada'>
 		                        <div class="overlay">
@@ -176,6 +177,43 @@
 	            <?php
 	        }
 	        $conexion->liberarResultado($tarjetasEliminar);
+		}
+
+		public static function obtenerTarjetasModificar($conexion){
+			$tarjetasModificar = $conexion->ejecutarInstruccion('
+						SELECT 
+								codigo_juego, 
+								codigo_desarrollador,
+								codigo_esrb, nombre_juego, 
+								descripcion, 
+								fecha_publicacion, 
+								url, portada, 
+								calificacion, 
+								precio FROM tbl_juegos 
+				');
+
+			while ($fila_tarjetas_modificar = $conexion->obtenerFila($tarjetasModificar)) {
+				?>
+				<div class="rowglyphicon-thumbs-up">
+		            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-5 row-divisor-bottom card-container ">
+		                <div class="well hovereffect card-profile ">
+		                    <img id='img-<?php echo $fila_tarjetas_modificar["nombre_juego"]; ?>' class='img img-responsive' src='<?php echo $fila_tarjetas_modificar["portada"]; ?>' alt='Portada'>
+		                        <div class="overlay">
+		                            <h2><b><?php echo $fila_tarjetas_modificar["nombre_juego"]; ?></b></h2>
+		                             <br>
+		                              <button data-toggle="modal" data-target="#modal-actualizar-juego" type="button" class="btn btn-danger"  title="Modificar <?php echo $fila_tarjetas_modificar['nombre_juego']; ?>" style="position: center;">
+	                                        <span class="glyphicon glyphicon-pencil" 
+	                                        onclick="editarJuego(<?php echo $fila_tarjetas_modificar["codigo_juego"]; ?>)" style="font-size: 200%" aria-hidden="true"></span>
+	                                 </button>
+		                        </div>
+		                </div>
+		              </div>
+		         </div>
+
+	            <?php
+	        }
+
+	        $conexion->liberarResultado($tarjetasModificar);
 		}
 
 		public static function obtenerMasValorados($conexion){
@@ -304,16 +342,17 @@
 								
 				}
 			}
-
+			$conexion->liberarResultado($res);
+			$conexion->liberarResultado($UltimoInsert);
 		}
 
 		public static function generarCapturas($conexion, $codigoJuego) {
-				$capturas = $conexion->ejecutarInstruccion('
-								SELECT 
+				$sql = sprintf("SELECT 
 										url_captura
 								FROM tbl_capturas
-								WHERE codigo_juego = '.$codigoJuego.'								
-							');
+								WHERE codigo_juego = '%s'",stripslashes($codigoJuego));
+				
+				$capturas = $conexion->ejecutarInstruccion($sql);
 						while ($captura = $conexion->obtenerFila($capturas)) {
 					?>	
 							<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
@@ -321,15 +360,15 @@
 							</div>
 					<?php		
 						}
+				$conexion->liberarResultado($capturas);
 		}
 
 		public static function generarTrailer($conexion, $codigoJuego) {
-				$trailers = $conexion->ejecutarInstruccion('
-								SELECT 
-										url_trailer
+				$sql = sprintf("SELECT 
+								url_trailer
 								FROM tbl_trailer
-								WHERE codigo_juego = '.$codigoJuego.'								
-							');
+								WHERE codigo_juego = '%s'",stripslashes($codigoJuego));
+				$trailers = $conexion->ejecutarInstruccion($sql);
 						while ($trailer = $conexion->obtenerFila($trailers)) {
 					?>	
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-responsive embed-responsive-16by9">
@@ -338,25 +377,22 @@
 							</div>	
 					<?php		
 						}
+				$conexion->liberarResultado($trailers);
 		}
 
 		public static function generarRequisitosMinimos($conexion, $codigoJuego) {
-			$requisitos = $conexion->ejecutarInstruccion('
-								SELECT  
-										codigo_especificaciones, 
-										codigo_tipo_especificaciones, 
-										codigo_juego, 
-										sistema_operativo, 
-										ram, 
-										targeta_grafica, 
-										cpu 
-
+			$sql = sprintf("SELECT  
+								codigo_especificaciones, 
+								codigo_tipo_especificaciones, 
+								codigo_juego, 
+								sistema_operativo, 
+								ram, 
+								targeta_grafica, 
+								cpu 
 								FROM tbl_especificaciones
-
-								WHERE codigo_juego = '.$codigoJuego.' 
-
-								AND codigo_tipo_especificaciones = 1 						
-							');
+								WHERE codigo_juego = '%s' 
+								AND codigo_tipo_especificaciones = 1", stripslashes($codigoJuego));
+			$requisitos = $conexion->ejecutarInstruccion($sql);
 						$req = $conexion->obtenerFila($requisitos);
 						echo "Minimos<br><br>";
 						echo "SO: ".$req['sistema_operativo']."<br>";
@@ -364,11 +400,11 @@
 						echo "TARJETA GRAFICA: ".$req['targeta_grafica']."<br>";
 						echo "CPU: ".$req['cpu']."<br>";
 
+						$conexion->liberarResultado($requisitos);
 		}
 
 		public static function generarRequisitosRecomendados($conexion, $codigoJuego) {
-			$requisitos = $conexion->ejecutarInstruccion('
-								SELECT  
+			$sql = sprintf("SELECT  
 										codigo_especificaciones, 
 										codigo_tipo_especificaciones, 
 										codigo_juego, 
@@ -379,16 +415,44 @@
 
 								FROM tbl_especificaciones
 
-								WHERE codigo_juego = '.$codigoJuego.' 
+								WHERE codigo_juego = '%s' 
 
-								AND codigo_tipo_especificaciones = 2 						
-							');
+								AND codigo_tipo_especificaciones = 2",stripslashes($codigoJuego));
+			$requisitos = $conexion->ejecutarInstruccion($sql);
 						$req = $conexion->obtenerFila($requisitos);
 						echo "Recomendados<br><br>";
 						echo "SO: ".$req['sistema_operativo']."<br>";
 						echo "RAM: ".$req['ram']."<br>";
 						echo "TARJETA GRAFICA: ".$req['targeta_grafica']."<br>";
 						echo "CPU: ".$req['cpu']."<br>";
+
+						$conexion->liberarResultado($requisitos);
+		}
+
+		public static function eliminarJuegos($conexion,$codigoJuego){
+			$sql1 = sprintf("DELETE FROM tbl_capturas 
+							WHERE codigo_juego ='%s'", stripslashes($codigoJuego));
+			$conexion->ejecutarInstruccion($sql1);
+
+			$sql2 = sprintf("DELETE FROM tbl_trailer
+							WHERE codigo_juego ='%s'", stripslashes($codigoJuego));
+			$conexion->ejecutarInstruccion($sql2);
+
+			$sql3 = sprintf("DELETE FROM tbl_juegos_x_tbl_categorias 
+							WHERE codigo_juego ='%s'", stripslashes($codigoJuego));
+			$conexion->ejecutarInstruccion($sql3);
+
+			$sql4 = sprintf("DELETE FROM tbl_especificaciones 
+							WHERE codigo_juego ='%s'", stripslashes($codigoJuego));
+			$conexion->ejecutarInstruccion($sql4);
+
+			$sql5 = sprintf("DELETE FROM tbl_comentarios 
+							WHERE codigo_juego ='%s'", stripslashes($codigoJuego));
+			$conexion->ejecutarInstruccion($sql5);
+
+			$sql6 = sprintf("DELETE FROM tbl_juegos 
+							WHERE codigo_juego ='%s'", stripslashes($codigoJuego));
+			$conexion->ejecutarInstruccion($sql6);
 
 		}
 

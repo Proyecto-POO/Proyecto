@@ -30,8 +30,7 @@
 		public static function generar_select_usuarios($conexion){
 			$resultado = $conexion->ejecutarInstruccion('
 				                    SELECT 
-											codigo_usuario, 
-											codigo_tipo_usuario, 
+											codigo_usuario,  
 											codigo_tipo_pago, 
 											codigo_tarjeta_credito, 
 											nombre_usuario, nombre, 
@@ -120,14 +119,13 @@
 		}
 
 		public static function inicioSesion($conexion, $usuario, $contrasena){
-			$resultado = $conexion->ejecutarInstruccion(
-				"SELECT 
+			$sql = sprintf("SELECT 
 						nombre_usuario, 
 						contrasena
 				FROM tbl_usuarios
-				WHERE nombre_usuario = '".$usuario."' AND contrasena='".$contrasena."'
-				"
-			);
+				WHERE nombre_usuario = '%s' AND contrasena = '%s'"
+				,stripslashes($usuario),stripslashes($contrasena));
+			$resultado = $conexion->ejecutarInstruccion($sql);
 			$existe = 0;
             while ($fila = $conexion->obtenerFila($resultado)) {
             	if ($fila['nombre_usuario']==$usuario && $fila['contrasena']==$contrasena) {
@@ -139,7 +137,18 @@
             }else{
             	echo "<kbd>El usuario no esta registrado</kbd>";
             }
-            
+           $conexion->liberarResultado($resultado); 
+		}
+
+		public static function eliminarUsuario($conexion,$codigo_usuario){
+			//eliminacion de los comentarios
+			$sql = sprintf("DELETE FROM tbl_comentarios 
+							WHERE codigo_usuario ='%s'", stripslashes($codigo_usuario));
+			$conexion->ejecutarInstruccion($sql);
+
+			$sql2 = sprintf("DELETE FROM tbl_usuarios 
+							WHERE codigo_usuario ='%s'", stripslashes($codigo_usuario));
+			$conexion->ejecutarInstruccion($sql2);
 		}
 
 	}
