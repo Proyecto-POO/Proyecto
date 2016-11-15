@@ -5,6 +5,8 @@
 	include_once("../class/class_especificaciones.php");
 	include_once("../class/class_usuario.php");
 	include_once("../class/class_administradores.php");
+	include_once("../class/class_venta_diaria.php");
+	include_once("../class/class_tarjetas.php");
 				
 	$conexion = new Conexion();
 	switch ($_GET["accion"]) {
@@ -87,7 +89,11 @@
 			Administradores::inicioSesionAdmin($conexion,$usuario, $contrasena);
 			
 			break;
-		
+		case '9'://guardar registro de venta de juego y registro de tarjeta de credito que utilizo el usuario
+			VentaDiaria::guardarRegistroVenta($conexion,$_POST["nombre_usuario"],$_POST["codigo_juego"]);
+			TarjetaCredito::guardarRegistroTarjeta($conexion,$_POST["nombre_usuario"],$_POST["numero_tarjeta"],
+				$_POST["numero_identidad"]);
+			break;
 		default:		
 			# code...
 			break;

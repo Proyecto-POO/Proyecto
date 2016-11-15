@@ -322,3 +322,21 @@ editarEspecificacionesMax = function(codigoJuego){
 			}
 	});
 }
+
+function comprarJuego(codigoJuego,nombreUsuario){
+	alert("codigo del juego: " + codigoJuego + " nombre de usuario: " + nombreUsuario);
+	var info = "codigo_juego=" + codigoJuego + "&nombre_usuario=" + nombreUsuario + "&numero_identidad=" + $("#numero-id").val()
+	+ "&numero_tarjeta=" + $("#numero-tarjeta").val();
+	$.ajax({
+		url: "ajax/acciones.php?accion=9",
+		data: info,
+		method: "POST",
+		success:function(resultado){
+			alert("llegue al success de comprar juego");
+			alert(resultado);
+		},
+		error: function(){
+			alert("hubo error");
+		}
+	});
+}
