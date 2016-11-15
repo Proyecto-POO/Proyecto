@@ -4,6 +4,9 @@
     include_once("class/class_desarrolladores.php");
     include_once("class/class_juegos.php");
     $conexion = new Conexion();
+    session_start(); 
+    if(!isset($_SESSION['usuario']))
+      header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,9 +42,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_GET["nombre"]; ?><span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['usuario']; ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="login_administrador.php">Cerrar Sesion</a></li>
+                  <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
                   <li role="separator" class="divider"></li>
                 </ul>
               </li>

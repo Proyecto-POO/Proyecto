@@ -35,7 +35,8 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="index.php" class="hvr-underline-from-center">
+              <li>
+              	<a href="index.php" class="hvr-underline-from-center">
               		<button class="btn btn-warning">Volver Atras</button>
               	</a>
               </li>
@@ -83,8 +84,8 @@
 						<?php echo $fila_juego['descripcion']; ?>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					        <?php if ($_GET["nombreUsuario"]!="") {?>
-									<button data-toggle="modal" data-target="#modal-comprar-juego" id="comprar" class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
+					        <?php if ($_SESSION['nombre_usuario']!="") {?>
+									<button  id="comprar" class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
 							<?php } ?> 						
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -189,7 +190,7 @@
 											<form>
 												<textarea id="txt-comentario" placeholder="Ingresa tu comentario aqui." ></textarea>
 												
-												<?php if ($_GET["nombreUsuario"]!="") {?>
+												<?php if ($_SESSION['nombre_usuario']!="") {?>
 													<button onclick="GuardarComentario(<?php echo $_GET['codigoJuego']; ?>,'<?php echo $_GET["nombreUsuario"]; ?>');" type="button" class="btn btn-success btn-lg">Enviar Comentario</button>
 												<?php } ?> 
 												
@@ -203,61 +204,6 @@
 		</div>
 	</div>
 	
-	<!--Modal para la compra del video juego.-->
-		<div id="modal-comprar-juego" class="modal fade" tabindex="-1" role="dialog">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Compra del juego: <?php echo " ". $fila_juego['nombre_juego'];?></h4>
-		      </div>
-		      <div class="modal-body">
-			      <div class="row">
-			      	<div class="col-lg-4">
-			      		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-12">
-							<div class="well">
-								<img src="<?php echo $fila_juego["portada"]; ?>" class="img-responsive">
-									<?php 
-										for ($j=0;$j<$fila_juego["calificacion"];$j++)
-										echo '<span style="color:#f0ad4e;" class="glyphicon glyphicon-star" aria-hidden="true"></span>';
-									?>
-							</div>
-						</div>
-			      	</div>
-			      	<div class="col-lg-8">
-			      		<table class="table table-striped">
-			      			<tr>
-			      				<td><label>Ingresa tu número de identidad (ID)</label></td>
-			      				<td>
-			      					<input class="form-control" type="text" name="numero-id" id="numero-id">
-			      				</td>
-			      			</tr>
-			      			<tr>
-			      				<td><label>Ingresa el número de tu tarjeta de credito</label></td>
-			      				<td>
-			      					<input class="form-control" type="password" name="numero-tarjeta" id="numero-tarjeta">
-			      				</td>
-			      			</tr>
-			      			<tr>
-			      				<td><label>Precio</label></td>
-			      				<td>
-			      					<label style="color:#0065a5;"><?php echo "USD " . $fila_juego["precio"]; ?></label>
-			      				</td>
-			      			</tr>
-			      		</table>
-			      	</div>
-
-			      </div>
-		      </div>
-		      
-		      <div class="modal-footer">
-		        <button id="btn-cancelar-compra" type="button" class="btn btn-danger btn-lg" data-dismiss="modal">Cancelar</button>
-		        <button onclick="comprarJuego(<?php echo $fila_juego["codigo_juego"]; ?>, '<?php echo $_GET["nombreUsuario"]; ?>')"  id="btn-realizar-compra" type="button" class="btn btn-primary btn-lg" data-dismiss="modal">Comprar</button>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-	<!--Fin de la modal para la compra del video juego-->
 
 	<footer>
 

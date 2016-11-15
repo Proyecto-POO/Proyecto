@@ -53,19 +53,21 @@
 						contrasena
 				FROM tbl_administradores
 				WHERE usuario = '%s' AND contrasena = '%s'"
-				,stripslashes($usuario),stripslashes($contrasena));
-			$resultado = $conexion->ejecutarInstruccion($sql);
-			$existe = 0;
-            while ($fila = $conexion->obtenerFila($resultado)) {
-            	if ($fila['usuario']==$usuario && $fila['contrasena']==$contrasena) {
-            		$existe = 1;
-            	}
-            }
-            if ($existe==1) {
-            	echo $existe;
-            }else{
-            	echo "<kbd>El admin no esta registrado</kbd>";
-            }
+				,stripslashes($usuario),stripslashes($contrasena)
+				);
+			$respuesta = array();
+			$sesion_admin = $conexion->ejecutarInstruccion($sql);
+				if($conexion->cantidadRegistros($sesion_admin) >0){
+					$fila = $conexion->obtenerFila($sesion_admin);
+					$respuesta["inicio"] = "2";
+					$respuesta["usuario"] = $fila["usuario"];
+					
+				}
+				else {
+					$respuesta["inicio"] = "0";
+					$respuesta["resultado"] = "Usuario no Existe";
+				}
+				return $respuesta;
            $conexion->liberarResultado($resultado); 
 		}
 

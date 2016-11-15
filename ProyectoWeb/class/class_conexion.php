@@ -38,6 +38,10 @@
 			mysqli_free_result($resultado);
 		}
 
+		public function cantidadRegistros($resultado){
+			return mysqli_num_rows($resultado);
+		}
+
 		public function getUsuario(){
 			return $this->usuario;
 		}

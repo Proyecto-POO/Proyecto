@@ -187,46 +187,37 @@ $("#btn-guardar-juego").click(function(){
 function logInUsuario(){
 	var datos = "usuario="+$("#user").val()+"&"+
 			    "contrasena="+$("#pass").val();
-
-			  // alert(datos);  	
+	var nombre = $("#user").val()  	
 	$.ajax({
-			url:"ajax/acciones.php?accion=5",
+			url:"ajax/json.php?accion=4",
 			method: "POST",
 			data: datos,
-			
+			dataType: 'json',
 			success:function(resultado){
-				
-				if (resultado==1) {
-					
-					location.href = "index_usuario.php?nombre="+$("#user").val()+"";
-					$("#comprar").fadeIn();
-			}
-
+					if(resultado.nombre_usuario == nombre )
+						location.href ="index_usuario.php?";
 			},
 			error:function(){
-
 			}
 		})
 } 
 function logInAdmin(){
 	var datos = "Admin="+$("#user-admin").val()+"&"+
 			    "contrasena="+$("#pass-admin").val();
-
-			  // alert(datos);  	
+	var nombreAdmin = $("#user-admin").val() 	  	
 	$.ajax({
-			url:"ajax/acciones.php?accion=8",
+			url:"ajax/json.php?accion=5",
 			method: "POST",
 			data: datos,
-			
+			dataType: 'json',
 			success:function(resultado){
-				if (resultado==1) {
-					location.href = "index_administrador.php?nombre="+$("#user-admin").val()+"";
-					
-			}
+					alert(resultado)
+					if(resultado.usuario == nombreAdmin )
+						location.href ="index_administrador.php?";
 
 			},
 			error:function(){
-
+				alert("ERROR")
 			}
 		})
 }
@@ -320,23 +311,5 @@ editarEspecificacionesMax = function(codigoJuego){
 			$("#txt-sistema-operativo-recomendado2").val(resultado.sistema_operativo);
 			$("#txt-tarjeta-grafica-recomendado2").val(resultado.targeta_grafica);
 			}
-	});
-}
-
-function comprarJuego(codigoJuego,nombreUsuario){
-	alert("codigo del juego: " + codigoJuego + " nombre de usuario: " + nombreUsuario);
-	var info = "codigo_juego=" + codigoJuego + "&nombre_usuario=" + nombreUsuario + "&numero_identidad=" + $("#numero-id").val()
-	+ "&numero_tarjeta=" + $("#numero-tarjeta").val();
-	$.ajax({
-		url: "ajax/acciones.php?accion=9",
-		data: info,
-		method: "POST",
-		success:function(resultado){
-			alert("llegue al success de comprar juego");
-			alert(resultado);
-		},
-		error: function(){
-			alert("hubo error");
-		}
 	});
 }

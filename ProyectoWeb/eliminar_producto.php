@@ -3,6 +3,9 @@
     include_once("class/class_juegos.php");  
     include_once("class/class_usuario.php");
     $conexion = new Conexion();
+    session_start(); 
+  if(!isset($_SESSION['nombre_usuario']))
+    header("Location: login_usuario.php");
 ?>
 <!DOCTYPE html>
 <html>

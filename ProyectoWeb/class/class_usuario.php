@@ -55,7 +55,6 @@
 			$usuarios=$conexion->ejecutarInstruccion('
 									SELECT 
 										codigo_usuario, 
-										codigo_tipo_usuario, 
 										codigo_tipo_pago, 
 										codigo_tarjeta_credito, 
 										nombre_usuario, 
@@ -122,21 +121,25 @@
 			$sql = sprintf("SELECT 
 						nombre_usuario, 
 						contrasena
-				FROM tbl_usuarios
-				WHERE nombre_usuario = '%s' AND contrasena = '%s'"
-				,stripslashes($usuario),stripslashes($contrasena));
-			$resultado = $conexion->ejecutarInstruccion($sql);
-			$existe = 0;
-            while ($fila = $conexion->obtenerFila($resultado)) {
-            	if ($fila['nombre_usuario']==$usuario && $fila['contrasena']==$contrasena) {
-            		$existe = 1;
-            	}
-            }
-            if ($existe==1) {
-            	echo $existe;
-            }else{
-            	echo "<kbd>El usuario no esta registrado</kbd>";
-            }
+						FROM tbl_usuarios
+						WHERE nombre_usuario = '%s' AND contrasena = '%s'",
+						stripslashes($usuario),
+						stripslashes($contrasena)
+
+			);
+			$respuesta = array();
+			$sesion_usuario = $conexion->ejecutarInstruccion($sql);
+			if($conexion->cantidadRegistros($sesion_usuario) >0){
+				$fila = $conexion->obtenerFila($sesion_usuario);
+				$respuesta["inicio"] = "1";
+				$respuesta["nombre_usuario"] = $fila["nombre_usuario"];
+				
+			}
+			else {
+				$respuesta["inicio"] = "0";
+				$respuesta["resultado"] = "Usuario no Existe";
+			}
+			return $respuesta;
            $conexion->liberarResultado($resultado); 
 		}
 

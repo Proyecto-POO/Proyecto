@@ -5,8 +5,7 @@
 	include_once("../class/class_especificaciones.php");
 	include_once("../class/class_usuario.php");
 	include_once("../class/class_administradores.php");
-	include_once("../class/class_venta_diaria.php");
-	include_once("../class/class_tarjetas.php");
+	session_start();
 				
 	$conexion = new Conexion();
 	switch ($_GET["accion"]) {
@@ -63,15 +62,7 @@
 					$_POST["txt-cpu-recomendado"]
 			);
 		$nuevaEspecificacionRecomendada->guardarEspecificaciones($conexion);
-		break;
-
-		case '5'://comprobacion del login Usuario
-				$usuario = $_POST['usuario'];
-				$contrasena = $_POST['contrasena'];
-
-				Usuario::inicioSesion($conexion, $usuario, $contrasena);
-				
-				break;						
+		break;					
 		case '6'://Eliminacion de un usuario
 				$codigo_usuario=$_POST['codigoUsuario'];
 				Usuario::eliminarUsuario($conexion,$codigo_usuario);
@@ -81,18 +72,6 @@
 			$codigo_juego=$_POST['codigoJuego'];
 			Juegos::eliminarJuegos($conexion,$codigo_juego);
 			Juegos::obtenerTarjetasEliminar($conexion);
-			break;
-		case '8'://comprobacion del login Admin
-			$usuario = $_POST['Admin'];
-			$contrasena = $_POST['contrasena'];
-
-			Administradores::inicioSesionAdmin($conexion,$usuario, $contrasena);
-			
-			break;
-		case '9'://guardar registro de venta de juego y registro de tarjeta de credito que utilizo el usuario
-			VentaDiaria::guardarRegistroVenta($conexion,$_POST["nombre_usuario"],$_POST["codigo_juego"]);
-			TarjetaCredito::guardarRegistroTarjeta($conexion,$_POST["nombre_usuario"],$_POST["numero_tarjeta"],
-				$_POST["numero_identidad"]);
 			break;
 		default:		
 			# code...

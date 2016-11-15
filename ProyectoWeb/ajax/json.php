@@ -1,6 +1,9 @@
 <?php
 	include_once("../class/class_conexion.php");
 	include_once("../class/class_juegos.php");
+	include_once("../class/class_usuario.php");
+	include_once("../class/class_administradores.php");
+	session_start();
 	$conexion = new Conexion();
 	switch ($_GET['accion']) {
 		case '1':
@@ -51,6 +54,25 @@
 				 $fila = array_map('utf8_encode', $fila);
 				 echo json_encode($fila);
 		break;
+		case '4'://comprobacion del login Usuario
+				$usuario = $_POST['usuario'];
+				$contrasena = $_POST['contrasena'];
+				$resultado = Usuario::inicioSesion($conexion, $usuario, $contrasena);
+				$_SESSION["nombre_usuario"] = $resultado["nombre_usuario"];
+				$_SESSION["inicio"] = $resultado["inicio"];
+				echo json_encode($resultado);
+				
+				break;	
+		case '5'://comprobacion del login Admin
+			$usuario = $_POST['Admin'];
+			$contrasena = $_POST['contrasena'];
+
+			$respuesta = Administradores::inicioSesionAdmin($conexion,$usuario, $contrasena);
+			$_SESSION["usuario"] = $respuesta["usuario"];
+			echo json_encode($respuesta);
+			
+			break;
+		
 		default:
 			# code...
 			break;

@@ -2,6 +2,10 @@
     include_once("class/class_conexion.php");
     include_once("class/class_juegos.php");
     $conexion = new Conexion();
+  session_start(); 
+  if(!isset($_SESSION['nombre_usuario']))
+    header("Location: login_usuario.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -58,9 +62,9 @@
             <ul class="nav navbar-nav navbar-right">
               
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_GET["nombre"]; ?> <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre_usuario'] ?> <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="login_usuario.php">Cerrar sesion</a></li>
+                  <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
                   
                  
                 </ul>
@@ -136,7 +140,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 row-divisor-right">
               <?php
                     //impresion de las tarjetas de los juegos
-                    Juegos::generacionTarjetas($conexion,$_GET["nombre"]);
+                    Juegos::generacionTarjetas($conexion,$_SESSION['nombre_usuario']);
               ?>
                  
             </div>
