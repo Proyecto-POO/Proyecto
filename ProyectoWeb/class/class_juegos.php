@@ -277,6 +277,42 @@
 			$conexion->liberarResultado($masValorados);
 		}
 
+		public static function obtenerRecomendados($conexion){
+			$recomendados = $conexion->ejecutarInstruccion('
+					SELECT 
+							codigo_juego, 
+							codigo_desarrollador, 
+							codigo_esrb, 
+							nombre_juego, 
+							descripcion, 
+							fecha_publicacion, 
+							url, portada, 
+							calificacion, 
+							precio 
+							FROM tbl_juegos
+				');
+			
+			$x=1;
+			while ($x<=6) {
+				$fila_recomendados=$conexion->obtenerFila($recomendados);
+				?>
+					<div class="col-lg-6 col-md-6 col-lg-offset- col-md-offset-">
+
+						 <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_recomendados["codigo_juego"]; ?>">
+							<div class="item">
+		                        <img class="img img-responsive" src="<?php echo $fila_recomendados["portada"]; ?>" alt="">
+		                     </div>
+		                </a>
+		            </div>    
+				<?php
+				$x++;
+			}
+			
+
+			$conexion->liberarResultado($recomendados);
+		}	
+
+
 		public static function generarESRB($conexion){
 			$resultado = $conexion->ejecutarInstruccion(
 				'SELECT codigo_esrb, 

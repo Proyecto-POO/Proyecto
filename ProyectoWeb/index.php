@@ -148,6 +148,17 @@
                 Juegos::obtenerMasValorados($conexion);
               ?>
               </div>
+              <br><br><br>
+              <div class="row">
+                 <div class="col-lg-8 col-md-9 col-lg-offset-2 col-md-offset-2">
+                    <h5 class="titulo">Recomendados</h5>
+                    <div class="row">
+                        <?php
+                        Juegos::obtenerRecomendados($conexion);
+                        ?>
+                    </div>
+                  </div>
+              </div>
             </div>
 
       </div>
