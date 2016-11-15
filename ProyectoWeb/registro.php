@@ -86,12 +86,20 @@
                     <input type="text" name="txt-nombre-usuario" id="txt-nombre-usuario" style="width:50%" class="form-control" >
                     <div id="mensaje1" class="well error-form"> Error, campo vacio, ingrese su nombre.</div>
                     <hr>
+                    Nombre 
+                    <input type="text" name="txt-nombre" id="txt-nombre" style="width:50%" class="form-control" >
+                    <div id="mensaje6" class="well error-form"> Error, campo vacio, ingrese su nombre.</div>
+                    <hr>
+                    Apellido
+                    <input type="text" name="txt-apellido" id="txt-apellido" style="width:50%" class="form-control" >
+                    <div id="mensaje7" class="well error-form"> Error, campo vacio, ingrese su nombre.</div>
+                    <hr>
                     Contraseña
-                    <input type="password" name="txt-contraseña" id="txt-contraseña" style="width:50%"  class="form-control" >
+                    <input type="password" name="txt-contrasena" id="txt-contrasena" style="width:50%"  class="form-control" >
                     <div id="mensaje2" class="well error-form"> Error, campo vacio, ingrese su contraseña.</div>
                     <hr>
                     Verificar contraseña
-                    <input type="password" name="txt-contraseña-verificar" id="txt-contraseña-verificar" style="width:50%" class="form-control" >
+                    <input type="password" name="txt-contrasena-verificar" id="txt-contrasena-verificar" style="width:50%" class="form-control" >
                     <div id="mensaje3" class="well error-form"> Error, campo vacio o sus contraseñas no coinciden.</div>
                     <hr>
                     Fecha de Nacimiento<br>

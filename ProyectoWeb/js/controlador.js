@@ -1,16 +1,20 @@
 $(document).ready(function(){
 	$("#btn-crear-cuenta").click(function(){
            var nombreUsuario = $("#txt-nombre-usuario").val();
-           var contraseña = $("#txt-contraseña").val();
-           var contraseñaVerificar = $("#txt-contraseña-verificar").val();
+           var nombre = $("#txt-nombre").val();
+           var apellido = $("#txt-apellido").val();
+           var contrasena = $("#txt-contrasena").val();
+           var contrasenaVerificar = $("#txt-contrasena-verificar").val();
            var correo = $("#txt-correo").val();
            var correoVerificar = $("#txt-correo-verificar").val();
            //faltan las variables de los select y el checkbox (que no aparece).
  
            if(nombreUsuario==""
-             ||contraseña==""
-             ||contraseñaVerificar==""
-             ||contraseñaVerificar!=contraseña
+             ||nombre==""
+             ||apellido==""
+             ||contrasena==""
+             ||contrasenaVerificar==""
+             ||contrasenaVerificar!=contrasena
              ||correo==""
              || !/[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/.test(correo)
              ||correoVerificar==""
@@ -24,14 +28,14 @@ $(document).ready(function(){
                 $("#mensaje1").fadeOut();
              }
  
-             if(contraseña==""){
+             if(contrasena==""){
                 $("#mensaje2").fadeIn();
                 
              }else{
                 $("#mensaje2").fadeOut();
              }
  
-             if(contraseñaVerificar==""||contraseñaVerificar!=contraseña){
+             if(contrasenaVerificar==""||contrasenaVerificar!=contrasena){
                 $("#mensaje3").fadeIn();
                 
              }else{
@@ -50,6 +54,20 @@ $(document).ready(function(){
              }else{
                $("#mensaje5").fadeOut();
              }
+
+             if(nombre==""){
+                $("#mensaje6").fadeIn();
+                
+             }else{
+                $("#mensaje6").fadeOut();
+             }
+
+             if(apellido==""){
+                $("#mensaje7").fadeIn();
+                
+             }else{
+                $("#mensaje7").fadeOut();
+             }
  
            } else{
              alert("informacion enviada con exito.");
@@ -58,11 +76,15 @@ $(document).ready(function(){
              $("#mensaje3").fadeOut();
              $("#mensaje4").fadeOut();
              $("#mensaje5").fadeOut();
- 
+             $("#mensaje6").fadeOut();
+             $("#mensaje7").fadeOut();
+ 			 
              $("#txt-nombre-usuario").val("");
-             $("#txt-contraseña").val("");
-             $("#txt-contraseña-verificar").val("");
-            $("#txt-correo").val("");
+             $("#txt-nombre").val("");
+             $("#txt-apellido").val("");
+             $("#txt-contrasena").val("");
+             $("#txt-contrasena-verificar").val("");
+             $("#txt-correo").val("");
              $("#txt-correo-verificar").val("");
            } 
          });
@@ -241,18 +263,62 @@ function eliminarJuego(codigoJuego){
 function editarJuego(codigoJuego){
 	alert(codigoJuego);
 	var info = "codigo_juego=" + codigoJuego;
-	alert("codigo juego: "+ info);
 	$.ajax({
-		url: "ajax/json.php?accion=8",
+		url: "ajax/json.php?accion=1",
 		data: info,
 		method: "POST",
 		dataType: 'json',
 		success:function(resultado){
 			alert(resultado);
 			$("#txt-titulo-juego2").val(resultado.nombre_juego);
+			$("#txt-portada2").val(resultado.portada);
+			$("#textArea-descripcion2").val(resultado.descripcion);
+			$("#txt-fecha-lanzamiento2").val(resultado.fecha_publicacion);
+			$("#txt-precio2").val(resultado.precio);
+			$("#txt-tamano2").val(resultado.portada);
+			$("#txt-url-iso2").val(resultado.url);
+			$("#txt-calificacion2").val(resultado.calificacion);
+			$("#slc-desarrolladores").val(resultado.codigo_desarrollador);
+			$("#slc-esrb").val(resultado.codigo_esrb);
+			editarEspecificacionesMin(codigoJuego);
+			editarEspecificacionesMax(codigoJuego);
+
+			
 		},
 		error: function(){
 			alert("hubo error");
 		}
+	});
+}
+
+editarEspecificacionesMin = function(codigoJuego){
+	var info = "codigo_juego=" + codigoJuego;
+	$.ajax({
+		url: "ajax/json.php?accion=2",
+			data: info,
+			method: "POST",
+			dataType: 'json',
+			success:function(resultado){
+			$("#txt-cpu-minimo2").val(resultado.cpu);
+			$("#txt-ram-minimo2").val(resultado.ram);
+			$("#txt-sistema-operativo-minimo2").val(resultado.sistema_operativo);
+			$("#txt-tarjeta-grafica-minimo2").val(resultado.targeta_grafica);
+			}
+	});
+}
+
+editarEspecificacionesMax = function(codigoJuego){
+	var info = "codigo_juego=" + codigoJuego;
+	$.ajax({
+		url: "ajax/json.php?accion=3",
+			data: info,
+			method: "POST",
+			dataType: 'json',
+			success:function(resultado){
+			$("#txt-cpu-recomendado2").val(resultado.cpu);
+			$("#txt-ram-recomendado2").val(resultado.ram);
+			$("#txt-sistema-operativo-recomendado2").val(resultado.sistema_operativo);
+			$("#txt-tarjeta-grafica-recomendado2").val(resultado.targeta_grafica);
+			}
 	});
 }

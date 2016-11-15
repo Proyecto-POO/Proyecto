@@ -43,6 +43,7 @@
       </nav>
 	<div class="container-fluid">
        <div class="row">
+        <div id="tmp"></div>
               <div class="row-divisor-bottom col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
               <div class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="div-lista-modificar-juegos">
                     <div class="row">
