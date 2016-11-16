@@ -113,6 +113,19 @@
 			echo $sql;
 			$conexion->ejecutarInstruccion($sql);
 			break;
+		case '10':
+		sleep(10);
+			$fecha = $_POST['fecha'];
+			$monto = $_POST['precio'];
+			TarjetaCredito::guardarTransaccion($conexion, $fecha, $monto);
+
+			TarjetaCredito::guardarTarjeta( $conexion, 
+											$_POST['t-nombre'],
+			 								$_POST['t-numero'],
+			 								$_POST['t-vencimiento'], 
+			 								$_POST['t-seguridad']
+			 								);
+			break;	
 		default:		
 			# code...
 			break;

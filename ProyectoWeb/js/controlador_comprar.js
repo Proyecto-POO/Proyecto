@@ -7,7 +7,7 @@
 				"t-seguridad="+$("#t-seguridad").val();
 
 	$.ajax({
-		url: "ajax/acciones.php?accion=9",
+		url: "ajax/acciones.php?accion=10",
 		method: "POST",
 		data: info,
 		beforeSend: function(){
