@@ -5,7 +5,7 @@
     include_once("class/class_juegos.php");
     $conexion = new Conexion();
     session_start(); 
-    if((!isset($_SESSION['usuario']))&&($_SESSION['inicio']==1))
+    if((!isset($_SESSION['usuario']))||($_SESSION['inicio']==1))
       header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
@@ -193,6 +193,7 @@
    <script src="js/bootstrap.min.js"></script>
    <script src="js/controlador_admin.js"></script>
    <script >
+    //Permite el almacenamiento de la imagen en la carpeta predestinada y la URL a la base de datos
         $(function(){
             $("input[name='file']").on("change", function(){
                 var formData = new FormData($("#formulario")[0]);

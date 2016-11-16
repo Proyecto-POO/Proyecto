@@ -70,24 +70,41 @@ $(document).ready(function(){
              }
  
            } else{
-             alert("informacion enviada con exito.");
-             $("#mensaje1").fadeOut();
-             $("#mensaje2").fadeOut();
-             $("#mensaje3").fadeOut();
-             $("#mensaje4").fadeOut();
-             $("#mensaje5").fadeOut();
-             $("#mensaje6").fadeOut();
-             $("#mensaje7").fadeOut();
- 			 
-             $("#txt-nombre-usuario").val("");
-             $("#txt-nombre").val("");
-             $("#txt-apellido").val("");
-             $("#txt-contrasena").val("");
-             $("#txt-contrasena-verificar").val("");
-             $("#txt-correo").val("");
-             $("#txt-correo-verificar").val("");
-           } 
-         });
+             var nuevoUsuario = 
+                        "txt-nombre-usuario="+$("#txt-nombre-usuario").val()+
+                        "&txt-nombre="+$("#txt-nombre").val()+
+                        "&txt-apellido="+$("#txt-apellido").val()+
+                        "&txt-contrasena="+$("#txt-contrasena").val()+
+                        "&dte-fecha-nacimiento="+$("#dte-fecha-nacimiento").val()+
+                        "&txt-correo="+$("#txt-correo").val();
+            alert(nuevoUsuario);
+           $.ajax({
+             data:nuevoUsuario,
+             url: "ajax/acciones.php?accion=9",
+             method: "POST",
+             success:function(Usuario){
+                    alert(Usuario);
+                     $("#mensaje1").fadeOut();
+                     $("#mensaje2").fadeOut();
+                     $("#mensaje3").fadeOut();
+                     $("#mensaje4").fadeOut();
+                     $("#mensaje5").fadeOut();
+                     $("#mensaje6").fadeOut();
+                     $("#mensaje7").fadeOut();
+                    $("#txt-nombre-usuario").val("");
+                    $("#txt-nombre").val("");
+                    $("#txt-apellido").val("");
+                    $("#txt-contrasena").val("");
+                    $("#txt-contrasena-verificar").val("");
+                    $("#txt-correo").val("");
+                    $("#txt-correo-verificar").val("");
+             },
+             error:function(){
+                alert("No se registro el Usuario");
+             }
+           })      
+         } 
+    });
 	
 
 });

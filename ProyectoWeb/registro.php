@@ -103,7 +103,7 @@
                     <div id="mensaje3" class="well error-form"> Error, campo vacio o sus contraseñas no coinciden.</div>
                     <hr>
                     Fecha de Nacimiento<br>
-                    <input type="date" name="dte-fecha-nacimiento" step="1" min="01-01-1900" max="31-31-2099"
+                    <input type="date" name="dte-fecha-nacimiento" id="dte-fecha-nacimiento" step="1" min="01-01-1900" max="31-31-2099"
                           value="<?php echo date('Y-m-d');?>"
                           class="date"
                     >
@@ -117,9 +117,9 @@
                     <div id="mensaje5" class="well error-form"> Error, campo vacio o sus correos no coinciden.</div>
                     <hr>
                     Terminos de suscriptor
-                    <textarea class="form-control"></textarea>
+                    <textarea class="form-control" disabled></textarea>
                     <hr>
-                    <input  type="checkbox" >&nbsp;He leido y acepto los terminos de suscriptor.
+                    <input  type="checkbox" id="chk-terminos" >&nbsp;He leido y acepto los terminos de suscriptor.
                     <hr>
                     <button id="btn-crear-cuenta" name="btn-crear-cuenta" class="btn btn-primary" style="width:100%"> Crear cuenta</button>
     </div>
@@ -139,8 +139,8 @@
 
     <script src='js/jquery.min.js'></script>
     <script src='js/bootstrap.min.js'></script>
-    <script src='js/controlador.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.string/3.2.3/underscore.string.min.js'></script> 
+    <script src='js/controlador_usuario.js'></script>
+
 
   </body>
 </html>

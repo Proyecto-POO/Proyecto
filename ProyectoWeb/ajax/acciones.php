@@ -5,7 +5,6 @@
 	include_once("../class/class_especificaciones.php");
 	include_once("../class/class_usuario.php");
 	include_once("../class/class_administradores.php");
-	include_once("../class/class_tarjetas.php");
 	session_start();
 				
 	$conexion = new Conexion();
@@ -77,19 +76,43 @@
 		case '8'://Actualizar los datos del juego
 			
 			break;
-		case '9':
-		sleep(10);
-			$fecha = $_POST['fecha'];
-			$monto = $_POST['precio'];
-			TarjetaCredito::guardarTransaccion($conexion, $fecha, $monto);
-
-			TarjetaCredito::guardarTarjeta( $conexion, 
-											$_POST['t-nombre'],
-			 								$_POST['t-numero'],
-			 								$_POST['t-vencimiento'], 
-			 								$_POST['t-seguridad']
-			 								);
-			break;	
+		case '9'://registro de un nuevo usuario
+			/*$nombreUsuario
+			$nombre
+			$apellido
+			$contrasena
+			$correoElectronico
+			
+			$nuevoUsuario = new Usuario(
+											$_POST["txt-nombre-usuario"],
+											$_POST["txt-nombre"],
+											$_POST["txt-apellido"],
+											$_POST["txt-contrasena"],
+											$_POST["dte-fecha-nacimiento"],
+											$_POST["txt-correo"]
+										);
+			$nuevoUsuario->guardarUsuario($conexion);*/
+			$sql = sprintf("INSERT INTO tbl_usuarios(
+												codigo_usuario, 
+												codigo_tipo_pago, 
+												codigo_tarjeta_credito, 
+												nombre_usuario, 
+												nombre, 
+												apellido, 
+												correo_electronico, 
+												contrasena, 
+												fecha_nacimiento
+												) VALUES (NULL,NULL,NULL,'%s','%s','%s','%s','%s','%s')",
+												stripslashes($_POST["txt-nombre-usuario"]),
+												stripslashes($_POST["txt-nombre"]),
+												stripslashes($_POST["txt-apellido"]),
+												stripslashes($_POST["txt-correo"]),
+												stripslashes($_POST["txt-contrasena"]),
+												stripslashes($_POST["dte-fecha-nacimiento"])
+						);	
+			echo $sql;
+			$conexion->ejecutarInstruccion($sql);
+			break;
 		default:		
 			# code...
 			break;

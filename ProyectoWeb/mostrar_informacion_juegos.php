@@ -97,7 +97,7 @@
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					        <?php if ($_SESSION['nombre_usuario']!="") {?>
-									<a href="comprar.php?precio=<?php echo $fila_juego['precio'];?>" id="comprar" class="btn btn-warning form-control" >Comprar <?php echo $fila_juego['precio'];?> USD</a>
+									<button  id="comprar" class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
 							<?php } else{?>
 									<div class="text-center">Inicia sesion para poder comprar el juego. Precio USD 
 											<?php echo $fila_juego['precio'];?>
