@@ -5,6 +5,7 @@
 	include_once("../class/class_especificaciones.php");
 	include_once("../class/class_usuario.php");
 	include_once("../class/class_administradores.php");
+	include_once("../class/class_tarjetas.php");
 	session_start();
 				
 	$conexion = new Conexion();
@@ -76,6 +77,19 @@
 		case '8'://Actualizar los datos del juego
 			
 			break;
+		case '9':
+		sleep(10);
+			$fecha = $_POST['fecha'];
+			$monto = $_POST['precio'];
+			TarjetaCredito::guardarTransaccion($conexion, $fecha, $monto);
+
+			TarjetaCredito::guardarTarjeta( $conexion, 
+											$_POST['t-nombre'],
+			 								$_POST['t-numero'],
+			 								$_POST['t-vencimiento'], 
+			 								$_POST['t-seguridad']
+			 								);
+			break;	
 		default:		
 			# code...
 			break;

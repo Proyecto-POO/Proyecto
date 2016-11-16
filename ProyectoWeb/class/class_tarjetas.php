@@ -32,20 +32,36 @@
 			$this->codigo_usuario = $codigo_usuario;
 		}
 
-		public static function guardarRegistroTarjeta($conexion, $nombre_usuario,$numero_tarjeta,$numero_identidad){
+		public static function guardarTarjeta($conexion, $nombreUsuario,$numeroTarjeta,$vencimiento, $codSeguridad){
 			$sql = sprintf("SELECT codigo_usuario, nombre_usuario
 								FROM tbl_usuarios
 								WHERE nombre_usuario = '%s'",
-								stripslashes($nombre_usuario));
+								stripslashes($nombreUsuario));
 			$resultado = $conexion->ejecutarInstruccion($sql);
 			$fila = $conexion->obtenerFila($resultado);
 
-			$sql2 = sprintf("INSERT INTO tbl_tarjeta_credito(codigo_tarjeta_credito, numero_tarjeta, codigo_usuario,numero_identidad_usuario)
-			 VALUES (NULL,'%s','%s','%s')",
-				    stripslashes($numero_tarjeta),
-				    stripslashes($fila["codigo_usuario"]),
-				    stripslashes($numero_identidad));
+			$sql2 = sprintf("INSERT INTO tbl_tarjeta_credito(codigo_tarjeta_credito, codigo_usuario, numero_tarjeta, seguridad_tarjeta, fecha_vencimiento)
+			 VALUES (NULL,'%s','%s','%s','%s')",
+			 		 stripslashes($fila["codigo_usuario"]),
+				     stripslashes($numeroTarjeta),
+				     stripslashes($codSeguridad),
+				     stripslashes($vencimiento));
 			$conexion->ejecutarInstruccion($sql2);
+			$conexion->liberarResultado($resultado);
+		}
+
+		public static function guardarTransaccion($conexion, $fecha, $monto){
+			$sql = sprintf("INSERT INTO tbl_venta_diaria
+										(
+										codigo_venta_diaria, 
+										fecha_venta, 
+										monto
+										) 
+							VALUES (NULL,'%s','%s')",
+							stripslashes($fecha),
+							stripslashes($monto));
+
+			$resultado = $conexion->ejecutarInstruccion($sql);
 			$conexion->liberarResultado($resultado);
 		}
 	}
