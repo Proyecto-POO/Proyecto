@@ -382,8 +382,6 @@
 								
 				}
 			}
-			$conexion->liberarResultado($res);
-			$conexion->liberarResultado($UltimoInsert);
 		}
 
 		public static function generarCapturas($conexion, $codigoJuego) {

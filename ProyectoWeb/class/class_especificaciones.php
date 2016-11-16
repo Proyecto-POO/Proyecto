@@ -81,7 +81,7 @@
 
 			echo "<br>Instruccion a ejecutar: ".$sql;
 			$resultado=$conexion->ejecutarInstruccion($sql);
-			$conexion->liberarResultado($resultado);
+			
 		}
 
 

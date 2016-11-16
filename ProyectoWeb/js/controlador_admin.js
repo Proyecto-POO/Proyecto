@@ -122,7 +122,6 @@ $("#btn-guardar-juego").click(function(){
 			"&"+categoriasSeleccionadas+
 			"txt-fecha-lanzamiento="+$("#txt-fecha-lanzamiento").val()+
 			"&txt-precio="+$("#txt-precio").val()+
-			"&txt-tamano="+$("#txt-tamano").val()+
 			"&txt-url-iso="+$("#txt-url-iso").val()+
 			"&txt-calificacion="+$("#txt-calificacion").val()+
 			"&slc-desarrolladores="+$("#slc-desarrolladores").val()+
@@ -135,7 +134,6 @@ $("#btn-guardar-juego").click(function(){
 			"&txt-sistema-operativo-recomendado="+$("#txt-sistema-operativo-recomendado").val()+
 			"&txt-tarjeta-grafica-minimo="+$("#txt-tarjeta-grafica-minimo").val()+
 			"&txt-tarjeta-grafica-recomendado="+$("#txt-tarjeta-grafica-recomendado").val();
-
 			alert(parametros);
 	$.ajax({
 			url:"ajax/acciones.php?accion=4",
@@ -150,3 +148,5 @@ $("#btn-guardar-juego").click(function(){
 			}
 		});
 });
+
+

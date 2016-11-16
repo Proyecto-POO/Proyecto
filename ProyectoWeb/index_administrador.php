@@ -92,7 +92,11 @@
           </tr>
           <tr>
             <th>Portada</th>
-            <td colspan="3"><input type="text" name="txt-portada" id="txt-portada" class="form-control"></td>
+            <td colspan="3">
+                  <form method="post" id="formulario" enctype="multipart/form-data"> Subir imagen: <input type="file" name="file">
+                  </form>
+                  <input type="text" style="display: none" name="txt-portada" id="txt-portada"  class="form-control">
+            </td>
           </tr>
           <tr>
             <th>Descripcion</th>
@@ -171,6 +175,7 @@
     </div>
   </div>
 </div>
+<div id="depuracion"></div>
       <br><br><br><br><br><br><br>
     <footer>
             <div class="container ">
@@ -187,6 +192,26 @@
 	 <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/controlador_admin.js"></script>
+   <script >
+        $(function(){
+            $("input[name='file']").on("change", function(){
+                var formData = new FormData($("#formulario")[0]);
+                $.ajax({
+                    url: "imagen.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        alert(datos);
+                        $("#txt-portada").val(datos);
+                    }
+                });
+            });
+         });
+          
+   </script>
 
 
 </body>
