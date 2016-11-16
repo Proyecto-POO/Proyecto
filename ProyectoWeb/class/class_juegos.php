@@ -101,7 +101,7 @@
 				" Precio: " . $this->precio;
 		}
 
-		public static function generacionTarjetas($conexion,$nombreUsuario){
+		public static function generacionTarjetas($conexion){
 			$tarjetas = $conexion->ejecutarInstruccion('
 						SELECT 
 								codigo_juego, 
@@ -117,7 +117,7 @@
 
 			while ($fila_tarjetas = $conexion->obtenerFila($tarjetas)) {
 				?>
-	             <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_tarjetas["codigo_juego"]; ?>&nombreUsuario=<?php echo $nombreUsuario; ?>"> <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 row-divisor-bottom">
+	             <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_tarjetas["codigo_juego"]; ?>"> <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 row-divisor-bottom">
 	                <div class="well hovereffect">
 	                    <img id='img-<?php echo $fila_tarjetas["nombre_juego"]; ?>' class='img img-responsive' src='<?php echo $fila_tarjetas["portada"]; ?>' alt='Portada'>
 	                        <div class="overlay">
@@ -241,26 +241,30 @@
 			while ($fila_masValorados = $conexion->obtenerFila($masValorados)) {
 				if ($opcion==0) {
 			?>			
-						 <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_masValorados["codigo_juego"]; ?>">
-						    <div class="item active">
-		                        <img class="img img-responsive" src="<?php echo $fila_masValorados["portada"]; ?>" alt="">
-		                        <div class="carousel-caption">
-		                          <h4><?php echo $fila_masValorados["nombre_juego"]; ?></h4>
-		                        </div>
-		                     </div>
-		                </a>
+					 
+					    <div class="item active">
+	                       <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_masValorados["codigo_juego"]; ?>">
+	                       	 <img class="img img-responsive" src="<?php echo $fila_masValorados["portada"]; ?>" alt="">
+	                       </a>
+	                        <div class="carousel-caption">
+	                          <h4><?php echo $fila_masValorados["nombre_juego"]; ?></h4>
+	                        </div>
+	                     </div>
+		                
 				<?php
 					$opcion++;
 				}else{
 				?>
-						 <a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_masValorados["codigo_juego"]; ?>">
-							<div class="item">
-		                        <img class="img img-responsive" src="<?php echo $fila_masValorados["portada"]; ?>" alt="">
-		                        <div class="carousel-caption">
-		                            <h4><?php echo $fila_masValorados["nombre_juego"]; ?></h4>
-		                        </div>
-		                     </div>
-		                </a>
+						 
+					<div class="item">
+						<a href="mostrar_informacion_juegos.php?codigoJuego=<?php echo $fila_masValorados["codigo_juego"]; ?>">
+                        	<img class="img img-responsive" src="<?php echo $fila_masValorados["portada"]; ?>" alt="">
+                       	</a>
+                        <div class="carousel-caption">
+                            <h4><?php echo $fila_masValorados["nombre_juego"]; ?></h4>
+                        </div>
+                     </div>
+              
 				<?php
 				}
 			}

@@ -136,7 +136,7 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 row-divisor-right">
               <?php
                     //impresion de las tarjetas de los juegos
-                    Juegos::generacionTarjetas($conexion,"");
+                    Juegos::generacionTarjetas($conexion);
               ?>
                  
             </div>

@@ -4,6 +4,9 @@
 	include_once("class/class_juegos.php");
 
 	$conexion = new Conexion();
+	session_start(); 
+  if(!isset($_SESSION['nombre_usuario']))
+    $_SESSION['nombre_usuario']="";
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,9 +39,18 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li>
-              	<a href="index.php" class="hvr-underline-from-center">
-              		<button class="btn btn-warning">Volver Atras</button>
-              	</a>
+              	<?php if ($_SESSION['nombre_usuario']!="") {?>
+					<a href="index_usuario.php" class="hvr-underline-from-center">
+              			<button class="btn btn-warning">Volver Atras</button>
+              		</a>
+				<?php }else{?>
+						<a href="index.php" class="hvr-underline-from-center">
+		              		<button class="btn btn-warning">Volver Atras</button>
+		              	</a>
+				<?php
+					} 
+				?> 
+              	
               </li>
             </ul>
           </div><!-- /.navbar-collapse -->
@@ -86,7 +98,9 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					        <?php if ($_SESSION['nombre_usuario']!="") {?>
 									<button  id="comprar" class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
-							<?php } ?> 						
+							<?php } else{?>
+									<div class="text-center">Inicia sesion para poder comprar el juego</div>
+							<?php 	}?> 						
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<hr>
@@ -191,8 +205,10 @@
 												<textarea id="txt-comentario" placeholder="Ingresa tu comentario aqui." ></textarea>
 												
 												<?php if ($_SESSION['nombre_usuario']!="") {?>
-													<button onclick="GuardarComentario(<?php echo $_GET['codigoJuego']; ?>,'<?php echo $_GET["nombreUsuario"]; ?>');" type="button" class="btn btn-success btn-lg">Enviar Comentario</button>
-												<?php } ?> 
+													<button onclick="GuardarComentario(<?php echo $_GET['codigoJuego']; ?>,'<?php echo $_SESSION['nombre_usuario']; ?>');" type="button" class="btn btn-success btn-lg">Enviar Comentario</button>
+												<?php } else{?>
+														<div class="text-center" style="background-color: #000">Inicia sesion para poder comentar acerca del juego</div>
+												<?php 	}?> 
 												
 											</form>
 										</div><!-- Status Upload  -->
@@ -223,7 +239,7 @@
    <script src="js/controlador.js"></script>
    <script type="text/javascript">
    	$(document).ready(function(){
-   		CargarComentarios(<?php echo $_GET["codigoJuego"]?>,'<?php echo $_GET["nombreUsuario"];?>');
+   		CargarComentarios(<?php echo $_GET["codigoJuego"]?>,'<?php echo $_SESSION['nombre_usuario'];?>');
    	});
    </script>
 </body>

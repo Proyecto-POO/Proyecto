@@ -66,9 +66,9 @@
 				ON (a.codigo_usuario=b.codigo_usuario)
 				WHERE a.codigo_juego='%s'",stripslashes($codigo_juego));
 			$resultado = $conexion->ejecutarInstruccion($sql);
-			
 			while ($fila = $conexion->obtenerFila($resultado)) {
-				?>
+				
+			?>
 				<li>
 					<div class="comment-main-level">
 					<!-- Contenedor del Comentario -->
