@@ -5,7 +5,7 @@
     include_once("class/class_juegos.php");
     $conexion = new Conexion();
     session_start(); 
-    if(!isset($_SESSION['usuario']))
+    if((!isset($_SESSION['usuario']))&&($_SESSION['inicio']==1))
       header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
@@ -186,7 +186,7 @@
 
 	 <script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/controlador.js"></script>
+   <script src="js/controlador_admin.js"></script>
 
 
 </body>

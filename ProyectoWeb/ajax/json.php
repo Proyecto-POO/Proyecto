@@ -6,7 +6,7 @@
 	session_start();
 	$conexion = new Conexion();
 	switch ($_GET['accion']) {
-		case '1':
+		case '1'://editar juego
 				 $sql = sprintf("SELECT codigo_juego, codigo_desarrollador, 
 				 				codigo_esrb, nombre_juego, 
 				 				descripcion, fecha_publicacion, 
@@ -21,7 +21,7 @@
 				 echo json_encode($fila);
 		break;
 
-		case '2':
+		case '2'://obtener requisitos minimos
 				$sql = sprintf("SELECT
 				 				codigo_especificaciones, codigo_tipo_especificaciones, 
 				 				codigo_juego, sistema_operativo, 
@@ -38,7 +38,7 @@
 				 echo json_encode($fila);
 		break;
 
-		case '3':
+		case '3'://obtener requistos Recomendados
 				$sql = sprintf("SELECT
 				 				codigo_especificaciones, codigo_tipo_especificaciones, 
 				 				codigo_juego, sistema_operativo, 
@@ -69,6 +69,7 @@
 
 			$respuesta = Administradores::inicioSesionAdmin($conexion,$usuario, $contrasena);
 			$_SESSION["usuario"] = $respuesta["usuario"];
+			$_SESSION["inicio"] = $respuesta["inicio"];
 			echo json_encode($respuesta);
 			
 			break;

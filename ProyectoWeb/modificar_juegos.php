@@ -6,8 +6,10 @@
     include_once("class/class_desarrolladores.php");
     $conexion = new Conexion();
     session_start(); 
-      if(!isset($_SESSION['nombre_usuario']))
-        header("Location: login_usuario.php");
+      if(!isset($_SESSION['usuario']))
+        header("Location: login_administrador.php");
+      if ($_SESSION['inicio']=="1")
+         header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -126,23 +128,23 @@
           </tr>
           <tr>
             <th>CPU</th>
-            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo2" class=" form-control"></td>
-            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado2" class="form-control"></td>
+            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado" class="form-control"></td>
           </tr>
           <tr>
             <th>RAM</th>
-            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo2" class=" form-control"></td>
-            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado2" class="form-control"></td>
+            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado" class="form-control"></td>
           </tr>
           <tr>
             <th>Sistema Operativo</th>
-            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo2" class=" form-control"></td>
-            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado2" class="form-control"></td>
+            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado" class="form-control"></td>
           </tr>
           <tr>
             <th>Tarjeta Grafica</th>
-            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo2" class=" form-control"></td>
-            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado2" class="form-control"></td>
+            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo" class=" form-control"></td>
+            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado" class="form-control"></td>
           </tr>
         </table>
 
@@ -151,7 +153,7 @@
        <!--formulario de los botones de la ventana modal-->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="button" id="btn-guardar-juego"  class="btn btn-primary">Guardar</button>
+        <button type="button" id="btn-modificar-juego"  class="btn btn-primary">Actualizar Datos</button>
         
       </div>
     </div>
@@ -173,6 +175,6 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/controlador.js"></script>
+   <script src="js/controlador_admin.js"></script>
 </body>
 </html>

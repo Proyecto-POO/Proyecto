@@ -73,6 +73,9 @@
 			Juegos::eliminarJuegos($conexion,$codigo_juego);
 			Juegos::obtenerTarjetasEliminar($conexion);
 			break;
+		case '8'://Actualizar los datos del juego
+			
+			break;
 		default:		
 			# code...
 			break;

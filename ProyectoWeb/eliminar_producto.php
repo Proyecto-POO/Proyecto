@@ -4,8 +4,11 @@
     include_once("class/class_usuario.php");
     $conexion = new Conexion();
     session_start(); 
-  if(!isset($_SESSION['nombre_usuario']))
-    header("Location: login_usuario.php");
+  if(!isset($_SESSION['usuario']))
+    header("Location: login_administrador.php");
+  // verificacion para que solo los admin puedan ver esta pagina
+  if ($_SESSION['inicio']==1)
+       header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -78,6 +81,6 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/controlador.js"></script>
+   <script src="js/controlador_admin.js"></script>
 </body>
 </html>

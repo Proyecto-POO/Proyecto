@@ -99,7 +99,9 @@
 					        <?php if ($_SESSION['nombre_usuario']!="") {?>
 									<button  id="comprar" class="btn btn-warning form-control" >Comprar USD <?php echo $fila_juego['precio'];?></button>
 							<?php } else{?>
-									<div class="text-center">Inicia sesion para poder comprar el juego</div>
+									<div class="text-center">Inicia sesion para poder comprar el juego. Precio USD 
+											<?php echo $fila_juego['precio'];?>
+									</div>
 							<?php 	}?> 						
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -236,7 +238,7 @@
 
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
-   <script src="js/controlador.js"></script>
+   <script src="js/controlador_usuario.js"></script>
    <script type="text/javascript">
    	$(document).ready(function(){
    		CargarComentarios(<?php echo $_GET["codigoJuego"]?>,'<?php echo $_SESSION['nombre_usuario'];?>');
