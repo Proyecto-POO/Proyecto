@@ -8,7 +8,7 @@
 	include_once("../class/class_capturas.php");
 	include_once("../class/class_tarjetas.php");
 	session_start();
-				
+	$j=1;	
 	$conexion = new Conexion();
 	switch ($_GET["accion"]) {
 		case '1':// cargar los comentarios
@@ -170,39 +170,29 @@
 		$nuevaEspecificacionRecomendada->modificarEspecificaciones($conexion,$_POST["CodigoJuegoActualizar"]);
 
 		//Almacenamiento de las capturas del juego
-		
-		$sqlCapturas1 = sprintf("UPDATE tbl_capturas 
-								SET 
-								url_captura='%s' 
+		//Almacenamiento de las capturas del juego
+
+		$sqlCodCap = sprintf("SELECT codigo_capturas, codigo_juego
+								FROM tbl_capturas 
 								WHERE codigo_juego = '%s'",
-										stripslashes($_POST["txt-captura1"]),
-										stripslashes($_POST["CodigoJuegoActualizar"])										
+										stripslashes($_POST["CodigoJuegoActualizar"])								
 								);
-		$conexion->ejecutarInstruccion($sqlCapturas1);
-		$sqlCapturas2 = sprintf("UPDATE tbl_capturas 
-								SET 
-								url_captura='%s' 
-								WHERE codigo_juego = '%s'",
-										stripslashes($_POST["txt-captura2"]),
-										stripslashes($_POST["CodigoJuegoActualizar"])											
-							);
-		$conexion->ejecutarInstruccion($sqlCapturas2);
-		$sqlCapturas3 = sprintf("UPDATE tbl_capturas 
-								SET 
-								url_captura='%s' 
-								WHERE codigo_juego = '%s'",
-										stripslashes($_POST["txt-captura3"]),
-										stripslashes($_POST["CodigoJuegoActualizar"])											
-							);
-		$conexion->ejecutarInstruccion($sqlCapturas3);
-		$sqlCapturas4 = sprintf("UPDATE tbl_capturas 
-								SET 
-								url_captura='%s' 
-								WHERE codigo_juego = '%s'",
-										stripslashes($_POST["txt-captura4"]),
-										stripslashes($_POST["CodigoJuegoActualizar"])											
-							);
-		$conexion->ejecutarInstruccion($sqlCapturas4);
+		$result =$conexion->ejecutarInstruccion($sqlCodCap);
+
+		while($filaCodigo = $conexion->obtenerFila($result))
+		{
+			$sqlCapturas = sprintf("UPDATE tbl_capturas 
+								SET url_captura='%s' 
+								WHERE codigo_juego = '%s'
+								AND codigo_capturas = '%s'",
+										stripslashes($_POST["txt-captura".$j]),
+										stripslashes($_POST["CodigoJuegoActualizar"]),
+										stripslashes($filaCodigo["codigo_capturas"])
+								);
+
+			$conexion->ejecutarInstruccion($sqlCapturas);
+			$j++;
+		}
 		//Guardar Trailer
 		
 		$sqlTrailer = sprintf("UPDATE tbl_trailer 
