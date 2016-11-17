@@ -2,6 +2,9 @@
 		include_once("class/class_conexion.php");
 	    include_once("class/class_juegos.php");
 	    $conexion = new Conexion();
+	    session_start();
+	    if(!isset($_SESSION['nombre_usuario']))
+   			 $_SESSION['nombre_usuario']="";
     
 ?>
 <!DOCTYPE html>
@@ -32,7 +35,11 @@
 	          <!-- Collect the nav links, forms, and other content for toggling -->
 	          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	            <ul class="nav navbar-nav">
-	              <li><a href="index.php" class="hvr-underline-from-center">Inicio</a></li>
+	            <?php if ($_SESSION['nombre_usuario']!="") {?>
+						<li><a href="index_usuario.php" class="hvr-underline-from-center">Inicio</a></li>
+					<?php } else{?>
+							<li><a href="index.php" class="hvr-underline-from-center">Inicio</a></li>
+					<?php 	}?> 
 	              <li><a href="productos.php">Productos</a></li>
 	              <li class="dropdown">
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acerca de <span class="caret"></span></a>
@@ -54,17 +61,31 @@
 	              </div>
 
 	            </form>
-	            <ul class="nav navbar-nav navbar-right">
-	              <li><a href="registro.php">Registrarse</a></li>
-	              <li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar Sesión <span class="caret"></span></a>
-	                <ul class="dropdown-menu">
-	                  <li><a href="login_usuario.php">Cliente</a></li>
-	                  <li role="separator" class="divider"></li>
-	                  <li><a href="login_administrador.php">Administrador</a></li>
-	                </ul>
-	              </li>
-	            </ul>
+	            <?php if ($_SESSION['nombre_usuario']!="") {?>
+					<ul class="nav navbar-nav navbar-right">
+			              <li class="dropdown">
+			                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['nombre_usuario'] ?> <span class="caret"></span></a>
+			                <ul class="dropdown-menu">
+			                  <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
+			                  
+			                 
+			                </ul>
+			              </li>
+			            </ul>
+				<?php } else{?>
+						<ul class="nav navbar-nav navbar-right">
+				              <li><a href="registro.php">Registrarse</a></li>
+				              <li class="dropdown">
+				                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Iniciar Sesión <span class="caret"></span></a>
+				                <ul class="dropdown-menu">
+				                  <li><a href="login_usuario.php">Cliente</a></li>
+				                  <li role="separator" class="divider"></li>
+				                  <li><a href="login_administrador.php">Administrador</a></li>
+				                </ul>
+	              			</li>
+	            		</ul>
+				<?php 	}?> 	            
+	              
 	          </div><!-- /.navbar-collapse -->
 	        </div><!-- /.container-fluid -->
       </nav>
