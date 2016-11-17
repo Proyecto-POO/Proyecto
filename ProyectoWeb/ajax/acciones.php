@@ -6,6 +6,7 @@
 	include_once("../class/class_usuario.php");
 	include_once("../class/class_administradores.php");
 	include_once("../class/class_capturas.php");
+	include_once("../class/class_tarjetas.php");
 	session_start();
 				
 	$conexion = new Conexion();
@@ -188,7 +189,7 @@
 			$conexion->ejecutarInstruccion($sql);
 			break;
 		case '10':
-		sleep(10);
+		sleep(6);
 			$fecha = $_POST['fecha'];
 			$monto = $_POST['precio'];
 			TarjetaCredito::guardarTransaccion($conexion, $fecha, $monto);
@@ -199,7 +200,18 @@
 			 								$_POST['t-vencimiento'], 
 			 								$_POST['t-seguridad']
 			 								);
-			break;	
+			break;
+		case '11': //generar clave de producto
+
+				TarjetaCredito::claveProducto($conexion, $_POST['codigoJuego']);
+				
+
+			break;
+		case '12': //generar descarga
+
+				TarjetaCredito::descarga($conexion, $_POST['codigoJuego']);
+
+			break;							
 		default:		
 			# code...
 			break;

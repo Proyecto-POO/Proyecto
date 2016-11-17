@@ -66,7 +66,7 @@
               <hr>
                <div class="row">
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-                    <input type="text" class="form-control" placeholder="Nombre" id="t-nombre">
+                    <input type="text" class="form-control" placeholder="Nombre" value="<?php echo $_SESSION['nombre_usuario']; ?>" id="t-nombre">
                   </div>
               </div>
               <br>
@@ -105,6 +105,13 @@
                
                 <div class="cont2" id="mensaje" style="display: none;">
                     <!-- imagen GIF de carga AQUI-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-2">
+                <div class="btn btn-danger" id="continuar" style="display: none;">
+                   <a href="final_compra.php?codigoJuego=<?php echo $_GET['cj']; ?>"><h4>Clave de Producto y Descarga</h4></a>
                 </div>
             </div>
         </div>
