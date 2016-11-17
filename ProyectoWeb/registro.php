@@ -114,15 +114,32 @@
                     <hr>
                     Verificar correo electronico
                     <input type="text" name="txt-correo-verificar" id="txt-correo-verificar" style="width:50%"  class="form-control" >
-                    <div id="mensaje5" class="well error-form"> Error, campo vacio o sus correos no coinciden.</div>
-                    <hr>
-                    Terminos de suscriptor
-                    <textarea class="form-control" disabled></textarea>
-                    <hr>
-                    <input  type="checkbox" id="chk-terminos" >&nbsp;He leido y acepto los terminos de suscriptor.
-                    <hr>
+                    <div id="mensaje5" class="well error-form"> Error, campo vacio o sus correos no coinciden.</div><br>
                     <button id="btn-crear-cuenta" name="btn-crear-cuenta" class="btn btn-primary" style="width:100%"> Crear cuenta</button>
     </div>
+    <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-2">
+              <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
+                       <div class="cont" id="loading" style="display: none;">
+                          <img class="img img-responsive" src="img/loading.gif" alt="">
+                      </div>
+                  </div>
+                  
+              </div>
+               
+                <div class="cont2" id="verifica-usuario" style="display: none;">
+                    <!-- imagen GIF de carga AQUI-->
+                </div>
+            </div>
+        </div>
+    <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-2">
+                <div class="btn btn-danger" id="verificar" style="display: none;">
+                   
+                </div>
+            </div>
+        </div>
 <!-- Fin del Formulario para registrar nuevo usuario-->
 <!--Inicio de las e-->
      <footer style="position: relative;">

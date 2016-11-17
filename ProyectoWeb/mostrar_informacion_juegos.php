@@ -254,8 +254,3 @@
    </script>
 </body>
 </html>
-<?php 
-$conexion->liberarResultado($juego);
-$conexion->cerrarConexion();
-
-?>

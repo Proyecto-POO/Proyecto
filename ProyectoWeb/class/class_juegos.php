@@ -324,7 +324,7 @@
 			$resultado = $conexion->ejecutarInstruccion(
 				'SELECT codigo_esrb, 
 						tipo_esrb,
-						icono 
+						url_esrb 
 				FROM tbl_esrb');
 
 			echo "<select name='slc-esrb' id='slc-esrb' class='form-control' style='height: 30px;'>";

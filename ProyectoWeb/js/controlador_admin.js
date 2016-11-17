@@ -19,7 +19,6 @@ function logInAdmin(){
 		})
 }
 function eliminarUsuario(codigoUsuario){
-	alert(codigoUsuario);
 	var eliminarUsuario = "codigoUsuario= " + codigoUsuario;
 	$.ajax({
 		url:"ajax/acciones.php?accion=6",
@@ -34,7 +33,6 @@ function eliminarUsuario(codigoUsuario){
 }
 
 function eliminarJuego(codigoJuego){
-	alert(codigoJuego);
 	var eliminarJuego = "codigoJuego= " + codigoJuego;
 	$.ajax({
 		url:"ajax/acciones.php?accion=7",
@@ -103,7 +101,6 @@ editarCapturas = function(codigoJuego){
   			method: "POST",
   			dataType: 'json',
   			success:function(resultado){
-  				alert(resultado);
   				$("#txt-captura1").val(resultado.imagen0);
   				$("#txt-captura2").val(resultado.imagen1);
   				$("#txt-captura3").val(resultado.imagen2);
@@ -343,7 +340,7 @@ $("#btn-guardar-juego").click(function(){
 			"&txt-sistema-operativo-recomendado="+$("#txt-sistema-operativo-recomendado").val()+
 			"&txt-tarjeta-grafica-minimo="+$("#txt-tarjeta-grafica-minimo").val()+
 			"&txt-tarjeta-grafica-recomendado="+$("#txt-tarjeta-grafica-recomendado").val();
-			alert(parametros);
+			
 	$.ajax({
 			url:"ajax/acciones.php?accion=4",
 			method: "POST",

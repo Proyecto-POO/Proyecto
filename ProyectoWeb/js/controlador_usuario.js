@@ -77,13 +77,21 @@ $(document).ready(function(){
                         "&txt-contrasena="+$("#txt-contrasena").val()+
                         "&dte-fecha-nacimiento="+$("#dte-fecha-nacimiento").val()+
                         "&txt-correo="+$("#txt-correo").val();
-            alert(nuevoUsuario);
            $.ajax({
              data:nuevoUsuario,
              url: "ajax/acciones.php?accion=9",
              method: "POST",
+             beforeSend: function(){
+                $("#verifica-usuario").fadeIn();
+                $("#btn-crear-cuenta").fadeOut();
+                $("#loading").fadeIn();
+            },
              success:function(Usuario){
-                    alert(Usuario);
+                    $("#loading").fadeOut();
+                    $("#verificar-usuario").fadeOut();
+                    $("#btn-crear-cuenta").fadeIn();
+                    $("#verificar").fadeIn();
+                    $("#verificar").html(Usuario);
                      $("#mensaje1").fadeOut();
                      $("#mensaje2").fadeOut();
                      $("#mensaje3").fadeOut();

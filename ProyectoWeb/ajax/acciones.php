@@ -216,7 +216,27 @@
 
 			break;
 		case '9'://registro de un nuevo usuario
-			$sql = sprintf("INSERT INTO tbl_usuarios(
+			sleep(9);
+			$sqlVerificar = $conexion->ejecutarInstruccion("SELECT 
+																	codigo_usuario, 	
+																	codigo_tipo_pago, 
+																	codigo_tarjeta_credito, 
+																	nombre_usuario, 
+																	nombre, 
+																	apellido, 
+																	correo_electronico, 
+																	contrasena, 
+																	fecha_nacimiento FROM tbl_usuarios ");
+			$verificacion=0;
+			while ($fila_Verificar = $conexion->obtenerFila($sqlVerificar)) {
+				if ($fila_Verificar["nombre_usuario"]==$_POST["txt-nombre-usuario"]) {
+					$verificacion++;
+				}
+			}
+			if ($verificacion==1) {
+				echo "No se registro, porque el nombre de usuario ya existe";
+			}else{
+					$sql = sprintf("INSERT INTO tbl_usuarios(
 												codigo_usuario, 
 												codigo_tipo_pago, 
 												codigo_tarjeta_credito, 
@@ -234,8 +254,11 @@
 												stripslashes($_POST["txt-contrasena"]),
 												stripslashes($_POST["dte-fecha-nacimiento"])
 						);	
-			echo $sql;
-			$conexion->ejecutarInstruccion($sql);
+					echo "Usuario Almacenado con exito";
+					$conexion->ejecutarInstruccion($sql);
+			}
+
+			
 			break;
 		case '10':
 		sleep(6);
