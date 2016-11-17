@@ -91,6 +91,12 @@
 		public function setPrecio($precio){
 			$this->precio = $precio;
 		}
+		public function getClaveProducto(){
+			return $this->claveProducto;
+		}
+		public function setClaveProducto($claveProducto){
+			$this->claveProducto = $claveProducto;
+		}
 		public function toString(){
 			return "Desarrollador: " . $this->desarrollador . 
 				" Especificaciones: " . $this->especificaciones . 
@@ -423,30 +429,6 @@
 				echo "Error al guardar el registro";
 				exit;
 			}
-			//Es necesario obtener el ultimo ID agregado:
-			// $UltimoInsert = $conexion->ejecutarInstruccion("SELECT last_insert_id(codigo_juego) as id FROM tbl_juegos ORDER BY id DESC;");
-			// $fila = $conexion->obtenerFila($UltimoInsert);
-
-			//Las categorias
-			// if ($fila["id"]>0){
-			// 	for ($i=0;$i<count($this->categoria);$i++){
-			// 		$sql = sprintf(
-			// 			"INSERT INTO tbl_juegos_x_tbl_categorias(codigo_juego, codigo_categoria) VALUES ('%s','%s')",
-			// 			stripslashes($fila["id"]),	
-			// 			stripslashes($this->categoria[$i])
-											
-			// 		);
-			// 		echo "Instruccion a ejecutar: ".$sql;
-			// 			$res = $conexion->ejecutarInstruccion($sql);
-			// 			if($res){
-			// 				echo "Registro almacenado con exito";
-			// 			}else{
-			// 				echo "Error al guardar el registro";
-			// 				exit;
-			// 			}
-								
-			// 	}
-			// }
 		}
 
 		public static function generarCapturas($conexion, $codigoJuego) {

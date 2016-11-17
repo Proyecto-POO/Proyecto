@@ -18,6 +18,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
     <style type="text/css">
       .error-form{
          background-color: #e26161; 
@@ -289,7 +290,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-portada").val(datos);
                     }
                 });
@@ -304,7 +304,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura1").val(datos);
                     }
                 });
@@ -324,7 +323,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura2").val(datos);
                     }
                 });
@@ -341,7 +339,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura3").val(datos);
                     }
                 });
@@ -358,7 +355,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura4").val(datos);
                     }
                 });

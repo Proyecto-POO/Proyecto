@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 
     <link rel="stylesheet" href="css/login-reg.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 
   </head>
 
@@ -34,26 +35,9 @@
                   <ul class="nav navbar-nav">
                     <li><a href="index.php" class="hvr-underline-from-center">Inicio</a></li>
                     <li><a href="productos.php">Productos</a></li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acerca de <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Conocenos</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Contacto</a></li>
-                      </ul>
-                    </li>
+                   
                   </ul>
-                  <form class="navbar-form navbar-left">
-                    <div class="form-group input-group">
-                      <input type="text" class="form-control-search" placeholder="Buscar">
-                      <span class="input-group-btn">
-                          <button type="button" class="btn btn-default">
-                             <span class="glyphicon glyphicon-search"></span>
-                          </button>
-                      </span>
-                    </div>
-
-                  </form>
+                  
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="registro.php">Registrarse</a></li>
                     <li class="dropdown">

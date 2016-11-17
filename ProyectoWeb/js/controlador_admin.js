@@ -326,6 +326,7 @@ $("#btn-guardar-juego").click(function(){
 			"&txt-url-iso="+$("#txt-url-iso").val()+
 			"&txt-trailer="+$("#txt-trailer").val()+
 			"&txt-calificacion="+$("#txt-calificacion").val()+
+			"&txt-clave-producto="+$("#txt-clave-producto").val()+
 			"&slc-desarrolladores="+$("#slc-desarrolladores").val()+
 			"&slc-esrb="+$("#slc-esrb").val()+
 			"&txt-captura1="+$("#txt-captura1").val()+//comienzo de las capturas del juego
@@ -362,6 +363,7 @@ $("#btn-guardar-juego").click(function(){
 		$("#txt-url-iso").val("");
 		$("#txt-trailer").val("");
 		$("#txt-calificacion").val("");
+		$("#txt-clave-producto").val("");
 		$("#slc-desarrolladores").val("");
 		$("#slc-esrb").val("");
 		$("#txt-captura1").val(-1);
@@ -382,19 +384,13 @@ $("#btn-guardar-juego").click(function(){
 $("#btn-modificar-juego").click(function(){
 
 	$("#btn-modificar-juego").button("Guardando");
-	var categoriasSeleccionadas="";
-		
-		$("input[name='chkcategorias[]']:checked").each(function(){
-			categoriasSeleccionadas+="categorias[]="+$(this).val()+"&";
-		});
 
 	var parametros=
 			"txt-titulo-juego2="+$("#txt-titulo-juego2").val()+
 			"&txt-portada2="+$("#txt-portada2").val()+
 			"&CodigoJuegoActualizar="+CodigoJuegoActualizar+
 			"&textArea-descripcion2="+$("#textArea-descripcion2").val()+
-			"&"+categoriasSeleccionadas+
-			"txt-fecha-lanzamiento2="+$("#txt-fecha-lanzamiento2").val()+
+			"&txt-fecha-lanzamiento2="+$("#txt-fecha-lanzamiento2").val()+
 			"&txt-precio2="+$("#txt-precio2").val()+
 			"&txt-url-iso2="+$("#txt-url-iso2").val()+
 			"&txt-trailer="+$("#txt-trailer").val()+

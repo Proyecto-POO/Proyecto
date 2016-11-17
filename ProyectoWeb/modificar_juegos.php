@@ -17,6 +17,7 @@
 	<link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 
 </head>
 <body style="background-image: url('img/fondo.png'); ">
@@ -89,11 +90,6 @@
             <th>Descripcion</th>
             <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion2" class="form-control"></textarea></td>
           </tr>
-          <tr>
-            <th>Categorias</th>
-            <td colspan="3"><?php Categorias::checkBoxCategoria($conexion); ?></td>
-          </tr>
-          <tr>
             <th>Fecha de lanzamiento</th>
             <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento2"  class="form-control"></td>
           </tr>
@@ -231,7 +227,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-portada2").val(datos);
                     }
                 });
@@ -246,7 +241,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura1").val(datos);
                     }
                 });
@@ -266,7 +260,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura2").val(datos);
                     }
                 });
@@ -283,7 +276,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura3").val(datos);
                     }
                 });
@@ -300,7 +292,6 @@
                     processData: false,
                     success: function(datos)
                     {
-                        alert(datos);
                         $("#txt-captura4").val(datos);
                     }
                 });

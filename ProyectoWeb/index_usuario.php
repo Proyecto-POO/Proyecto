@@ -17,6 +17,7 @@
     <title>GAMERS.ES</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
 
 </head>
 <body style=" background-image: url('img/fondo.png');">
@@ -39,25 +40,9 @@
             <ul class="nav navbar-nav">
               <li><a href="index_usuario.php" class="hvr-underline-from-center">Inicio</a></li>
               <li><a href="productos.php">Productos</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acerca de <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Conocenos</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Contacto</a></li>
-                </ul>
-              </li>
+             
             </ul>
-            <form class="navbar-form navbar-left">
-              <div class="form-group input-group">
-                <input type="text" class="form-control-search" placeholder="Buscar">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-default">
-                       <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-              </div>
-
+           
             </form>
             <ul class="nav navbar-nav navbar-right">
               
