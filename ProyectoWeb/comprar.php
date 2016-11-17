@@ -13,7 +13,12 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
-
+    <style type="text/css">
+      .error-form{
+         background-color: #e26161; 
+         display: none;
+       }
+    </style>
 </head>
 <body style="background-image: url('img/fondo.png'); ">
 
@@ -66,22 +71,28 @@
               <hr>
                <div class="row">
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
-                    <input type="text" class="form-control" placeholder="Nombre" value="<?php echo $_SESSION['nombre_usuario']; ?>" id="t-nombre">
+                    <input type="text" class="form-control" placeholder="Nombre" value="<?php echo $_SESSION['nombre_usuario']; ?>" id="t-nombre" disabled="disabled">
+                    
                   </div>
               </div>
               <br>
               <div class="row">
                   <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
                     <input type="text" class="form-control" placeholder="Numero de tarjeta" id="t-numero">
+                    <div id="campo1" class="well error-form"> Error, campo vacio, ingrese su numero de tarjeta.</div>
+                    
                   </div>
               </div>
              <br>
               <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 col-lg-offset-2 col-md-offset-2 col-sm-offset-2 col-xs-offset-2">
                      <input type="text" class="form-control" placeholder="fecha vencimiento" id="t-vencimiento">
+                     <div id="campo2" class="well error-form"> Error, campo vacio, ingrese la fecha de vencimiento.</div>
+                      
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5">
                     <input type="text" class="form-control" placeholder="Cod. seguridad" id="t-seguridad">
+                    <div id="campo3" class="well error-form"> Error, campo vacio, ingrese el codigo de seguridad.</div>
                 </div>    
               </div>
               <br><br>

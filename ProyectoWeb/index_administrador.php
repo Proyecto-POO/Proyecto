@@ -18,6 +18,12 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
     <link rel="stylesheet" href="css/admin.css">
+    <style type="text/css">
+      .error-form{
+         background-color: #e26161; 
+         display: none;
+       }
+    </style>
 
 </head>
 <body style="background-image: url('img/fondo.png'); ">
@@ -88,7 +94,9 @@
           <table class="table table-striped">
           <tr>
             <th>Titulo</th>
-            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control" ></td>
+            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control" >
+              
+            </td>
           </tr>
           <tr>
             <th>Portada</th>
@@ -100,19 +108,25 @@
           </tr>
           <tr>
             <th>Descripcion</th>
-            <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion" class="form-control"></textarea></td>
+            <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion" class="form-control"></textarea>
+              
+            </td>
           </tr>
           <tr>
             <th>Categorias</th>
-            <td colspan="3"><?php Categorias::checkBoxCategoria($conexion); ?></td>
+            <td colspan="3"><?php Categorias::checkBoxCategoria($conexion); ?>
+              
+            </td>
           </tr>
           <tr>
             <th>Fecha de lanzamiento</th>
-            <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control"></td>
+            <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control">
+            </td>
           </tr>
            <tr>
             <th>Precio</th>
-            <td colspan="3"><input type="text" name="txt-precio" id="txt-precio" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-precio" id="txt-precio" class="form-control">
+            </td>
           </tr>
           <tr>
             <th>Tamaño</th>
@@ -120,27 +134,35 @@
           </tr>
           <tr>
             <th>Url del producto</th>
-            <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso" class="form-control">
+            </td>
           </tr>
            <tr>
             <th>Url del Trailer</th>
-            <td colspan="3"><input type="text" name="txt-trailer" id="txt-trailer" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-trailer" id="txt-trailer" class="form-control">
+            </td>
           </tr>
           <tr>
             <th>calificacion</th>
-            <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion" class="form-control">
+            </td>
           </tr>
           <tr>
             <th>Clave del pruducto</th>
-            <td colspan="3"><input type="text" name="txt-clave-producto" id="txt-clave-producto" class="form-control"></td>
+            <td colspan="3"><input type="text" name="txt-clave-producto" id="txt-clave-producto" class="form-control">
+            </td>
           </tr>
           <tr>
             <th>Desarrollador</th>
-            <td colspan="3"><?php Desarrolladores::generarDesarrolladores($conexion);?></td>
+            <td colspan="3"><?php Desarrolladores::generarDesarrolladores($conexion);?>
+              
+            </td>
           </tr>
           <tr>
             <th>Clasificacion ESRB</th>
-            <td colspan="3"><?php Juegos::generarESRB($conexion);?></td>
+            <td colspan="3"><?php Juegos::generarESRB($conexion);?>
+              
+            </td>
           </tr>
           <tr>
              <th class="text-center" colspan="3">Captura del Juego</th>
@@ -183,26 +205,33 @@
           </tr>
           <tr>
             <th>CPU</th>
-            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo" class=" form-control">
+             </td>
+            <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado" class="form-control">
+            </td>
           </tr>
           <tr>
             <th>RAM</th>
-            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo" class=" form-control">
+            </td>
+            <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado" class="form-control">
+              </td>
           </tr>
           <tr>
             <th>Sistema Operativo</th>
-            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo" class=" form-control">
+             </td>
+            <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado" class="form-control">
+              </td>
           </tr>
           <tr>
             <th>Tarjeta Grafica</th>
-            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo" class=" form-control"></td>
-            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado" class="form-control"></td>
+            <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo" class=" form-control">
+            </td>
+            <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado" class="form-control">
+            </td>
           </tr>
         </table>
-
           <!--Fin Formulario de registro de  nuevo juego-->
       </div>
        <!--formulario de los botones de la ventana modal-->
