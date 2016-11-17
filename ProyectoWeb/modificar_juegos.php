@@ -80,7 +80,11 @@
           </tr>
           <tr>
             <th>Portada</th>
-            <td colspan="3"><input type="text" name="txt-portada" id="txt-portada2" class="form-control"></td>
+            <td colspan="3">
+                  <form method="post" id="formulario" enctype="multipart/form-data"> Subir imagen: <input type="file" name="file">
+                  </form>
+                  <input type="text" disabled name="txt-portada" id="txt-portada2"  class="form-control">
+            </td>
           </tr>
           <tr>
             <th>Descripcion</th>
@@ -107,6 +111,10 @@
             <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso2" class="form-control"></td>
           </tr>
           <tr>
+            <th>Url del Trailer</th>
+            <td colspan="3"><input type="text" name="txt-trailer" id="txt-trailer" class="form-control"></td>
+          </tr>
+          <tr>
             <th>calificacion</th>
             <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion2" class="form-control"></td>
           </tr>
@@ -117,6 +125,37 @@
           <tr>
             <th>Clasificacion ESRB</th>
             <td colspan="3"><?php Juegos::generarESRB($conexion);?></td>
+          </tr>
+          <tr>
+             <th class="text-center" colspan="3">Captura del Juego</th>
+          </tr>
+           <tr>
+            <td colspan="3">
+                  <form method="post" id="form-captura-1" enctype="multipart/form-data"> Subir imagen de captura del juego: <input type="file" name="file-captura1">
+                  </form>
+                  <input type="text" disabled name="txt-captura1" id="txt-captura1"  class="form-control">
+            </td>
+          </tr>
+           <tr>
+            <td colspan="3">
+                  <form method="post" id="form-captura-2" enctype="multipart/form-data"> Subir imagen de captura del juego: <input type="file" name="file-captura2">
+                  </form>
+                  <input type="text" disabled name="txt-captura2" id="txt-captura2"  class="form-control">
+            </td>
+          </tr>
+           <tr>
+            <td colspan="3">
+                  <form method="post" id="form-captura-3" enctype="multipart/form-data"> Subir imagen de captura del juego: <input type="file" name="file-captura3">
+                  </form>
+                  <input type="text" disabled name="txt-captura3" id="txt-captura3"  class="form-control">
+            </td>
+          </tr>
+           <tr>
+            <td colspan="3">
+                  <form method="post" id="form-captura-4" enctype="multipart/form-data"> Subir imagen de captura del juego: <input type="file" name="file-captura4">
+                  </form>
+                  <input type="text" disabled name="txt-captura4" id="txt-captura4"  class="form-control">
+            </td>
           </tr>
            <tr>
              <th class="text-center" colspan="3">Especificaciones</th>
@@ -176,5 +215,95 @@
 	<script src="js/jquery.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/controlador_admin.js"></script>
+   <script >
+    //Permite el almacenamiento de la imagen en la carpeta predestinada y la URL a la base de datos
+        $(function(){
+            $("input[name='file']").on("change", function(){
+                var formData = new FormData($("#formulario")[0]);
+                $.ajax({
+                    url: "imagen.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        alert(datos);
+                        $("#txt-portada2").val(datos);
+                    }
+                });
+            });
+              $("input[name='file-captura1']").on("change", function(){
+                var formData = new FormData($("#form-captura-1")[0]);
+                $.ajax({
+                    url: "imagen_captura.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        alert(datos);
+                        $("#txt-captura1").val(datos);
+                    }
+                });
+            }); 
+        });
+        $(function(){
+                  
+        });
+        $(function(){
+           $("input[name='file-captura2']").on("change", function(){
+                var formData = new FormData($("#form-captura-2")[0]);
+                $.ajax({
+                    url: "imagen_captura.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        alert(datos);
+                        $("#txt-captura2").val(datos);
+                    }
+                });
+            });
+        });
+        $(function(){
+             $("input[name='file-captura3']").on("change", function(){
+                var formData = new FormData($("#form-captura-3")[0]);
+                $.ajax({
+                    url: "imagen_captura.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        alert(datos);
+                        $("#txt-captura3").val(datos);
+                    }
+                });
+            });
+        });
+        $(function(){
+             $("input[name='file-captura4']").on("change", function(){
+                var formData = new FormData($("#form-captura-4")[0]);
+                $.ajax({
+                    url: "imagen_captura.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        alert(datos);
+                        $("#txt-captura4").val(datos);
+                    }
+                });
+            });          
+        });
+          
+   </script>
 </body>
 </html>

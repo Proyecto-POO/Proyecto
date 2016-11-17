@@ -1,7 +1,7 @@
 function logInAdmin(){
 	var datos = "Admin="+$("#user-admin").val()+"&"+
 			    "contrasena="+$("#pass-admin").val();
-	var nombreAdmin = $("#user-admin").val() 	  	
+	var nombreAdmin = $("#user-admin").val(); 	  	
 	$.ajax({
 			url:"ajax/json.php?accion=5",
 			method: "POST",
@@ -65,6 +65,7 @@ function editarJuego(codigoJuego){
 			$("#txt-calificacion2").val(resultado.calificacion);
 			$("#slc-desarrolladores").val(resultado.codigo_desarrollador);
 			$("#slc-esrb").val(resultado.codigo_esrb);
+			editarTrailer(codigoJuego);
 			editarEspecificacionesMin(codigoJuego);
 			editarEspecificacionesMax(codigoJuego);
 
@@ -73,6 +74,42 @@ function editarJuego(codigoJuego){
 		error: function(){
 			alert("hubo error");
 		}
+	});
+}
+editarTrailer = function(codigoJuego){
+	var info = "codigo_juego=" + codigoJuego;
+	$.ajax({
+			url: "ajax/json.php?accion=6",
+			data: info,
+			method: "POST",
+			dataType: 'json',
+			success:function(resultado){
+				$("#txt-trailer").val(resultado.url_trailer);
+			}
+
+	});
+}
+
+ editarCapturas = function(codigoJuego){
+	var info = "codigo_juego=" + codigoJuego;
+	alert(info);
+	$.ajax({
+			url: "ajax/json.php?accion=7",
+			data: info,
+			method: "POST",
+			dataType: 'json',
+			success:function(resultado){
+				alert(resultado);
+				$("#txt-captura1").val(resultado.Captura1);
+				$("#txt-captura2").val(resultado.Captura2);
+				$("#txt-captura3").val(resultado.Captura3);
+				$("#txt-captura4").val(resultado.Captura4);
+			},
+			error: function(){
+				alert("NO");
+			}
+
+
 	});
 }
 
@@ -123,9 +160,14 @@ $("#btn-guardar-juego").click(function(){
 			"txt-fecha-lanzamiento="+$("#txt-fecha-lanzamiento").val()+
 			"&txt-precio="+$("#txt-precio").val()+
 			"&txt-url-iso="+$("#txt-url-iso").val()+
+			"&txt-trailer="+$("#txt-trailer").val()+
 			"&txt-calificacion="+$("#txt-calificacion").val()+
 			"&slc-desarrolladores="+$("#slc-desarrolladores").val()+
 			"&slc-esrb="+$("#slc-esrb").val()+
+			"&txt-captura1="+$("#txt-captura1").val()+//comienzo de las capturas del juego
+			"&txt-captura2="+$("#txt-captura2").val()+
+			"&txt-captura3="+$("#txt-captura3").val()+
+			"&txt-captura4="+$("#txt-captura4").val()+
 			"&txt-cpu-minimo="+$("#txt-cpu-minimo").val()+//comienza informacion de especificaciones
 			"&txt-cpu-recomendado="+$("#txt-cpu-recomendado").val()+
 			"&txt-ram-minimo="+$("#txt-ram-minimo").val()+

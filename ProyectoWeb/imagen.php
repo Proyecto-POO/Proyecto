@@ -6,9 +6,6 @@ if (isset($_FILES["file"]))
     $tipo = $file["type"];
     $ruta_provisional = $file["tmp_name"];
     $size = $file["size"];
-    $dimensiones = getimagesize($ruta_provisional);
-    $width = $dimensiones[0];
-    $height = $dimensiones[1];
     $carpeta = "img/portadas/";
     
     if ($tipo != 'image/jpg' && $tipo != 'image/jpeg' && $tipo != 'image/png' && $tipo != 'image/gif')
@@ -24,6 +21,6 @@ if (isset($_FILES["file"]))
         echo $src;
     }
 }else{
-    echo "Nuhay archivo";
+    echo "No hay archivo";
 }
 ?>

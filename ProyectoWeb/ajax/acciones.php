@@ -5,6 +5,7 @@
 	include_once("../class/class_especificaciones.php");
 	include_once("../class/class_usuario.php");
 	include_once("../class/class_administradores.php");
+	include_once("../class/class_capturas.php");
 	session_start();
 				
 	$conexion = new Conexion();
@@ -62,6 +63,79 @@
 					$_POST["txt-cpu-recomendado"]
 			);
 		$nuevaEspecificacionRecomendada->guardarEspecificaciones($conexion);
+
+		//Almacenamiento de las capturas del juego
+		/*$nuevaCaptura1 = new capturas(
+										$fila["id"],
+										$_POST["txt-captura1"]);
+		$nuevaCaptura1->guardarCapturas($conexion);
+
+		$nuevaCaptura2 = new capturas(
+										$fila["id"],
+										$_POST["txt-captura2"]);
+		$nuevaCaptura2->guardarCapturas($conexion);
+
+		$nuevaCaptura3 = new capturas(
+										$fila["id"],
+										$_POST["txt-captura3"]);
+		$nuevaCaptura3->guardarCapturas($conexion);
+
+		$nuevaCaptura4 = new capturas(
+										$fila["id"],
+										$_POST["txt-captura4"]);
+		$nuevaCaptura4->guardarCapturas($conexion);*/
+		$sqlCapturas1 = sprintf("
+									INSERT INTO tbl_capturas(
+															codigo_capturas, 
+															codigo_juego, 
+															url_captura
+															) VALUES (NULL,'%s','%s')",
+										stripslashes($fila["id"]),
+										stripslashes($_POST["txt-captura1"])										
+								);
+		$conexion->ejecutarInstruccion($sqlCapturas1);
+		$sqlCapturas2 = sprintf("
+								INSERT INTO tbl_capturas(
+														codigo_capturas, 
+														codigo_juego, 
+														url_captura
+														) VALUES (NULL,'%s','%s')",
+										stripslashes($fila["id"]),
+										stripslashes($_POST["txt-captura2"])										
+							);
+		$conexion->ejecutarInstruccion($sqlCapturas2);
+		$sqlCapturas3 = sprintf("
+								INSERT INTO tbl_capturas(
+														codigo_capturas, 
+														codigo_juego, 
+														url_captura
+														) VALUES (NULL,'%s','%s')",
+										stripslashes($fila["id"]),
+										stripslashes($_POST["txt-captura3"])										
+							);
+		$conexion->ejecutarInstruccion($sqlCapturas3);
+		$sqlCapturas4 = sprintf("
+								INSERT INTO tbl_capturas(
+														codigo_capturas, 
+														codigo_juego, 
+														url_captura
+														) VALUES (NULL,'%s','%s')",
+										stripslashes($fila["id"]),
+										stripslashes($_POST["txt-captura4"])										
+							);
+		$conexion->ejecutarInstruccion($sqlCapturas4);
+		//Guardar Trailer
+		$sqlTrailer = sprintf("
+								INSERT INTO tbl_trailer(
+														codigo_trailer, 
+														codigo_juego, 
+														url_trailer
+														) VALUES (NULL,'%s','%s')",
+										stripslashes($fila["id"]),
+										stripslashes($_POST["txt-trailer"])
+							);	
+		$conexion->ejecutarInstruccion($sqlTrailer);
+
 		break;					
 		case '6'://Eliminacion de un usuario
 				$codigo_usuario=$_POST['codigoUsuario'];
