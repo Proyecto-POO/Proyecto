@@ -59,7 +59,7 @@
             <div class="cont">
             <label>Ver Listas</label><br><br>
               <a href="eliminar_producto.php"><button class="btn btn-warning btn-lg">Ver Usuarios y Juegos</button></a><br><br>
-              <button class="btn btn-primary btn-lg">Ver Transacciones</button><br><br>
+              <a href="transacciones.php" class="btn btn-primary btn-lg">Ver Transacciones</a><br><br>
 
             </div>
         </div>

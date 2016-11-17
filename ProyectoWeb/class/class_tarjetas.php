@@ -134,5 +134,59 @@
 			$conexion->liberarResultado($resultado);
 
 		}
+
+		public static function mostrarTransacciones($conexion){
+			$transacciones = $conexion->ejecutarInstruccion("
+									SELECT 
+											codigo_venta_diaria, 
+											fecha_venta, 
+											monto 
+
+									FROM tbl_venta_diaria 
+									");
+			?>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-2">
+					<div class="cont text-center"><h4>LISTADO DE TRANSACCIONES</h4></div> 
+						<table class="table table-striped" style="background-color: #fff; text-align: center;">
+							<tr>	
+					                <th style="text-align: center"> Fecha </th>
+					                <th style="text-align: center"> Monto</th>
+					        </tr> 
+					        <?php
+					        $total=0;
+							while ($fila = $conexion->obtenerFila($transacciones)) {
+							?>
+								<tr>
+									<td>
+										<?php
+											echo $fila['fecha_venta'];
+										?>
+									</td>
+									<td>
+										<?php
+											echo $fila['monto']." USD";
+										?>
+									</td>
+								</tr> 
+							<?php
+							$total+= $fila['monto'];
+							}
+							?>
+							<tr>
+								<td style="text-align: center">Total</td>
+								<td style="text-align: center">
+									<?php
+										echo $total." USD";
+									?>
+								</td>
+							</tr>	
+						</table>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
 	}
 ?>
