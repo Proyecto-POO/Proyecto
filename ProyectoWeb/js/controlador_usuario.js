@@ -179,8 +179,6 @@ function logInUsuario(){
 			success:function(resultado){
 					if(resultado.nombre_usuario == nombre )
 						location.href ="index_usuario.php";
-			},
-			error:function(){
 			}
 		})
 } 

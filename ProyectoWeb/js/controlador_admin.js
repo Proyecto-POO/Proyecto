@@ -12,9 +12,6 @@ function logInAdmin(){
 					if(resultado.usuario == nombreAdmin )
 						location.href ="index_administrador.php";
 
-			},
-			error:function(){
-				alert("ERROR")
 			}
 		})
 }
@@ -410,13 +407,13 @@ $("#btn-modificar-juego").click(function(){
 			"&txt-sistema-operativo-recomendado="+$("#txt-sistema-operativo-recomendado").val()+
 			"&txt-tarjeta-grafica-minimo="+$("#txt-tarjeta-grafica-minimo").val()+
 			"&txt-tarjeta-grafica-recomendado="+$("#txt-tarjeta-grafica-recomendado").val();
-			alert(parametros);
+			
 	$.ajax({
 			url:"ajax/acciones.php?accion=8",
 			method: "POST",
 			data: parametros,
 			success:function(resultado){
-				alert(resultado);
+				alert("juego modificado con exito");
 				$("#btn-modificar-juego").button("reset");
 			},
 			error:function(){
