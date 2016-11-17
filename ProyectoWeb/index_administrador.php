@@ -91,11 +91,12 @@
       </div>
       <div class="modal-body">
           <!--Formulario de registro-->
+          <form id="formulario">
           <table class="table table-striped">
           <tr>
             <th>Titulo</th>
-            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control" >
-              
+            <td colspan="3"><input type="text" name="txt-titulo-juego" id="txt-titulo-juego" class="form-control">
+              <div id="error1" class="well error-form"> Error, campo vacio, ingrese el titulo del juego.</div>
             </td>
           </tr>
           <tr>
@@ -109,23 +110,25 @@
           <tr>
             <th>Descripcion</th>
             <td colspan="3"><textarea  name="textArea-descripcion" id="textArea-descripcion" class="form-control"></textarea>
-              
+              <div id="error2" class="well error-form"> Error, campo vacio, ingrese la descripcion del juego.</div>
             </td>
           </tr>
           <tr>
             <th>Categorias</th>
             <td colspan="3"><?php Categorias::checkBoxCategoria($conexion); ?>
-              
+              <div id="error-categorias" class="well error-form"> Error, debe seleccionar al menos una categoria.</div>
             </td>
           </tr>
           <tr>
             <th>Fecha de lanzamiento</th>
             <td colspan="3"><input type="date" name="txt-fecha-lanzamiento" id="txt-fecha-lanzamiento"  class="form-control">
+            <div id="error3" class="well error-form"> Error, campo vacio, seleccione la fecha de lanzamiento.</div>
             </td>
           </tr>
            <tr>
             <th>Precio</th>
             <td colspan="3"><input type="text" name="txt-precio" id="txt-precio" class="form-control">
+            <div id="error4" class="well error-form"> Error, campo vacio, o valor invalido</div>
             </td>
           </tr>
           <tr>
@@ -135,33 +138,37 @@
           <tr>
             <th>Url del producto</th>
             <td colspan="3"><input type="text" name="txt-url-iso" id="txt-url-iso" class="form-control">
+            <div id="error5" class="well error-form"> Error, campo vacio, ingrese la url del producto.</div>
             </td>
           </tr>
            <tr>
             <th>Url del Trailer</th>
             <td colspan="3"><input type="text" name="txt-trailer" id="txt-trailer" class="form-control">
+            <div id="error6" class="well error-form"> Error, campo vacio, ingrese la url del trailer.</div>
             </td>
           </tr>
           <tr>
             <th>calificacion</th>
             <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion" class="form-control">
+            <div id="error7" class="well error-form"> Error, campo vacio,  o calificacion incorrecta.</div>
             </td>
           </tr>
           <tr>
             <th>Clave del pruducto</th>
             <td colspan="3"><input type="text" name="txt-clave-producto" id="txt-clave-producto" class="form-control">
+            <div id="error-clave" class="well error-form"> Error, campo vacio o ingrese la clave correcta.</div>
             </td>
           </tr>
           <tr>
             <th>Desarrollador</th>
             <td colspan="3"><?php Desarrolladores::generarDesarrolladores($conexion);?>
-              
+              <div id="error8" class="well error-form"> Error, campo vacio, seleccione el desarrollador.</div>
             </td>
           </tr>
           <tr>
             <th>Clasificacion ESRB</th>
             <td colspan="3"><?php Juegos::generarESRB($conexion);?>
-              
+              <div id="error9" class="well error-form"> Error, campo vacio, seleccione la ESRB del juego.</div>
             </td>
           </tr>
           <tr>
@@ -206,32 +213,41 @@
           <tr>
             <th>CPU</th>
             <td><input type="text" name="txt-cpu-minimo" id="txt-cpu-minimo" class=" form-control">
+            <div id="error10" class="well error-form"> Error, campo vacio, ingrese la especificacion.</div>
              </td>
             <td><input type="text" name="txt-cpu-recomendado" id="txt-cpu-recomendado" class="form-control">
+            <div id="error11" class="well error-form"> Error, campo vacio, ingrese la especificacion.</div>
             </td>
           </tr>
           <tr>
             <th>RAM</th>
             <td><input type="text" name="txt-ram-minimo" id="txt-ram-minimo" class=" form-control">
+            <div id="error12" class="well error-form"> Error, campo vacio, o valor incorrecto.</div>
             </td>
             <td><input type="text" name="txt-ram-recomendado" id="txt-ram-recomendado" class="form-control">
+            <div id="error13" class="well error-form"> Error, campo vacio, o valor incorrecto.</div>
               </td>
           </tr>
           <tr>
             <th>Sistema Operativo</th>
             <td><input type="text" name="txt-sistema-operativo-minimo" id="txt-sistema-operativo-minimo" class=" form-control">
+            <div id="error14" class="well error-form"> Error, campo vacio, ingrese la especificacion.</div>
              </td>
             <td><input type="text" name="txt-sistema-operativo-recomendado" id="txt-sistema-operativo-recomendado" class="form-control">
+            <div id="error15" class="well error-form"> Error, campo vacio, ingrese la especificacion.</div>
               </td>
           </tr>
           <tr>
             <th>Tarjeta Grafica</th>
             <td><input type="text" name="txt-tarjeta-grafica-minimo" id="txt-tarjeta-grafica-minimo" class=" form-control">
+            <div id="error16" class="well error-form"> Error, campo vacio, ingrese la especificacion.</div>
             </td>
             <td><input type="text" name="txt-tarjeta-grafica-recomendado" id="txt-tarjeta-grafica-recomendado" class="form-control">
+            <div id="error17" class="well error-form"> Error, campo vacio, ingrese la especificacion.</div>
             </td>
           </tr>
         </table>
+        </form>
           <!--Fin Formulario de registro de  nuevo juego-->
       </div>
        <!--formulario de los botones de la ventana modal-->

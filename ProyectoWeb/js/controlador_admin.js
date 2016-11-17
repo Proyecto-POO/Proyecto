@@ -150,7 +150,169 @@ editarEspecificacionesMax = function(codigoJuego){
 }
 
 $("#btn-guardar-juego").click(function(){
-	$("#btn-guardar-juego").button("Guardando");
+	formulario = document.getElementById("formulario");
+	var cont = 0;
+	for(var i=0; i<formulario.elements.length; i++) {
+	  var elemento = formulario.elements[i];
+	  if(elemento.type == "checkbox") {
+	    if(elemento.checked) {
+	      cont = cont + 1;
+	    }
+	  }
+	}
+	if (cont > 0) {
+		categoriaSeleccionada = true;
+	}else{
+		categoriaSeleccionada = false;
+	}
+	if ($("#txt-titulo-juego").val()==""
+		|| categoriaSeleccionada == false
+		||$("#txt-portada").val()==""
+		||$("#textArea-descripcion").val()==""
+		||$("#txt-fecha-lanzamiento").val()==""
+		||$("#txt-precio").val()==""
+		||$("#txt-clave-producto").val()==""
+		|| !/^[0-9]+$/.test($("#txt-precio").val())
+		||$("#txt-url-iso").val()==""
+		||$("#txt-trailer").val()==""
+		||$("#txt-calificacion").val()==""
+		|| !/^[0-5]+$/.test($("#txt-calificacion").val())
+		||$("#slc-desarrolladores").val()==""
+		||$("#slc-esrb").val()==""
+		||$("#txt-captura1").val()==""
+		||$("#txt-captura2").val()==""
+		||$("#txt-captura3").val()==""
+		||$("#txt-captura4").val()==""
+		||$("#txt-cpu-minimo").val()==""
+		||$("#txt-cpu-recomendado").val()==""
+		||$("#txt-ram-minimo").val()==""
+		|| !/^[0-9]+$/.test($("#txt-ram-minimo").val())
+		||$("#txt-ram-recomendado").val()==""
+		|| !/^[0-9]+$/.test($("#txt-ram-recomendado").val())
+		||$("#txt-sistema-operativo-minimo").val()==""
+		||$("#txt-sistema-operativo-recomendado").val()==""
+		||$("#txt-tarjeta-grafica-minimo").val()==""
+		||$("#txt-tarjeta-grafica-recomendado").val()=="") {
+
+		if ($("#txt-clave-producto").val()=="") {
+			$("#error-clave").fadeIn();
+		}else{
+			$("#error-clave").fadeOut();
+		}
+
+		if (categoriaSeleccionada==false) {
+			$("#error-categorias").fadeIn();
+		}else{
+			$("#error-categorias").fadeOut();
+		}
+		
+
+		if ($("#txt-titulo-juego").val()=="") {
+			$("#error1").fadeIn();
+		}else{
+			$("#error1").fadeOut();		
+		}
+		if ($("#textArea-descripcion").val()=="") {
+			$("#error2").fadeIn();	
+		}else{
+			$("#error2").fadeOut();			
+		}
+		if ($("#txt-fecha-lanzamiento").val()=="") {
+			$("#error3").fadeIn();
+		}else{
+			$("#error3").fadeOut();			
+		}
+		if ($("#txt-precio").val()==""|| !/^[0-9]+$/.test($("#txt-precio").val())) {
+			$("#error4").fadeIn();
+		}else{
+			$("#error4").fadeOut();			
+		}
+		if ($("#txt-url-iso").val()=="") {
+			$("#error5").fadeIn();
+		}else{
+			$("#error5").fadeOut();			
+		}
+		if ($("#txt-trailer").val()=="") {
+			$("#error6").fadeIn();
+		}else{
+			$("#error6").fadeOut();			
+		}
+		if ($("#txt-calificacion").val()=="" || !/^[0-5]+$/.test($("#txt-calificacion").val())) {
+			$("#error7").fadeIn();
+		}else{
+			$("#error7").fadeOut();		}
+		if ($("#slc-desarrolladores").val()=="") {
+			$("#error8").fadeIn();
+		}else{
+			$("#error8").fadeOut();			
+		}
+		if ($("#slc-esrb").val()=="") {
+			$("#error9").fadeIn();
+		}else{
+			$("#error9").fadeOut();			
+		}
+		if ($("#txt-cpu-minimo").val()=="") {
+			$("#error10").fadeIn();
+		}else{
+			$("#error10").fadeOut();			
+		}
+		if ($("#txt-cpu-recomendado").val()=="") {
+			$("#error11").fadeIn();
+		}else{
+			$("#error11").fadeOut();			
+		}
+		if ($("#txt-ram-minimo").val()=="" || !/^[0-9]+$/.test($("#txt-ram-minimo").val())) {
+			$("#error12").fadeIn();
+		}else{
+			$("#error12").fadeOut();			
+		}
+		if ($("#txt-ram-recomendado").val()=="" || !/^[0-9]+$/.test($("#txt-ram-recomendado").val())) {
+			$("#error13").fadeIn();
+		}else{
+			$("#error13").fadeOut();			
+		}
+		if ($("#txt-sistema-operativo-minimo").val()=="") {
+			$("#error14").fadeIn();
+		}else{
+			$("#error14").fadeOut();			
+		}
+		if ($("#txt-sistema-operativo-recomendado").val()=="") {
+			$("#error15").fadeIn();
+		}else{
+			$("#error15").fadeOut();			
+		}
+		if ($("#txt-tarjeta-grafica-minimo").val()=="") {
+			$("#error16").fadeIn();
+		}else{
+			$("#error16").fadeOut();			
+		}
+		if ($("#txt-tarjeta-grafica-recomendado").val()=="") {
+			$("#error17").fadeIn();
+		}else{
+			$("#error17").fadeOut();			
+		}
+	}
+	else{
+		$("#error-categorias").hide();
+		$("#error1").hide();
+		$("#error2").hide();
+		$("#error3").hide();
+		$("#error4").hide();
+		$("#error5").hide();
+		$("#error6").hide();	
+		$("#error7").hide();	
+		$("#error8").hide();
+		$("#error9").hide();
+		$("#error10").hide();
+		$("#error11").hide();
+		$("#error12").hide();
+		$("#error13").hide();
+		$("#error14").hide();
+		$("#error15").hide();
+		$("#error16").hide();
+		$("#error17").hide();
+		$("#error-clave").hide();
+		$("#btn-guardar-juego").button("Guardando");
 	var categoriasSeleccionadas="";
 		
 		$("input[name='chkcategorias[]']:checked").each(function(){
@@ -167,7 +329,6 @@ $("#btn-guardar-juego").click(function(){
 			"&txt-url-iso="+$("#txt-url-iso").val()+
 			"&txt-trailer="+$("#txt-trailer").val()+
 			"&txt-calificacion="+$("#txt-calificacion").val()+
-			"&txt-clave-producto="+$("#txt-clave-producto").val()+
 			"&slc-desarrolladores="+$("#slc-desarrolladores").val()+
 			"&slc-esrb="+$("#slc-esrb").val()+
 			"&txt-captura1="+$("#txt-captura1").val()+//comienzo de las capturas del juego
@@ -195,6 +356,29 @@ $("#btn-guardar-juego").click(function(){
 
 			}
 		});
+		$("#txt-sistema-operativo-recomendado").val("");
+		$("#txt-titulo-juego").val("");
+		$("#txt-portada").val(-1);
+		$("#textArea-descripcion").val("");
+		$("#txt-fecha-lanzamiento").val("");
+		$("#txt-precio").val("");
+		$("#txt-url-iso").val("");
+		$("#txt-trailer").val("");
+		$("#txt-calificacion").val("");
+		$("#slc-desarrolladores").val("");
+		$("#slc-esrb").val("");
+		$("#txt-captura1").val(-1);
+		$("#txt-captura2").val(-1);
+		$("#txt-captura3").val(-1);
+		$("#txt-captura4").val(-1);
+		$("#txt-cpu-minimo").val("");
+		$("#txt-cpu-recomendado").val("");
+		$("#txt-ram-minimo").val("");
+		$("#txt-ram-recomendado").val("");
+		$("#txt-sistema-operativo-minimo").val("");
+		$("#txt-tarjeta-grafica-minimo").val("");
+		$("#txt-tarjeta-grafica-recomendado").val("");
+	}
 });
 
 
