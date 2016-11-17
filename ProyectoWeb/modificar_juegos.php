@@ -6,10 +6,8 @@
     include_once("class/class_desarrolladores.php");
     $conexion = new Conexion();
     session_start(); 
-      if(!isset($_SESSION['usuario']))
+      if(!isset($_SESSION['usuario'])||($_SESSION['inicio']==1))
         header("Location: login_administrador.php");
-      if ($_SESSION['inicio']=="1")
-         header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
 <html>

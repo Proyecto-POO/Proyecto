@@ -3,7 +3,7 @@
     include_once("class/class_juegos.php");
     $conexion = new Conexion();
   session_start(); 
-  if(!isset($_SESSION['nombre_usuario']))
+  if(!isset($_SESSION['nombre_usuario'])||($_SESSION['inicio']==2))
     header("Location: login_usuario.php");
 
 ?>

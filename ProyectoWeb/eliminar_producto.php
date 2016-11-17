@@ -4,11 +4,8 @@
     include_once("class/class_usuario.php");
     $conexion = new Conexion();
     session_start(); 
-  if(!isset($_SESSION['usuario']))
+  if(!isset($_SESSION['usuario'])||($_SESSION['inicio']==1))
     header("Location: login_administrador.php");
-  // verificacion para que solo los admin puedan ver esta pagina
-  if ($_SESSION['inicio']==1)
-       header("Location: login_administrador.php");
 ?>
 <!DOCTYPE html>
 <html>
