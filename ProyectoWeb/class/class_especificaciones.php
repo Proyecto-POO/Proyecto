@@ -85,5 +85,27 @@
 		}
 
 
+		public function modificarEspecificaciones($conexion,$codigoJuego){
+			$sql = sprintf(
+				"UPDATE tbl_especificaciones 
+						SET	sistema_operativo='%s',
+							ram='%s',
+							targeta_grafica='%s',
+							cpu='%s'
+						WHERE codigo_juego = '%s' 
+						AND codigo_tipo_especificaciones='%s'",
+						stripslashes($this->sistemaOperativo),
+						stripslashes($this->ram),
+						stripslashes($this->tarjetaGrafica),
+						stripslashes($this->cpu),
+						stripslashes($codigoJuego),
+						stripslashes($this->codigoTipoE)
+				);
+
+			echo "<br>Instruccion a ejecutar: ".$sql;
+			$resultado=$conexion->ejecutarInstruccion($sql);
+			
+		}
+
 	}
 ?>

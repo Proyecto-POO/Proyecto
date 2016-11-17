@@ -131,6 +131,10 @@
             <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion" class="form-control"></td>
           </tr>
           <tr>
+            <th>Clave del pruducto</th>
+            <td colspan="3"><input type="text" name="txt-clave-producto" id="txt-clave-producto" class="form-control"></td>
+          </tr>
+          <tr>
             <th>Desarrollador</th>
             <td colspan="3"><?php Desarrolladores::generarDesarrolladores($conexion);?></td>
           </tr>

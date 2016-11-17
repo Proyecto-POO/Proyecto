@@ -1,4 +1,5 @@
 <?php
+	$i=0;
 	include_once("../class/class_conexion.php");
 	include_once("../class/class_juegos.php");
 	include_once("../class/class_usuario.php");
@@ -10,7 +11,7 @@
 				 $sql = sprintf("SELECT codigo_juego, codigo_desarrollador, 
 				 				codigo_esrb, nombre_juego, 
 				 				descripcion, fecha_publicacion, 
-				 				url, portada, calificacion, precio
+				 				url, portada, calificacion, precio, clave_producto
 					 FROM tbl_juegos
 				 	 WHERE codigo_juego = '%s'",
 					stripslashes($_POST["codigo_juego"]));
@@ -54,6 +55,7 @@
 				 $fila = array_map('utf8_encode', $fila);
 				 echo json_encode($fila);
 		break;
+
 		case '4'://comprobacion del login Usuario
 				$usuario = $_POST['usuario'];
 				$contrasena = $_POST['contrasena'];
@@ -62,7 +64,8 @@
 				$_SESSION["inicio"] = $resultado["inicio"];
 				echo json_encode($resultado);
 				
-				break;	
+		break;	
+
 		case '5'://comprobacion del login Admin
 			$usuario = $_POST['Admin'];
 			$contrasena = $_POST['contrasena'];
@@ -72,7 +75,8 @@
 			$_SESSION["inicio"] = $respuesta["inicio"];
 			echo json_encode($respuesta);
 			
-			break;
+		break;
+
 		case '6'://editar Trailer
 				$sqlTrailer = sprintf("
 								SELECT 
@@ -88,9 +92,11 @@
 				 $filaTrailer = $conexion->obtenerFila($resultadoTrailer);
 				 $filaTrailer = array_map('utf8_encode', $filaTrailer);
 				 echo json_encode($filaTrailer);
-			break;
+		break;
+
 		case '7':// obtener las capturas para editarlas
-			/*$sqlCapturas = sprintf("
+			
+			$sqlCapturas = sprintf("
 								SELECT 
 									codigo_capturas, 
 									codigo_juego, 
@@ -102,20 +108,12 @@
 
 				 $resultadoCapturas=$conexion->ejecutarInstruccion($sqlCapturas);
 				 while ( $filaCapturas = $conexion->obtenerFila($resultadoCapturas)) {
-				 	$capturas[] = echo $filaCapturas["url_captura"]; 
-				 };
-				$json= '{
-						 	"Captura1" :"$capturas[0]",
-						 	"Captura2" :"echo $capturas[1]",
-						 	"Captura3" :"echo $capturas[2]",
-						 	"Captura4" :"$capturas[3]"
-						 }';
-				/*$Captura['captura1']= echo $capturas[0];;
-				$Captura['captura2']= echo $capturas[1];;
-				$Captura['captura3']= echo $capturas[2];;
-				$Captura['captura4']= echo $capturas[3];;
-				echo json_encode($Captura);*/
-				 break;
+				 	$capturas["imagen".$i] = $filaCapturas["url_captura"]; 
+				 	$i++;
+				 }
+				
+				echo json_encode($capturas);
+		break;
 		default:
 			# code...
 			break;

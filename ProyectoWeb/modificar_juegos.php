@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
 	<title>Modificar Juego</title>
 	<link href="css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/hovereffects.css">
@@ -115,6 +116,10 @@
           <tr>
             <th>calificacion</th>
             <td colspan="3"><input type="text" name="txt-calificacion" id="txt-calificacion2" class="form-control"></td>
+          </tr>
+          <tr>
+            <th>Clave del pruducto</th>
+            <td colspan="3"><input type="text" name="txt-clave-producto" id="txt-clave-producto" class="form-control"></td>
           </tr>
           <tr>
             <th>Desarrollador</th>

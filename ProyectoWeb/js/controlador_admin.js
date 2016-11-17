@@ -1,3 +1,4 @@
+var CodigoJuegoActualizar;
 function logInAdmin(){
 	var datos = "Admin="+$("#user-admin").val()+"&"+
 			    "contrasena="+$("#pass-admin").val();
@@ -48,6 +49,7 @@ function eliminarJuego(codigoJuego){
 }
 
 function editarJuego(codigoJuego){
+	CodigoJuegoActualizar=codigoJuego;
 	var info = "codigo_juego=" + codigoJuego;
 	$.ajax({
 		url: "ajax/json.php?accion=1",
@@ -63,11 +65,13 @@ function editarJuego(codigoJuego){
 			$("#txt-tamano2").val(resultado.portada);
 			$("#txt-url-iso2").val(resultado.url);
 			$("#txt-calificacion2").val(resultado.calificacion);
+			$("#txt-clave-producto").val(resultado.clave_producto);
 			$("#slc-desarrolladores").val(resultado.codigo_desarrollador);
 			$("#slc-esrb").val(resultado.codigo_esrb);
 			editarTrailer(codigoJuego);
 			editarEspecificacionesMin(codigoJuego);
 			editarEspecificacionesMax(codigoJuego);
+			editarCapturas(codigoJuego);
 
 			
 		},
@@ -76,6 +80,7 @@ function editarJuego(codigoJuego){
 		}
 	});
 }
+
 editarTrailer = function(codigoJuego){
 	var info = "codigo_juego=" + codigoJuego;
 	$.ajax({
@@ -90,28 +95,27 @@ editarTrailer = function(codigoJuego){
 	});
 }
 
- editarCapturas = function(codigoJuego){
-	var info = "codigo_juego=" + codigoJuego;
-	alert(info);
-	$.ajax({
-			url: "ajax/json.php?accion=7",
-			data: info,
-			method: "POST",
-			dataType: 'json',
-			success:function(resultado){
-				alert(resultado);
-				$("#txt-captura1").val(resultado.Captura1);
-				$("#txt-captura2").val(resultado.Captura2);
-				$("#txt-captura3").val(resultado.Captura3);
-				$("#txt-captura4").val(resultado.Captura4);
-			},
-			error: function(){
-				alert("NO");
-			}
+editarCapturas = function(codigoJuego){
+  	var info = "codigo_juego=" + codigoJuego;
+  	$.ajax({
+  			url: "ajax/json.php?accion=7",
+  			data: info,
+  			method: "POST",
+  			dataType: 'json',
+  			success:function(resultado){
+  				alert(resultado);
+  				$("#txt-captura1").val(resultado.imagen0);
+  				$("#txt-captura2").val(resultado.imagen1);
+  				$("#txt-captura3").val(resultado.imagen2);
+  				$("#txt-captura4").val(resultado.imagen3);
+  			},
+  			error: function(){
+  				alert("NO");
+  			}
 
 
-	});
-}
+  	});
+  }
 
 editarEspecificacionesMin = function(codigoJuego){
 	var info = "codigo_juego=" + codigoJuego;
@@ -144,6 +148,7 @@ editarEspecificacionesMax = function(codigoJuego){
 			}
 	});
 }
+
 $("#btn-guardar-juego").click(function(){
 	$("#btn-guardar-juego").button("Guardando");
 	var categoriasSeleccionadas="";
@@ -162,6 +167,7 @@ $("#btn-guardar-juego").click(function(){
 			"&txt-url-iso="+$("#txt-url-iso").val()+
 			"&txt-trailer="+$("#txt-trailer").val()+
 			"&txt-calificacion="+$("#txt-calificacion").val()+
+			"&txt-clave-producto="+$("#txt-clave-producto").val()+
 			"&slc-desarrolladores="+$("#slc-desarrolladores").val()+
 			"&slc-esrb="+$("#slc-esrb").val()+
 			"&txt-captura1="+$("#txt-captura1").val()+//comienzo de las capturas del juego
@@ -184,6 +190,57 @@ $("#btn-guardar-juego").click(function(){
 			success:function(resultado){
 				alert(resultado);
 				$("#btn-guardar-juego").button("reset");
+			},
+			error:function(){
+
+			}
+		});
+});
+
+
+$("#btn-modificar-juego").click(function(){
+
+	$("#btn-modificar-juego").button("Guardando");
+	var categoriasSeleccionadas="";
+		
+		$("input[name='chkcategorias[]']:checked").each(function(){
+			categoriasSeleccionadas+="categorias[]="+$(this).val()+"&";
+		});
+
+	var parametros=
+			"txt-titulo-juego2="+$("#txt-titulo-juego2").val()+
+			"&txt-portada2="+$("#txt-portada2").val()+
+			"&CodigoJuegoActualizar="+CodigoJuegoActualizar+
+			"&textArea-descripcion2="+$("#textArea-descripcion2").val()+
+			"&"+categoriasSeleccionadas+
+			"txt-fecha-lanzamiento2="+$("#txt-fecha-lanzamiento2").val()+
+			"&txt-precio2="+$("#txt-precio2").val()+
+			"&txt-url-iso2="+$("#txt-url-iso2").val()+
+			"&txt-trailer="+$("#txt-trailer").val()+
+			"&txt-calificacion2="+$("#txt-calificacion2").val()+
+			"&txt-clave-producto="+$("#txt-clave-producto").val()+
+			"&slc-desarrolladores="+$("#slc-desarrolladores").val()+
+			"&slc-esrb="+$("#slc-esrb").val()+
+			"&txt-captura1="+$("#txt-captura1").val()+//comienzo de las capturas del juego
+			"&txt-captura2="+$("#txt-captura2").val()+
+			"&txt-captura3="+$("#txt-captura3").val()+
+			"&txt-captura4="+$("#txt-captura4").val()+
+			"&txt-cpu-minimo="+$("#txt-cpu-minimo").val()+//comienza informacion de especificaciones
+			"&txt-cpu-recomendado="+$("#txt-cpu-recomendado").val()+
+			"&txt-ram-minimo="+$("#txt-ram-minimo").val()+
+			"&txt-ram-recomendado="+$("#txt-ram-recomendado").val()+
+			"&txt-sistema-operativo-minimo="+$("#txt-sistema-operativo-minimo").val()+
+			"&txt-sistema-operativo-recomendado="+$("#txt-sistema-operativo-recomendado").val()+
+			"&txt-tarjeta-grafica-minimo="+$("#txt-tarjeta-grafica-minimo").val()+
+			"&txt-tarjeta-grafica-recomendado="+$("#txt-tarjeta-grafica-recomendado").val();
+			alert(parametros);
+	$.ajax({
+			url:"ajax/acciones.php?accion=8",
+			method: "POST",
+			data: parametros,
+			success:function(resultado){
+				alert(resultado);
+				$("#btn-modificar-juego").button("reset");
 			},
 			error:function(){
 

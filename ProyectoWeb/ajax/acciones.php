@@ -41,7 +41,8 @@
 					$_POST["txt-portada"],
 					$_POST["txt-calificacion"],
 					$_POST["txt-precio"],
-					$_POST["categorias"]
+					$_POST["categorias"],
+					$_POST["txt-clave-producto"]
 			);
 		$nuevoJuego->guardarJuego($conexion);
 
@@ -66,25 +67,6 @@
 		$nuevaEspecificacionRecomendada->guardarEspecificaciones($conexion);
 
 		//Almacenamiento de las capturas del juego
-		/*$nuevaCaptura1 = new capturas(
-										$fila["id"],
-										$_POST["txt-captura1"]);
-		$nuevaCaptura1->guardarCapturas($conexion);
-
-		$nuevaCaptura2 = new capturas(
-										$fila["id"],
-										$_POST["txt-captura2"]);
-		$nuevaCaptura2->guardarCapturas($conexion);
-
-		$nuevaCaptura3 = new capturas(
-										$fila["id"],
-										$_POST["txt-captura3"]);
-		$nuevaCaptura3->guardarCapturas($conexion);
-
-		$nuevaCaptura4 = new capturas(
-										$fila["id"],
-										$_POST["txt-captura4"]);
-		$nuevaCaptura4->guardarCapturas($conexion);*/
 		$sqlCapturas1 = sprintf("
 									INSERT INTO tbl_capturas(
 															codigo_capturas, 
@@ -137,36 +119,103 @@
 							);	
 		$conexion->ejecutarInstruccion($sqlTrailer);
 
-		break;					
+		break;		
+
 		case '6'://Eliminacion de un usuario
 				$codigo_usuario=$_POST['codigoUsuario'];
 				Usuario::eliminarUsuario($conexion,$codigo_usuario);
 				Usuario::mostrarUsuarios($conexion);
 			break;
+
 		case '7'://Eliminacion de un juego
 			$codigo_juego=$_POST['codigoJuego'];
 			Juegos::eliminarJuegos($conexion,$codigo_juego);
 			Juegos::obtenerTarjetasEliminar($conexion);
 			break;
+
 		case '8'://Actualizar los datos del juego
-			
+				sleep(3);
+		$nuevoJuego = new Juegos($_POST["slc-desarrolladores"],
+					$_POST["slc-esrb"],
+					$_POST["txt-titulo-juego2"],
+					$_POST["textArea-descripcion2"],
+					$_POST["txt-fecha-lanzamiento2"],
+					$_POST["txt-url-iso2"],
+					$_POST["txt-portada2"],
+					$_POST["txt-calificacion2"],
+					$_POST["txt-precio2"],
+					null,//$_POST["categorias"],
+					$_POST["txt-clave-producto"]
+			);
+		$nuevoJuego->ModificarJuego($conexion,$_POST["CodigoJuegoActualizar"]);
+
+		//actualizacion de especificaciones minimas
+		$nuevaEspecificacionMinima = new especificaciones(1,
+					null,
+					$_POST["txt-sistema-operativo-minimo"],
+					$_POST["txt-tarjeta-grafica-minimo"],
+					$_POST["txt-ram-minimo"],
+					$_POST["txt-cpu-minimo"]
+			);
+		$nuevaEspecificacionMinima->modificarEspecificaciones($conexion,$_POST["CodigoJuegoActualizar"]);
+
+		//actualizacion de especificaciones recomendadas
+		$nuevaEspecificacionRecomendada = new especificaciones(2,
+					null,
+					$_POST["txt-sistema-operativo-recomendado"],
+					$_POST["txt-tarjeta-grafica-recomendado"],
+					$_POST["txt-ram-recomendado"],
+					$_POST["txt-cpu-recomendado"]
+			);
+		$nuevaEspecificacionRecomendada->modificarEspecificaciones($conexion,$_POST["CodigoJuegoActualizar"]);
+
+		//Almacenamiento de las capturas del juego
+		
+		$sqlCapturas1 = sprintf("UPDATE tbl_capturas 
+								SET 
+								url_captura='%s' 
+								WHERE codigo_juego = '%s'",
+										stripslashes($_POST["txt-captura1"]),
+										stripslashes($_POST["CodigoJuegoActualizar"])										
+								);
+		$conexion->ejecutarInstruccion($sqlCapturas1);
+		$sqlCapturas2 = sprintf("UPDATE tbl_capturas 
+								SET 
+								url_captura='%s' 
+								WHERE codigo_juego = '%s'",
+										stripslashes($_POST["txt-captura2"]),
+										stripslashes($_POST["CodigoJuegoActualizar"])											
+							);
+		$conexion->ejecutarInstruccion($sqlCapturas2);
+		$sqlCapturas3 = sprintf("UPDATE tbl_capturas 
+								SET 
+								url_captura='%s' 
+								WHERE codigo_juego = '%s'",
+										stripslashes($_POST["txt-captura3"]),
+										stripslashes($_POST["CodigoJuegoActualizar"])											
+							);
+		$conexion->ejecutarInstruccion($sqlCapturas3);
+		$sqlCapturas4 = sprintf("UPDATE tbl_capturas 
+								SET 
+								url_captura='%s' 
+								WHERE codigo_juego = '%s'",
+										stripslashes($_POST["txt-captura4"]),
+										stripslashes($_POST["CodigoJuegoActualizar"])											
+							);
+		$conexion->ejecutarInstruccion($sqlCapturas4);
+		//Guardar Trailer
+		
+		$sqlTrailer = sprintf("UPDATE tbl_trailer 
+								SET 
+								url_trailer='%s' 
+								WHERE codigo_juego = '%s'",
+										stripslashes($_POST["txt-trailer"]),
+										stripslashes($_POST["CodigoJuegoActualizar"])	
+							);	
+		$conexion->ejecutarInstruccion($sqlTrailer);
+
 			break;
 		case '9'://registro de un nuevo usuario
-			/*$nombreUsuario
-			$nombre
-			$apellido
-			$contrasena
-			$correoElectronico
-			
-			$nuevoUsuario = new Usuario(
-											$_POST["txt-nombre-usuario"],
-											$_POST["txt-nombre"],
-											$_POST["txt-apellido"],
-											$_POST["txt-contrasena"],
-											$_POST["dte-fecha-nacimiento"],
-											$_POST["txt-correo"]
-										);
-			$nuevoUsuario->guardarUsuario($conexion);*/
 			$sql = sprintf("INSERT INTO tbl_usuarios(
 												codigo_usuario, 
 												codigo_tipo_pago, 
