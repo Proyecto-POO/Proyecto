@@ -73,7 +73,7 @@
 									a.calificacion, 
 									a.precio, 
 									b.nombre_desarrollador,
-									c.tipo_esrb
+									c.url_esrb
 									FROM tbl_juegos a
 									INNER JOIN tbl_desarrollador b
 									ON (a.codigo_desarrollador=b.codigo_desarrollador) 
@@ -112,8 +112,15 @@
 						<?php echo $fila_juego['nombre_desarrollador']; ?>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<label>ESRB : </label>
-						<?php echo $fila_juego['tipo_esrb']; ?>
+						<div class="row">
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<label>ESRB: </label>
+								
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<img class="img img-responsive" src="<?php echo $fila_juego['url_esrb']; ?>" alt="">
+							</div>
+						</div>
 					</div>
 					
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
